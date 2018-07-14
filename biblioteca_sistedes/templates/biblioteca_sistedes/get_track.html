@@ -1,0 +1,30 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+<article class="page page_168">
+    <header class="wrapper">
+        <h1> {{ track.name }}</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper">
+            <hr>
+            <p>Coordinadoras:&nbsp;Carme Quer y Mª José&nbsp;Suárez</p>
+            <hr>
+            <p>&nbsp;</p>
+            <p>Listado de artículos correspondientes al track {{ track.name }}</p>
+            <ol id="articulo_a_conferencia_list">
+                {% for ar in articles %}
+                <li>
+                    <a href="https://biblioteca.sistedes.es/articulo/herramienta-para-la-prueba-de-mutaciones-en-el-lenguaje-c/">
+                        {{ ar.name }}
+                    </a>
+                    <br>
+                    <span class="txtPequeno">Pedro Delgado-Pérez&nbsp;/&nbsp;Inmaculada Medina-Bulo&nbsp;/&nbsp;Juan José Domínguez-Jiménez&nbsp;/&nbsp;</span>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

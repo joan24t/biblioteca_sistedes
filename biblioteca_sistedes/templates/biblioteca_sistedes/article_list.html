@@ -1,0 +1,43 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+
+{% block content %}
+		<h2><u> Artículos </u></h2>
+		<input id="myInput"type="text" onkeyup="search_table()">
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Autores</th>
+					<th>Palabras clave</th>
+					<th>Derechos de acceso</th>
+                    <th>Tracks</th>
+                    <th>Acciones</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				{% if object_list %}
+				{% for article in object_list %}
+				<tr>
+					<td>{{ article.id }}</td>
+					<td>{{ article.name }}</td>
+					<td>{{ article.author_ids }}</td>
+					<td>{{ article.keyword_ids }}</td>
+                    <td>{{ article.access_right_ids }}</td>
+					<td>{{ article.track_ids }}</td>
+
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/biblioteca_sistedes/article_update/{{ article.id }}">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca_sistedes/article_delete/{{ article.id }}">Eliminar</a>
+					</td>
+				</tr>
+				{% endfor %}
+
+				{% else %}
+				<h1>No hay registros de artículos</h1>
+				{% endif %}
+			</tbody>
+		</table>
+
+{% endblock%}

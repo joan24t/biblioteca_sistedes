@@ -1,0 +1,74 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+    <!-- form de busqueda //-->
+    <h1>Búsqueda Avanzada en la Biblioteca Digital</h1>
+    <form name="search" action="" method="get" class="form1">
+        <p><label>Búsqueda por título: </label><input type="text" placeholder="Título" name="txtTitulo" value=""></p>
+        <p>
+            <label>Búsqueda por autor: </label>
+            <select name="selCondAutor">
+                <option value="o">O</option>
+                <option value="y">Y</option>
+            </select>
+            &nbsp;
+            <input type="text" placeholder="Autor" name="txtAutor" value="">
+        </p>
+        <p>
+            <label>Búsqueda por afiliación: </label>
+            <select name="selCondAfiliacion">
+                <option value="o">O</option>
+                <option value="y">Y</option>
+            </select>
+            &nbsp;
+            <input type="text" placeholder="Afiliación" name="txtAfiliacion" value="">
+        </p>
+        <p>
+            <label>Búsqueda por palabra clave: </label>
+            <select name="selCondKeyword">
+                <option value="o">O</option>
+                <option value="y">Y</option>
+            </select>
+            &nbsp;
+            <input type="text" placeholder="Palabra clave" name="txtKeyword" value="">
+        </p>
+        <p><label>&nbsp;</label><input type="submit" value="Buscar"></p>
+    </form>
+    {% if params_exist %}
+        {% if conference_list %}
+            <!-- resultados de la busqueda //-->
+            <h1>Resultados de la Búsqueda: [ {{ conference_list|length }} artículo(s) ]</h1>
+            {% for conference in conference_list %}
+                <article class="page page_319">
+                    <header class="wrapper">
+                        <h3>{{forloop.counter}} - <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">{{ conference.name }}</a></h3>
+                    </header>
+                    <p>
+                        {{  conference.description }}
+                        {{  conference.id }}
+                    </p>
+                    <p style="font-size: 0.8em;">
+
+                        {% for author in conference.author_ids.all %}
+                            <strong>Autores: </strong>
+                             <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}}</a>&nbsp;/&nbsp;
+                        {% endfor %}
+
+                        <!--<strong>Palabras-->
+                        <!--Clave: </strong><a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo">ecological-->
+                        <!--debt</a> - <a href="https://biblioteca.sistedes.es/tag/greenability/?post_type=articulo">greenability</a> - -->
+                        <!--<a href="https://biblioteca.sistedes.es/tag/software-sustainability/?post_type=articulo"><span-->
+                                <!--class="highlight">software</span> sustainability</a> - <a-->
+                                <!--href="https://biblioteca.sistedes.es/tag/technical-debt/?post_type=articulo">technical debt</a>-->
+                    </p>
+                        <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">...leer artículo</a>
+                    </p>
+                </article>
+            {% endfor %}
+        {% else %}
+            <h1>No existen resultados para la Búsqueda solicitada.</h1>
+        {% endif %}
+    {% endif %}
+{{ conference_list|length }}
+{{ author_list }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block form %}
+<h2><u> Crear autor </u></h2>
+{% csrf_token %}
+<div class="form-style-10">
+    <form action='' method='post'>
+        <div class="column">
+            <div class="form-group">
+                <label for="name_au"><h4>Nombre:</h4></label> {{ form_author.name }}
+            </div>
+            <div class="form-group">
+                <label for="middle_au"><h4>Primera apellido:</h4></label> {{ form_author.middle_name }}
+            </div>
+            <div class="form-group">
+                <label for="last_au"><h4>Segundo apellido:</h4></label> {{ form_author.last_name }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="em_au"><h4>Email:</h4></label> {{ form_author.email }}
+        </div>
+
+        </br>
+           <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Crear autor</button>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}

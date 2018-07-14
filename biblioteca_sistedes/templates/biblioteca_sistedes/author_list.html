@@ -1,0 +1,39 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+
+{% block content %}
+		<h2><u> Autores </u></h2>
+		<input id="myInput"type="text" onkeyup="search_table()">
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Primer apellido</th>
+					<th>Segundo apellido</th>
+					<th>Acciones</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				{% if object_list %}
+				{% for author in object_list %}
+				<tr>
+					<td>{{ author.id }}</td>
+					<td>{{ author.name }}</td>
+					<td>{{ author.middle_name }}</td>
+					<td>{{ author.last_name }}</td>
+
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/biblioteca_sistedes/author_update/{{ author.id }}">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca_sistedes/author_delete/{{ author.id }}">Eliminar</a>
+					</td>
+				</tr>
+				{% endfor %}
+
+				{% else %}
+				<h1>No hay registros de autores</h1>
+				{% endif %}
+			</tbody>
+		</table>
+
+{% endblock%}

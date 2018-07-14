@@ -1,0 +1,37 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+
+{% block content %}
+		<h2><u> Tracks </u></h2>
+		<input id="myInput"type="text" onkeyup="search_table()">
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Edición</th>
+					<th>Acciones</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				{% if object_list %}
+				{% for track in object_list %}
+				<tr>
+					<td>{{ track.id }}</td>
+					<td ><div style="width: 300px; height: auto; overflow: auto">{{ track.name }}</div></td>
+					<td>{{ track.edition_id.name }}</td>
+
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/biblioteca_sistedes/track_update/{{ track.id }}">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca_sistedes/track_delete/{{ track.id }}">Eliminar</a>
+					</td>
+				</tr>
+				{% endfor %}
+
+				{% else %}
+				<h1>No hay registros de tracks</h1>
+				{% endif %}
+			</tbody>
+		</table>
+
+{% endblock%}

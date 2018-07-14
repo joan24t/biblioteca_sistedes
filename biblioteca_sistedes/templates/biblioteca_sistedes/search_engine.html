@@ -1,0 +1,38 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+
+
+<div class="divContenido">
+    <h1>Resultados de búsqueda para <strong><span class="highlight">software</span></strong></h1>
+    {% for conference in conference_list %}
+        <div class="articulo" id="articulo_2613">
+            <header class="wrapper">
+                <h3>
+                    <a href="https://biblioteca.sistedes.es/articulo/ecological-debt-outlining-a-measure-to-evaluate-software-greenability/"> {{ conference.name }}</a></h3>
+            </header>
+            <div style="font-size: 0.8em;">
+                <p>
+                  {{  conference.description }}
+                </p>
+            </div>
+            <p style="font-size: 0.8em;">
+
+                {% for author in conference.author_ids.all %}
+                <strong>Autores: </strong>
+                 <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}}</a>&nbsp;/&nbsp;
+                {% endfor %}
+
+                <!--<strong>Palabras-->
+                <!--Clave: </strong><a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo">ecological-->
+                <!--debt</a> - <a href="https://biblioteca.sistedes.es/tag/greenability/?post_type=articulo">greenability</a> - -->
+                <!--<a href="https://biblioteca.sistedes.es/tag/software-sustainability/?post_type=articulo"><span-->
+                        <!--class="highlight">software</span> sustainability</a> - <a-->
+                        <!--href="https://biblioteca.sistedes.es/tag/technical-debt/?post_type=articulo">technical debt</a>-->
+            </p>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

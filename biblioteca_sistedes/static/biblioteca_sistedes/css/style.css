@@ -1,0 +1,888 @@
+/*
+Theme Name: Sistedes
+Theme URI: http://www.sistedes.es
+Description: Tema desarrollado a medida para Sistedes.
+Author: David Eguizabal
+Author URI: http://www.davideguizabal.com
+Version: 1.0
+Text Domain: sistedes
+*/
+
+/**
+ * Colores corporativos
+ * - Granate: #006699
+ */
+
+/**
+ * Tipografías especiales
+ */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSansRegular.eot');
+    src: url('../fonts/OpenSansRegular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSansRegular.woff') format('woff'),
+         url('../fonts/OpenSansRegular.ttf') format('truetype'),
+         url('../fonts/OpenSansRegular.svg#OpenSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSansBold.eot');
+    src: url('../fonts/OpenSansBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSansBold.woff') format('woff'),
+         url('../fonts/OpenSansBold.ttf') format('truetype'),
+         url('../fonts/OpenSansBold.svg#OpenSansBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans Light';
+    src: url('../fonts/OpenSansLight.eot');
+    src: url('../fonts/OpenSansLight.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSansLight.woff') format('woff'),
+         url('../fonts/OpenSansLight.ttf') format('truetype'),
+         url('../fonts/OpenSansLight.svg#OpenSansLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*
+ * Genéricos
+ */
+body
+{
+	font-family: 'Open Sans Light', Arial, Verdana, sans-serif;
+	color: #111;
+	background: #fff;
+	font-size: 1.1em;
+	line-height: 1.4em;
+}
+
+a
+{
+	color: #0077b3;
+	border-bottom: 1px dotted #0077b3;
+	outline: none;
+	text-decoration: none;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+}
+
+a:hover
+{
+	text-decoration: none;
+	color: #000;
+	background: #f5da81;
+	border-bottom: 0;
+}
+
+#cabecera a,
+.i-link a,
+.post_loop h2 a,
+#pie a
+{
+	border-bottom: 0;
+}
+
+.post_loop h2 a
+{
+	color: #000;
+}
+
+#cabecera a:hover,
+.i-link a:hover,
+#pie a
+{
+	background: none;
+}
+
+h1
+{
+	font-size: 1.9em;
+	line-height: 1.2em;
+	margin-bottom: .5em;
+	text-align: left;
+	font-family: 'Open Sans';
+	font-weight: normal;
+}
+
+h2
+{
+	font-size: 1.6em;
+	line-height: 1.2em;
+	padding-top: 1em;
+	padding-bottom: .5em;
+	margin: 0;
+	text-align: center;
+	font-family: 'Open Sans';
+	color: #006699;
+	text-align: center;
+	clear: both;
+}
+
+h2.boton-wrapper
+{
+	font-size: 1.15em;
+}
+
+h3
+{
+	font-size: 1.4em;
+	line-height: 1.2em;
+	margin-bottom: .5em;
+	font-family: 'Open Sans';
+	color: #006699;
+	text-align: left;
+}
+
+h3.boton-wrapper
+{
+	font-size: 1.15em;
+}
+
+ol
+{
+	list-style: decimal inside;
+	margin: 0;
+	padding: 0 0 .3em 0;
+}
+
+ul
+{
+	list-style: disc inside;
+	margin: 0;
+	padding: 0 0 .3em 0;
+}
+
+li
+{
+	margin-left: 1em;
+}
+
+p
+{
+	padding: .4em 0;
+	margin: 0;
+}
+
+img
+{
+	max-width: 100%;
+}
+
+img.grises
+{
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+	filter: gray; /* IE6-9 */
+}
+
+img.grises:hover
+{
+	filter: none;
+}
+
+ul.menu li
+{
+	display: inline;
+	list-style: none;
+}
+
+video
+{
+	display: block;
+	margin: 1em auto;
+}
+
+.wrapper
+{
+	margin: 0 auto;
+	padding: 0 2%;
+	max-width: 1200px;
+	clear: both;
+	overflow: hidden;
+}
+
+.rteleft {text-align: left;}
+.rtecenter {text-align: center;}
+.rteright {text-align: right;}
+
+::selection
+{
+	background: #006699;
+	color: #fff;
+}
+*::-moz-selection
+{
+	background: #006699;
+	color: #fff;
+}
+
+a.boton
+{
+	border-radius: .25em;
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+	padding: .25em .5em;
+	background: #006699;
+	border-bottom: 2px solid #00334d;
+	font-family: 'Open Sans';
+}
+
+a.boton:hover
+{
+	background: #5aae00;
+	border-color: #326100;
+}
+
+.negro {color: #111;}
+.azul {color: #006699;}
+.gris-claro {color: #f0f0f0;}
+.gris {color: #666;}
+.gris-oscuro {color: #333;}
+.bg-negro {background: #111;}
+.bg-gris-claro {background: #f0f0f0;}
+.bg-gris {background: #999;}
+.bg-gris-oscuro {background: #333;}
+.bg-azul {background: #006699;}
+
+.f05 {font-size: .5em; line-height: 1.4em;}
+.f06 {font-size: .6em; line-height: 1.4em;}
+.f07 {font-size: .7em; line-height: 1.4em;}
+.f08 {font-size: .8em; line-height: 1.4em;}
+.f09 {font-size: .9em; line-height: 1.4em;}
+.f11 {font-size: 1.1em; line-height: 1.4em;}
+.f12 {font-size: 1.2em; line-height: 1.4em;}
+.f13 {font-size: 1.3em; line-height: 1.4em;}
+.f14 {font-size: 1.4em; line-height: 1.4em;}
+.f15 {font-size: 1.5em; line-height: 1.4em;}
+.f16 {font-size: 1.6em; line-height: 1.4em;}
+.f17 {font-size: 1.7em; line-height: 1.4em;}
+.f18 {font-size: 1.8em; line-height: 1.4em;}
+.f19 {font-size: 1.9em; line-height: 1.4em;}
+.f20 {font-size: 2em; line-height: 1.4em;}
+.f21 {font-size: 2.1em; line-height: 1.4em;}
+.f22 {font-size: 2.2em; line-height: 1.4em;}
+.f23 {font-size: 2.3em; line-height: 1.4em;}
+.f24 {font-size: 2.4em; line-height: 1.4em;}
+.f25 {font-size: 2.5em; line-height: 1.4em;}
+.f26 {font-size: 2.6em; line-height: 1.4em;}
+.f27 {font-size: 2.7em; line-height: 1.4em;}
+.f28 {font-size: 2.8em; line-height: 1.4em;}
+.f29 {font-size: 2.9em; line-height: 1.4em;}
+.f30 {font-size: 3em; line-height: 1.4em;}
+.f31 {font-size: 3.1em; line-height: 1.4em;}
+.f32 {font-size: 3.2em; line-height: 1.4em;}
+.f33 {font-size: 3.4em; line-height: 1.4em;}
+.f34 {font-size: 3.4em; line-height: 1.4em;}
+.f35 {font-size: 3.5em; line-height: 1.4em;}
+.f36 {font-size: 3.6em; line-height: 1.4em;}
+.f37 {font-size: 3.7em; line-height: 1.4em;}
+.f38 {font-size: 3.8em; line-height: 1.4em;}
+.f39 {font-size: 3.9em; line-height: 1.4em;}
+
+
+/**
+ * Cabecera
+ */
+#cabecera
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(255, 255, 255, .9);
+	padding-top: .25em;
+	z-index: 100;
+}
+
+#menu-principal
+{
+	padding-top: 3em;
+	text-transform: uppercase;
+	font-family: 'Open Sans';
+}
+
+#menu-principal a
+{
+	color: #069;
+}
+
+#menu-principal a:hover
+{
+	color: #000;
+}
+
+#cabecera.cabecera_menor
+{
+	border-bottom: 1px solid #006699;
+}
+
+#cabecera.cabecera_menor #logo p
+{
+	padding: 0;
+}
+
+#cabecera.cabecera_menor #logo img
+{
+	max-height: 2.5em;
+	max-width: none;
+}
+
+#cabecera.cabecera_menor #menu-principal
+{
+	padding-top: 1em;
+}
+
+
+/**
+ * Contenido
+ */
+#contenido
+{
+	padding-top: 6em;
+	overflow: hidden;
+}
+
+.page,
+.contenido_index,
+.contenido_archive,
+.post_single
+{
+	padding: 2em 0;
+}
+
+.page li,
+.post_single li
+{
+	list-style-position: outside;
+}
+
+.page_inicio
+{
+	padding: 0;
+}
+
+#inicio h1
+{
+	color: #fff;
+	text-shadow: 0 0 .1em #111;
+	padding: 2em 5% 0;
+	line-height: 1.4em;
+}
+
+.claim
+{
+	line-height: 1.4em;
+	font-size: 1.8em;
+	text-align: center;
+}
+
+.claim.s-c-blanco
+{
+	text-shadow: 0 0 .1em #111;
+}
+
+.claim .wrapper
+{
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+
+/**
+ * Posts: loop
+ */
+.post_loop
+{
+	margin-bottom: 1em;
+}
+
+.post_loop .thumb
+{
+	padding: 0;
+}
+
+.post_loop .meta
+{
+	font-style: italic;
+	font-size: .9em;
+}
+
+#pagenavi
+{
+	margin-top: 3em;
+	padding-top: 1em;
+	border-top: 1px solid #929292;
+	overflow: hidden;
+	clear: both;
+}
+
+#pagenavi .older
+{
+	float: left;
+}
+
+#pagenavi .newer
+{
+	float: right;
+}
+
+
+/**
+ * Pie
+ */
+#pie
+{
+	background: #333;
+	color: #f0f0f0;
+	padding: 1em 0;
+	font-size: .9em;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	margin: 50px 0px 0px 0px;
+}
+
+#pie a
+{
+	color: #f0f0f0;
+}
+
+#pie a:hover
+{
+	border-bottom: 1px dotted #f0f0f0;
+}
+
+#pie .redes a:hover
+{
+	border-bottom: 0;
+}
+
+#pie .facebook:hover
+{
+	color: #3b5998;
+}
+
+#pie .twitter:hover
+{
+	color: #00aced;
+}
+
+
+/**
+ * Formularios
+ */
+.wpcf7-text,
+.wpcf7-textarea
+{
+	border: 1px solid #333;
+	width: 60%;
+	padding: .25em;
+}
+
+.wpcf7-text:focus,
+.wpcf7-textarea:focus
+{
+	border-color: #006699;
+	background: #f0faff;
+}
+
+.wpcf7-textarea
+{
+	width: 95%;
+	resize: none;
+}
+
+.wpcf7-textarea:focus
+{
+	border-color: #006699;
+	background: #f0faff;
+}
+
+.wpcf7-not-valid
+{
+	border-color: #990000;
+	background: #fff0f0;
+}
+
+.wpcf7-submit
+{
+	margin-top: 1em;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	cursor: pointer;
+	border-radius: .25em;
+	display: inline-block;
+	color: #fff;
+	padding: .25em 1em;
+	background: #006699;
+	border-bottom: 2px solid #00334d;
+	font-family: 'Open Sans';
+}
+
+.wpcf7-submit:hover
+{
+	background: #5aae00;
+	border-color: #326100;
+}
+
+.wpcf7-submit[disabled="disabled"],
+.wpcf7-submit[disabled="disabled"]:hover
+{
+	background: #999;
+	border-color: #333;
+}
+
+
+/**
+ * Shortcodes
+ */
+.s
+{
+	padding: 40px 0;
+	overflow: hidden;
+}
+
+.s-stretch
+{
+	padding: 0;
+}
+
+.s-wide
+{
+	padding: 80px 0;
+}
+
+.s-f-opensans
+{
+	font-family: 'Open Sans';
+}
+
+.s-f-opensanslight
+{
+	font-family: 'Open Sans Light';
+}
+
+.s-c-blanco,
+.s-c-blanco h2,
+.s-c-blanco h3
+{
+	color: #fff;
+}
+
+.s-c-azul,
+.s-c-azul h2,
+.s-c-azul h3
+{
+	color: #006699;
+}
+
+.s-c-negro,
+.s-c-negro h2,
+.s-c-negro h3
+{
+	color: #111;
+}
+
+.s-left {text-align: left;}
+.s-center {text-align: center;}
+.s-right {text-align: right;}
+.s-justify {text-align: justify;}
+
+.s h2:first-child
+{
+	padding-top: 0;
+}
+
+.s .wrapper div h2:first-child
+{
+	padding-top: 1em;
+}
+
+.c-left {text-align: left;}
+.c-center {text-align: center;}
+.c-right {text-align: right;}
+.c-justify {text-align: justify;}
+
+.c-uppercase {text-transform: uppercase;}
+
+.i-left {text-align: left;}
+.i-center {text-align: center;}
+.i-right {text-align: right;}
+.i-justify {text-align: justify;}
+
+.fa-rounded,
+.fa-rounded-full
+{
+	border: 2px solid #111;
+	border-radius: 50%;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.fa-rounded-full
+{
+	background: #111;
+	color: #fff;
+}
+
+.i-azul
+{
+	color: #006699;
+}
+.i-azul .fa-rounded,
+.i-azul .fa-rounded-full
+{
+	border-color: #006699;
+}
+.i-azul .fa-rounded-full
+{
+	background: #006699;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+}
+
+.i-azul a:hover .fa-rounded-full
+{
+	background: #111;
+}
+
+.i-negro
+{
+	color: #111;
+}
+.i-negro .fa-rounded,
+.i-negro .fa-rounded-full
+{
+	border-color: #111;
+}
+.i-negro .fa-rounded-full
+{
+	background: #111;
+}
+
+.mapa_google
+{
+	width: 100%;
+	min-height: 380px;
+	color: #111;
+}
+
+.mapa_google img {max-width: inherit;}
+
+.social
+{
+	border-radius: 50%;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	vertical-align: middle;
+	text-align: center;
+	background: #006699;
+	color: #fff;
+	display: inline-block;
+	margin: 0 .25em;
+}
+.social.facebook {background: #3b5998;}
+.social.twitter {background: #00aced;}
+.social.linkedin {background: #007bb6;}
+.social.googleplus {background: #dd4b39;}
+.social.youtube {background: #bb0000;}
+.social.instagram {background: #517fa4;}
+.social.pinterest {background: #cb2027;}
+
+.social:hover
+{
+	background: #333;
+	color: #fff;
+}
+
+
+/**
+ * Cookies
+ */
+#cookies
+{
+	line-height: 1.3em;
+	color: #fff;
+	position: fixed;
+	bottom: 15px;
+	left: 15px;
+	width: 220px;
+	padding: 15px 20px;
+	z-index: 100000;
+	font-size: .8em;
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
+	/* RGBa with 0.4 opacity */
+	background: rgba(0, 0, 0, 0.9);
+	/* For IE 5.5 - 7*/
+	/* #00 = Math.floor(0.4 * 0).toString(16); */
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000)";
+}
+
+#cookies a
+{
+	color: #fff;
+	text-decoration: underline;
+}
+
+#cookies a:hover
+{
+	text-decoration: none;
+}
+
+#cookies .cookies-close
+{
+	background: #006699;
+	padding: .1em .15em;
+	text-decoration: none;
+}
+
+#cookies .cookies-close:hover
+{
+	background: transparent;
+}
+
+
+/**
+ * Otros
+ */
+
+
+
+/**
+ * Media Queries
+ */
+/* Desktop big screen */
+@media only screen and (min-width: 1200px) {
+}
+
+/* Desktop */
+@media only screen and (max-width: 1024px) {
+}
+
+/* iPad landscape */
+@media only screen and (max-width: 900px) {
+}
+
+/* iPad portrait */
+@media only screen and (max-width: 768px) {
+}
+
+/* Custom */
+@media only screen and (max-width: 650px) {
+}
+
+/* iPhone 5 landscape */
+@media only screen and (max-width: 568px) {
+}
+
+/* iPhone 4 landscape */
+@media only screen and (max-width: 480px) {
+}
+
+/* iPhone portrait */
+@media only screen and (max-width: 320px) {
+}
+
+
+/* DL */
+
+
+.contenedor1 {
+	max-width: 1200px;
+	margin: 0px auto 60px auto;
+	padding: 20px 0px 20px 0px;
+	/* background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0; */
+}
+.divSidebar {
+	display: block;
+	width: 25%;
+	overflow:  hidden;
+	margin: 0px;
+	padding:  0px 0px 0px 20px;
+	float: left;
+	font-size: 0.8em;
+}
+
+.divSidebar h2 {
+	margin-top: 0px !important;
+	padding-top: 30px !important;
+	text-align: left !important;
+	font-size: 1.25em;
+
+}
+
+.divContenido {
+	display: block;
+	width: 70%;
+	overflow:  hidden;
+	margin: 0px;
+	padding:  0px;
+	padding-left: 20px;
+	float: left;
+}
+
+
+
+/* breadcrumbs */
+.breadcrumbs {
+	padding: 0;
+	margin: 0;
+	font-size: 0.9em;
+}
+.breadcrumbs li {
+	display: inline-block;
+	list-style: none;
+}
+.breadcrumbs li + li:before {
+	content: ">";
+	display: inline-block;
+	margin: 0 .4em 0 .2em;
+
+}
+
+/* arbol */
+.arbolNavegacion  {
+	font-size: 0.9em;
+}
+
+.form1{
+
+}
+
+.form1 label {
+	display: block;
+	width: 250px;
+	height: 25px;
+	float: left;
+	overflow: hidden;
+	text-align: right;
+	margin: 0px;
+	padding: 0px 10px 0px 0px;
+}
+
+.highlight { background-color: yellow }
+
+.txtPequeno {font-size: 0.75em; color: #000;}
