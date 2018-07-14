@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'better_filter_widget',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
