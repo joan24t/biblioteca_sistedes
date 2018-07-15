@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     {% load static %}
+    {% block head %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/grid.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/button_style.css' %}"/>
@@ -22,7 +23,7 @@
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/tree.collapse.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/multi.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/better-multiselect-filter.js' %}"></script>
-
+    {% endblock %}
 
 
 </head>
@@ -60,23 +61,23 @@
             <h2>Navegación</h2>
             <div class="arbolNavegacion">
 
-                <ul id="tree1" class="treeview-famfamfam treeview">
-                    <li class="expandable">
-                        <div class="hitarea expandable-hitarea"></div>
-                        <a href="/biblioteca/conferencias/" class="">Conferencias</a>
-                        <ul class="children" style="display: none;">
+                <ul id="tree1" class="treeview-famfamfam treeview" style="">
+                    <li class="expandable first-hit-li">
+                        <div class="hitarea first-hit"></div>
+                        <a href="/biblioteca/conferencias" class="conferencias-selected">Conferencias</a>
+                        <ul class="children first-child">
 
                             {% for conference in conferences %}
-                            <li class="expandable">
-                                <div class="hitarea expandable-hitarea"></div>
-                                <a href="/biblioteca/conferencias/{{ conference.domain }}/">{{ conference.name }}</a>
-                                <ul class="children" style="display: none;">
+                            <li class="expandable hit-{{ conference.domain }}-li">
+                                <div class="hitarea hit-{{ conference.domain }}-area"></div>
+                                <a href="/biblioteca/conferencias/{{ conference.domain }}/" class="{{ conference.domain }}">{{ conference.name }}</a>
+                                <ul class="children child-{{ conference.domain }}">
                                     {% for edition in editions %}
                                     {% if edition.conference_id.id == conference.id%}
-                                    <li class="expandable">
-                                        <div class="hitarea expandable-hitarea"></div>
-                                        <a href="/biblioteca/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}/">{{ edition.name }}</a>
-                                        <ul class="children" style="display: none;">
+                                    <li class="expandable hit-{{ edition.conference_id.domain }}-{{ edition.year }}-li">
+                                        <div class="hitarea hit-{{ edition.conference_id.domain }}-{{ edition.year }}-area" ></div>
+                                        <a href="/biblioteca/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}/" class="{{ edition.conference_id.domain }}-{{ edition.year }}">{{ edition.name }}</a>
+                                        <ul class="children child-{{ edition.conference_id.domain }}-{{ edition.year }}">
                                             {% for track in tracks %}
                                             {% if track.edition_id.id == edition.id %}
 
@@ -104,7 +105,7 @@
                         <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
                         <a href="https://biblioteca.sistedes.es/biblioteca/documentos-sistedes/" class="">Documentos
                             SISTEDES</a>
-                        <ul class="children" style="display: none;">
+                        <ul class="children" style="">
                             <li>
                                 <a href="https://biblioteca.sistedes.es/biblioteca/documentos-sistedes/boletin-de-noticias-de-sistedes/">Boletín
                                     de noticias de SISTEDES</a></li>
@@ -120,11 +121,11 @@
                         <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
                         <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/" class="">Boletines de
                             Prensa</a>
-                        <ul class="children" style="display: none;">
+                        <ul class="children" style="">
                             <li class="expandable lastExpandable">
                                 <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
                                 <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/2018-2/">2018</a>
-                                <ul class="children" style="display: none;">
+                                <ul class="children" style="">
                                     <li>
                                         <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/2018-2/boletin-no-1-febrero-de-2018/">Boletín
                                             nº 1. Febrero de 2018</a></li>
@@ -182,7 +183,7 @@
 
 
 </main>
-<div style="display: block; overflow: hidden; width: 100%; height: 100px;">&nbsp;</div>
+<div style=" overflow: hidden; width: 100%; height: 100px;">&nbsp;</div>
 <footer id="pie">
     <div class="wrapper">
         <div class="c c-1-2 c-first">
@@ -205,7 +206,7 @@
                     class="fa fa-twitter fa-lg"></i></a></div>
     </div>
 </footer>
-<div id="cookies" style="display: none;">
+<div id="cookies" style="">
     <div class="cookies_es_inner"><p>Utilizamos cookies propias y de terceros con fines estadísticos para poder mejorar
         tu navegación y nuestros servicios.</p>
         <p>Si continúas navegando, consideramos que aceptas su uso. Para más información, consulta nuestra <a

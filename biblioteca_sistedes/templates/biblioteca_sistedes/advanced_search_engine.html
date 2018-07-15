@@ -4,33 +4,39 @@
     <!-- form de busqueda //-->
     <h1>Búsqueda Avanzada en la Biblioteca Digital</h1>
     <form name="search" action="" method="get" class="form1">
-        <p><label>Búsqueda por título: </label><input type="text" placeholder="Título" name="txtTitulo" value=""></p>
+        <p><label>Búsqueda por título: </label><input type="text" placeholder="Título" name="txtTitulo" value="{{ txtTitulo }}"></p>
         <p>
             <label>Búsqueda por autor: </label>
-            <select name="selCondAutor">
-                <option value="o">O</option>
-                <option value="y">Y</option>
+            <select name="selCondAutor" >
+                {% with "o" as name %}
+                <option value="o" {% if selCondAutor ==  name %} selected {% endif %}>O</option>
+                <option value="y" {% if selCondAutor !=  name %} selected {% endif %}>Y</option>
+                {% endwith %}
             </select>
             &nbsp;
-            <input type="text" placeholder="Autor" name="txtAutor" value="">
+            <input type="text" placeholder="Autor" name="txtAutor" value="{{ txtAutor }}">
         </p>
         <p>
             <label>Búsqueda por afiliación: </label>
-            <select name="selCondAfiliacion">
-                <option value="o">O</option>
-                <option value="y">Y</option>
+            <select name="selCondAfiliacion" selected="{{ selCondAfiliacion }}">
+                {% with "o" as name %}
+                <option value="o" {% if selCondAfiliacion ==  name %} selected {% endif %}>O</option>
+                <option value="y" {% if selCondAfiliacion !=  name %} selected {% endif %}>Y</option>
+                {% endwith %}
             </select>
             &nbsp;
-            <input type="text" placeholder="Afiliación" name="txtAfiliacion" value="">
+            <input type="text" placeholder="Afiliación" name="txtAfiliacion" value="{{ txtAfiliacion }}">
         </p>
         <p>
             <label>Búsqueda por palabra clave: </label>
-            <select name="selCondKeyword">
-                <option value="o">O</option>
-                <option value="y">Y</option>
+            <select name="selCondKeyword" value="{{ selCondKeyword }}">
+                {% with "o" as name %}
+                <option value="o" {% if selCondKeyword ==  name %} selected {% endif %}>O</option>
+                <option value="y" {% if selCondKeyword !=  name %} selected {% endif %}>Y</option>
+                {% endwith %}
             </select>
             &nbsp;
-            <input type="text" placeholder="Palabra clave" name="txtKeyword" value="">
+            <input type="text" placeholder="Palabra clave" name="txtKeyword" value="{{ txtKeyword }}">
         </p>
         <p><label>&nbsp;</label><input type="submit" value="Buscar"></p>
     </form>
@@ -69,6 +75,4 @@
             <h1>No existen resultados para la Búsqueda solicitada.</h1>
         {% endif %}
     {% endif %}
-{{ conference_list|length }}
-{{ author_list }}
 {% endblock %}
