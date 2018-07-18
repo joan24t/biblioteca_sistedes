@@ -26,7 +26,23 @@ jQuery(document).ready( function( ) {
         });
 
 
+        var current_url = window.location.href;
+        var str_url = new URL(current_url);
+        var key = str_url.searchParams.get("s");
 
+
+        if(key){
+            var content = document.querySelectorAll('[id=text-hightlight]');
+            for(var i=0; i<content.length; i++) {
+              var matches = content[i].innerHTML.match(new RegExp(key.toString(), 'gi'))
+              for (var j in matches){
+
+                    content[i].innerHTML = content[i].innerHTML.replace(new RegExp(matches[j], 'gi'), "<span class='highlight'>" + matches[j] + '</span>');
+                }
+            }
+
+
+        }
         var parts = String(window.location.href).split('/');
         var section = parts[parts.length - 2];
         var section2 = parts[parts.length - 3];

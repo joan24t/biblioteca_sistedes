@@ -4,15 +4,15 @@
 
 
 <div class="divContenido">
-    <h1>Resultados de búsqueda para <strong><span class="highlight">software</span></strong></h1>
+    <h1>Resultados de búsqueda para <strong><span class="highlight">{{ key }}</span></strong></h1>
     {% for conference in conference_list %}
         <div class="articulo" id="articulo_2613">
             <header class="wrapper">
                 <h3>
-                    <a href="https://biblioteca.sistedes.es/articulo/ecological-debt-outlining-a-measure-to-evaluate-software-greenability/"> {{ conference.name }}</a></h3>
+                    <a id="text-hightlight" href="https://biblioteca.sistedes.es/articulo/ecological-debt-outlining-a-measure-to-evaluate-software-greenability/"> {{ conference.name }}</a></h3>
             </header>
             <div style="font-size: 0.8em;">
-                <p>
+                <p id="text-hightlight">
                   {{  conference.description }}
                 </p>
             </div>

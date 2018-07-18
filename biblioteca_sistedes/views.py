@@ -67,15 +67,17 @@ def search_article(stype, key= False,
 			article_name = a.name
 			article_description = a.description
 			for n in article_name.split():
-				if key in n.lower():
-					conference_list.append(a)
-					found = True
-					break
+				for k in key.split():
+					if k.lower() in n.lower():
+						conference_list.append(a)
+						found = True
+						break
 			if not found:
 				for d in article_description.split():
-					if key in d.lower():
-						conference_list.append(a)
-						break
+					for k in key.split():
+						if k.lower() in d.lower():
+							conference_list.append(a)
+							break
 	elif stype == 'a':
 		for a in articles:
 			article_name = a.name
@@ -113,7 +115,7 @@ def index(request):
 	key = request.GET.get('s') or False
 	if key is not False:
 		conference_list = search_article('b', key)
-		context = {'conference_list': conference_list}
+		context = {'conference_list': conference_list, 'key': key}
 		context.update(global_context())
 		return render(request, 'biblioteca_sistedes/search_engine.html', context)
 
