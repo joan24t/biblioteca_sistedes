@@ -199,3 +199,18 @@ class ArticleForm(forms.ModelForm):
 			'class': 'multiselect',
 			})
 		}
+
+class KeywordForm(forms.ModelForm):
+
+	class Meta:
+		model = Keyword
+		fields = [
+			'name',
+		]
+		labels = {
+			'name': 'Nombre',
+		}
+		widgets = {
+			'name': forms.TextInput(attrs={
+            'id': 'name_key'}),
+		}

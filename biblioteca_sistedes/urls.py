@@ -28,5 +28,8 @@ urlpatterns = [
     path('conferencias/', views.Conferences, name='Conferencias'),
     path('conferencias/<slug:name>/', views.GetConferences, name='Ver todas las conferencias'),
     path('conferencias/<slug:name>/<int:year>/', views.GetEditions, name='Ver todas las ediciones'),
-    path('conferencias/<slug:name>/<int:year>/<int:id>', views.GetTracks, name='Ver todos los tracks')
+    path('conferencias/<slug:name>/<int:year>/<int:id>', views.GetTracks, name='Ver todos los tracks'),
+    path('keyword_list/', views.KeywordList.as_view(), name='Lista de palabras clave'),
+    path('keyword_create/', views.KeywordCreate.as_view(), name='Crear palabra clave'),
+    path('keyword_update/<int:pk>/', views.KeywordUpdate.as_view(), name='Modificar palabra clave'),
 ]

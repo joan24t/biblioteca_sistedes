@@ -1,0 +1,35 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+
+{% block content %}
+		<h2><u> Palabras clave </u></h2>
+		<input id="myInput"type="text" onkeyup="search_table()">
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				{% if object_list %}
+				{% for key in object_list %}
+				<tr style="border-bottom: 1px solid black;">
+					<td>{{ key.id }}</td>
+
+					<td ><div style="width: 500px; height: auto; overflow: auto">{{ key.name }}</div></td>
+
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/biblioteca/keyword_update/{{ key.id }}">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca/keyword_delete/{{ key.id }}">Eliminar</a>
+					</td>
+				</tr>
+				{% endfor %}
+
+				{% else %}
+				<h1>No hay registros de palabras clave</h1>
+				{% endif %}
+			</tbody>
+		</table>
+
+{% endblock%}

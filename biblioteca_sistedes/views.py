@@ -9,8 +9,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from django.core.exceptions import ValidationError
-from .models import Conference, Edition, Author, Track, Article, Sequence
-from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleForm
+from .models import Conference, Edition, Author, Track, Article, Sequence, Keyword
+from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleForm, KeywordForm
 from django.core.files.storage import FileSystemStorage
 
 
@@ -477,5 +477,66 @@ class ArticleUpdate(UpdateView):
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/biblioteca/article_list/')
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+
+class KeywordList(ListView):
+	model = Keyword
+	template_name = 'biblioteca_sistedes/keyword_list.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(KeywordList, self).get_context_data(**kwargs)
+		context.update(global_context())
+		return context
+
+class KeywordCreate(CreateView):
+	model = Keyword
+	template_name = 'biblioteca_sistedes/keyword_create.html'
+	form_class = KeywordForm
+	success_url = reverse_lazy('biblioteca_sistedes:keyword_list')
+
+	def get_context_data(self, **kwargs):
+		context = super(KeywordCreate, self).get_context_data(**kwargs)
+		if 'form_keyword' not in context:
+			context['form_keyword'] = self.form_class(self.request.GET)
+		context.update(global_context())
+		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST or None)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/biblioteca/keyword_list/')
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+class KeywordUpdate(UpdateView):
+	model = Keyword
+	template_name = 'biblioteca_sistedes/keyword_create.html'
+	form_class = KeywordForm
+	success_url = reverse_lazy('biblioteca_sistedes:keyword_list')
+
+	def get_context_data(self, **kwargs):
+		context = super(KeywordUpdate, self).get_context_data(**kwargs)
+		pk = self.kwargs.get('pk', 0)
+		keyword = self.model.objects.get(id=pk)
+		if 'form_keyword' not in context:
+			context['form_keyword'] = self.form_class(instance=keyword)
+		context['id'] = pk
+		context.update(global_context())
+		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		id_keyword= kwargs['pk']
+		keyword = self.model.objects.get(id = id_keyword)
+		form = self.form_class(request.POST, instance=keyword)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/biblioteca/keyword_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
