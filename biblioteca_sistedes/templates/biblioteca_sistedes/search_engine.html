@@ -16,19 +16,17 @@
                   {{  conference.description }}
                 </p>
             </div>
-            <p style="font-size: 0.8em;">
+            <p style="font-size: 0.8em;" id="text-hightlight">
 
                 {% for author in conference.author_ids.all %}
                 <strong>Autores: </strong>
-                 <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}}</a>&nbsp;/&nbsp;
+                 <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                 {% endfor %}
-
-                <!--<strong>Palabras-->
-                <!--Clave: </strong><a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo">ecological-->
-                <!--debt</a> - <a href="https://biblioteca.sistedes.es/tag/greenability/?post_type=articulo">greenability</a> - -->
-                <!--<a href="https://biblioteca.sistedes.es/tag/software-sustainability/?post_type=articulo"><span-->
-                        <!--class="highlight">software</span> sustainability</a> - <a-->
-                        <!--href="https://biblioteca.sistedes.es/tag/technical-debt/?post_type=articulo">technical debt</a>-->
+                <br/>
+                <strong> Palabras Clave: </strong>
+                {% for keyword in conference.keyword_ids.all %}
+                    <a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                {% endfor %}
             </p>
         </div>
     {% endfor %}

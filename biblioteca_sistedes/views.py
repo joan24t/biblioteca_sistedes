@@ -15,7 +15,10 @@ from django.core.files.storage import FileSystemStorage
 
 
 def Conferences(request):
-	return render(request, 'biblioteca_sistedes/conferences.html', global_context())
+	if request.session.exists():
+		return render(request, 'biblioteca_sistedes/conferences.html', global_context())
+	else:
+		return HttpResponse('hola')
 
 def GetConferences(request, name=None):
 	conference = Conference.objects.filter(domain=name)[:1]
@@ -59,59 +62,81 @@ def search_article(stype, key= False,
 				   txtKeyword= False):
 	articles = Article.objects.all()
 	conference_list = []
-	list_by_title= []
 	list_by_author = []
+	list_by_keyword = []
+	def_article_authors = []
+	def_article_authors_mn = []
+	def_article_authors_ln = []
+	def_article_keywords = []
 	if stype == 'b':
 		for a in articles:
-			found = False
-			article_name = a.name
-			article_description = a.description
-			for n in article_name.split():
+			article_name = a.name.split()
+			article_description = a.description.split()
+
+			article_authors = [author.name for author in a.author_ids.all()]
+			for defaut in article_authors:
+				def_article_authors = def_article_authors + defaut.split()
+
+			article_authors_mn = [author.middle_name for author in a.author_ids.all()]
+			for defaut in article_authors_mn:
+				def_article_authors_mn = def_article_authors_mn + defaut.split()
+
+			article_authors_ln = [author.last_name for author in a.author_ids.all()]
+			for defaut in article_authors_ln:
+				def_article_authors_ln = def_article_authors_ln + defaut.split()
+
+			article_keywords = [keyword.name for keyword in a.keyword_ids.all()]
+			for defaut in article_keywords:
+				def_article_keywords = def_article_keywords+ defaut.split()
+
+			list_search = article_name + article_description + def_article_authors + def_article_authors_ln + def_article_authors_mn + def_article_keywords
+			final_list = list(set(list_search))
+
+			for n in final_list:
 				for k in key.split():
 					if k.lower() in n.lower():
 						conference_list.append(a)
-						found = True
 						break
-			if not found:
-				for d in article_description.split():
-					for k in key.split():
-						if k.lower() in d.lower():
-							conference_list.append(a)
-							break
+		print(final_list)
+
 	elif stype == 'a':
+		conference_list = list([])
 		for a in articles:
 			article_name = a.name
 			articles_autor = a.author_ids.all()
 			article_keyword = a.keyword_ids.all()
 			if txtTitulo:
 				for n in article_name.split():
-					if txtTitulo.lower() in n.lower():
-						list_by_title.append(a)
+					for tt in txtTitulo.split():
+						if tt.lower() in n.lower():
+							conference_list = list(conference_list)
+							conference_list.append(a)
+							break
 			if txtAutor:
 				for autor in articles_autor:
 					for n in autor.name.split():
 						if txtAutor.lower() in n.lower():
 							list_by_author.append(a)
-			if selCondAutor == 'o':
-				conference_list = list_by_title + list_by_author
-			else:
-				conference_list = set(list_by_title).intersection(list_by_author) if txtAutor else list_by_title + list_by_author
-
+							break
+				if selCondAutor == 'o':
+					conference_list = list(conference_list) + list_by_author
+				else:
+					conference_list = set(conference_list).intersection(list_by_author)
+			if txtKeyword:
+				for keyword in article_keyword:
+					for n in keyword.name.split():
+						if txtKeyword.lower() in n.lower():
+							list_by_keyword.append(a)
+							break
+				if selCondKeyword == 'o':
+					conference_list = list(conference_list) + list_by_keyword
+				else:
+					conference_list = set(conference_list).intersection(list_by_keyword)
 	return list(set(conference_list))
-			# if txtAutor:
-			# 	if selCondAutor == 'o':
-			# 		for autor in articles_autor:
-			# 			for n in autor.name.split():
-			# 				if txtAutor in n.lower():
-			# 					conference_list.append(a)
-			# if txtAutor:
-			# 	if selCondAutor == 'o':
-			# 		for autor in articles_autor:
-			# 			for n in autor.name.split():
-			# 				if txtAutor in n.lower():
-			# 					conference_list.append(a)
 
 def index(request):
+	request.session['user'] = 'pepe'
+	request.session.set_expiry(30)
 	key = request.GET.get('s') or False
 	if key is not False:
 		conference_list = search_article('b', key)

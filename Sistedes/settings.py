@@ -125,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = '/static/'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

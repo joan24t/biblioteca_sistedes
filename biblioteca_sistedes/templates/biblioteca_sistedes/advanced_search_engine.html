@@ -46,26 +46,22 @@
             <h1>Resultados de la Búsqueda: [ {{ conference_list|length }} artículo(s) ]</h1>
             {% for conference in conference_list %}
                 <article class="page page_319">
-                    <header class="wrapper">
+                    <header class="wrapper" id="text-hightlight">
                         <h3>{{forloop.counter}} - <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">{{ conference.name }}</a></h3>
                     </header>
-                    <p>
+                    <p id="text-hightlight">
                         {{  conference.description }}
-                        {{  conference.id }}
                     </p>
-                    <p style="font-size: 0.8em;">
-
-                        {% for author in conference.author_ids.all %}
-                            <strong>Autores: </strong>
-                             <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}}</a>&nbsp;/&nbsp;
-                        {% endfor %}
-
-                        <!--<strong>Palabras-->
-                        <!--Clave: </strong><a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo">ecological-->
-                        <!--debt</a> - <a href="https://biblioteca.sistedes.es/tag/greenability/?post_type=articulo">greenability</a> - -->
-                        <!--<a href="https://biblioteca.sistedes.es/tag/software-sustainability/?post_type=articulo"><span-->
-                                <!--class="highlight">software</span> sustainability</a> - <a-->
-                                <!--href="https://biblioteca.sistedes.es/tag/technical-debt/?post_type=articulo">technical debt</a>-->
+                    <p style="font-size: 0.8em;" id="text-hightlight">
+                        <strong>Autores: </strong>
+                            {% for author in conference.author_ids.all %}
+                                <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}}</a>&nbsp;/&nbsp;
+                            {% endfor %}
+                        <br/>
+                        <strong> Palabras Clave: </strong>
+                            {% for keyword in conference.keyword_ids.all %}
+                                <a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                            {% endfor %}
                     </p>
                         <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">...leer artículo</a>
                     </p>
