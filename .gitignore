@@ -2,4 +2,7 @@
 .idea
 .idea/workspace.xml
 /media
-/biblioteca_sistedes/__pycache__
+
+# Byte-compiled / optimized / DLL files
+biblioteca_sistedes/__pycache__/
+*.py[cod]
