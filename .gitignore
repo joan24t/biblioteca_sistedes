@@ -1,4 +1,5 @@
 # phpstorm
 .idea
 .idea/workspace.xml
-./media
+/media
+/biblioteca_sistedes/__pycache__

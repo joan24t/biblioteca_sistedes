@@ -17,9 +17,8 @@
                 </p>
             </div>
             <p style="font-size: 0.8em;" id="text-hightlight">
-
-                {% for author in conference.author_ids.all %}
                 <strong>Autores: </strong>
+                {% for author in conference.author_ids.all %}
                  <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                 {% endfor %}
                 <br/>
