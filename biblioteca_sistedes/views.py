@@ -20,6 +20,9 @@ def Conferences(request):
 	else:
 		return HttpResponse('hola')
 
+def Login(request):
+	return render(request, 'biblioteca_sistedes/login.html')
+
 def GetConferences(request, name=None):
 	conference = Conference.objects.filter(domain=name)[:1]
 	editions = Edition.objects.filter(conference_id = conference)
