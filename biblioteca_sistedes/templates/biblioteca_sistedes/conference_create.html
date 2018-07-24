@@ -2,7 +2,7 @@
 {% block form %}
 <h2><u>Crear conferencia </u></h2>
 {% csrf_token %}
-<div class="form-style-10">
+<div class="form-style-10" style="width:50%;">
 <form method="post">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -18,8 +18,8 @@
     </div>
     </br>
     <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Crear conferencia</button>
+        <div class="submit-row">
+            <input class="submit-row" type="submit" value="Crear conferencia">
         </div>
     </div>
 </form>

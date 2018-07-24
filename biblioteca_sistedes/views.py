@@ -12,15 +12,51 @@ from django.core.exceptions import ValidationError
 from .models import Conference, Edition, Author, Track, Article, Sequence, Keyword
 from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleForm, KeywordForm
 from django.core.files.storage import FileSystemStorage
+from django.contrib.sessions.backends.db import SessionStore
+from django.contrib.sessions.models import Session
 
+
+def index(request):
+	# request.session['user'] = 'pepe'
+	# request.session.set_expiry(30)
+	key = request.GET.get('s') or False
+	if key is not False:
+		conference_list = search_article('b', key)
+		context = {'conference_list': conference_list, 'key': key}
+		context.update(global_context())
+		return render(request, 'biblioteca_sistedes/search_engine.html', context)
+
+	else:
+		return render(request, 'biblioteca_sistedes/base.html', global_context())
 
 def Conferences(request):
-	if request.session.exists():
-		return render(request, 'biblioteca_sistedes/conferences.html', global_context())
-	else:
-		return HttpResponse('hola')
+	return render(request, 'biblioteca_sistedes/conferences.html', global_context())
+
+
+# def GetLogin(request):
+# 	return render(request, 'biblioteca_sistedes/login.html')
 
 def Login(request):
+	form_login = request.POST
+	if form_login:
+		username = request.POST.get("username", "")
+		password = request.POST.get("password", "")
+		request.session['username'] = username
+		print ('IIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN  ' + str(request.session.get('username')))
+		return HttpResponseRedirect( '/biblioteca/')
+
+
+def Logout(request):
+	# request.session.flush()
+	print ('OOOOOOOOOOOOOOOOO UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTTTTTTTTTTTTTT  ' + str(request.session.get('username')))
+	if request.session.get('username'):
+		del request.session['username']
+	return HttpResponseRedirect('/biblioteca/')
+
+def GetLogin(request):
+	# form_login = FormLogin
+	# context = {'form_login': form_login}
+	# context.update(global_context())
 	return render(request, 'biblioteca_sistedes/login.html')
 
 def GetConferences(request, name=None):
@@ -137,18 +173,6 @@ def search_article(stype, key= False,
 					conference_list = set(conference_list).intersection(list_by_keyword)
 	return list(set(conference_list))
 
-def index(request):
-	request.session['user'] = 'pepe'
-	request.session.set_expiry(30)
-	key = request.GET.get('s') or False
-	if key is not False:
-		conference_list = search_article('b', key)
-		context = {'conference_list': conference_list, 'key': key}
-		context.update(global_context())
-		return render(request, 'biblioteca_sistedes/search_engine.html', context)
-
-	else:
-		return render(request, 'biblioteca_sistedes/base.html', global_context())
 
 def search(request):
 	params_exist = True if request.GET.get('selCondAutor') else False
@@ -243,6 +267,7 @@ class ConferenceUpdate(UpdateView):
 	template_name = 'biblioteca_sistedes/conference_create.html'
 	form_class = ConferenceForm
 	success_url = reverse_lazy('biblioteca_sistedes:conference_list')
+
 
 	def get_context_data(self, **kwargs):
 		context = super(ConferenceUpdate, self).get_context_data(**kwargs)

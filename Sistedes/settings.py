@@ -82,7 +82,14 @@ DATABASES = {
         'PASSWORD': 'openpgpwd',
         'HOST': 'localhost',
         'PORT': '5432',
-    }
+    },
+    'users': {
+        'NAME': 'biblioteca_sistedes',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'sislib',
+        'PASSWORD': 'sislibmysql2018',
+        'HOST': 'sislib.mysql.pythonanywhere-services.com',
+    },
 }
 
 
@@ -127,3 +134,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = '/static/'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_SAVE_EVERY_REQUEST = True
+
+ALLOWED_HOSTS = ['192.168.1.6', 'localhost', '127.0.0.1']

@@ -214,3 +214,18 @@ class KeywordForm(forms.ModelForm):
 			'name': forms.TextInput(attrs={
             'id': 'name_key'}),
 		}
+
+# class FormLogin(forms.Form):
+# 	username = forms.CharField(
+# 		label=("Username"),
+# 		required=True,
+# 		name=('username'),
+# 		# id=('id_username'),
+# 	)
+# 	password = forms.CharField(
+# 		label=("Password"),
+# 		widget=forms.PasswordInput,
+# 		required=True,
+# 		name=('password'),
+# 		# id=('id_password'),
+# 	)

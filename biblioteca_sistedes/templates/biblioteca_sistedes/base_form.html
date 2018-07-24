@@ -1,4 +1,6 @@
 {% extends 'biblioteca_sistedes/base.html' %}
+{% block sidebar %}
+{% endblock %}
 {% block content %}
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
                 {% block form %}
