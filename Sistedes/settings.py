@@ -83,13 +83,14 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     },
-    'users': {
-        'NAME': 'biblioteca_sistedes',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'sislib',
-        'PASSWORD': 'sislibmysql2018',
-        'HOST': 'sislib.mysql.pythonanywhere-services.com',
-    },
+    # 'users': {
+    #     'NAME': 'sislib$biblioteca_sistedes',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'USER': 'sislib',
+    #     'PASSWORD': 'sislibmysql2018',
+    #     'HOST': 'sislib.mysql.pythonanywhere-services.com',
+    #     'PORT': '3306',
+    # },
 }
 
 
