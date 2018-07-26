@@ -1449,15 +1449,22 @@ table#change-history tbody th {
     background: #ccc;
 }
 
-/* POPUP */
-.popup #content {
-    padding: 20px;
+ul, ol {
+    list-style:none;
 }
 
-.popup #container {
-    min-width: 0;
+
+
+.nav li a {
+    color:#fff;
+    text-decoration:none;
 }
 
-.popup #header {
-    padding: 10px 20px;
+
+.nav li ul {
+    display:none;
+}
+
+.nav li:hover > ul {
+    display:block;
 }

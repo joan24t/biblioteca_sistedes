@@ -7,7 +7,8 @@
     <title></title>
     {% load static %}
     {% block head %}
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/grid.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/button_style.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/form_style.css' %}"/>
@@ -40,21 +41,37 @@
             </p>
         </div>
         <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
-            <ul id="menu-principal-ul" class="menu">
+            <ul id="menu-principal-ul" class="nav menu">
                 <li id="menu-item-379"
                     class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-379">
-                    <a href="/biblioteca/">Inicio</a></li>
-                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382"><a
-                        href="https://biblioteca.sistedes.es/noticias/">Noticias</a></li>
-                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385"><a
-                        href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a></li>
+                    <a href="/biblioteca/">Inicio</a>
+                </li>
+                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382">
+                    <a href="https://biblioteca.sistedes.es/noticias/">Noticias</a>
+                </li>
+                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385">
+                    <a href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a>
+                </li>
                 <li id="menu-item-388"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a
-                        href="https://biblioteca.sistedes.es/contacto/">Contacto</a></li>
-                {% if request.session.username %}
-                <li id="menu-item-393"
                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">
-                    <a href="/biblioteca/logout/">Cerrar sesión</a>
+                    <a href="https://biblioteca.sistedes.es/contacto/">Contacto</a>
+                </li>
+                {% if request.session.username %}
+                <!--<li id="menu-item-393"-->
+                    <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">-->
+                    <!--<a href="/biblioteca/logout/">Cerrar sesión</a>-->
+                <!--</li>-->
+
+
+                <li class="dropdown-submenu" >
+                    <a class="test" tabindex="-1" href="#" > <i class="fa fa-caret-down" style="font-size:24px"></i><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" >
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca">Mis conferencias</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="#">Mis ediciones</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="#">Mis tracks</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/logout/">Cerrar sesion</a></li><br/>
+                    </ul>
                 </li>
 
                 {% else %}
@@ -70,7 +87,6 @@
 </header>
 <main id="contenido">
     <div class="contenedor1">
-        Hola s{{ request.session.username }}
         {% block sidebar %}
         <div class="divSidebar">
             <h2>Navegación</h2>
@@ -176,7 +192,7 @@
                     <h1>Inicio</h1>
                 </header>
                 <section id="interior" class="s">
-                    <div class="wrapper"><p>Bienvenidos a la Biblioteca Digital de <a href="http://www.sistedes.es">SISTEDES</a>.
+                    <div class="wrapper"><p>Bienvenidos a la Biblioteca Digital de <a href="">SISTEDES</a>.
                         Este es&nbsp;el instrumento mediante el cual SISTEDES pone a disposición de sus socios y del
                         público en general los fondos documentales asociados a sus actividades. En particular, y como
                         principal valor, esta biblioteca contiene, en la actualidad parcialmente, el <a
@@ -185,7 +201,7 @@
                         precedentes, que se remontan hasta 1996. Adicionalmente, la biblioteca contiene los <a
                                 href="/biblioteca/documentos-sistedes/">documentos </a>de producción propia como
                         informes, anuarios, etc. Puede consultarse igualmente el <a
-                                href="https://biblioteca.sistedes.es/biblioteca/documentos-sistedes/boletin-de-noticias-de-sistedes/"
+                                href=""
                                 target="_blank" rel="noopener" title="este enlace se abrirá en una ventana emergente">Boletín
                             de Noticias</a> que SISTEDES publica desde febrero de 2018.</p>
                     </div>
@@ -204,14 +220,14 @@
             <ul id="menu-pie" class="menu">
                 <li id="menu-item-391"
                     class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-391"><a
-                        href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a></li>
+                        href="">Acerca de la Biblioteca</a></li>
                 <li id="menu-item-392" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-392"><a
-                        href="https://biblioteca.sistedes.es/noticias/">Noticias</a></li>
+                        href="">Noticias</a></li>
                 <li id="menu-item-433" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-433"><a
-                        href="https://biblioteca.sistedes.es/busqueda/">Búsqueda Avanzada</a></li>
+                        href="">Búsqueda Avanzada</a></li>
                 <li id="menu-item-390"
                     class="last-item menu-item menu-item-type-post_type menu-item-object-page menu-item-390"><a
-                        href="https://biblioteca.sistedes.es/contacto/">Contacto</a></li>
+                        href="">Contacto</a></li>
             </ul>
         </div>
         <div class="c c-1-2 c-last c-right redes">
@@ -224,7 +240,7 @@
     <div class="cookies_es_inner"><p>Utilizamos cookies propias y de terceros con fines estadísticos para poder mejorar
         tu navegación y nuestros servicios.</p>
         <p>Si continúas navegando, consideramos que aceptas su uso. Para más información, consulta nuestra <a
-                href="/politica-cookies" target="_blank"
+                href="" target="_blank"
                 title="Revisar política de cookies (este enlace se abrirá en una ventana emergente)">política de
             cookies</a>.</p>
         <p><a class="cookies-close" href="#">aceptar</a></p></div>

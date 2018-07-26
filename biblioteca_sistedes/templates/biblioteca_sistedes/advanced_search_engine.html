@@ -47,7 +47,7 @@
             {% for conference in conference_list %}
                 <article class="page page_319">
                     <header class="wrapper" id="text-hightlight">
-                        <h3>{{forloop.counter}} - <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">{{ conference.name }}</a></h3>
+                        <h3>{{forloop.counter}} - <a href="">{{ conference.name }}</a></h3>
                     </header>
                     <p id="text-hightlight">
                         {{  conference.description }}
@@ -60,10 +60,10 @@
                         <br/>
                         <strong> Palabras Clave: </strong>
                             {% for keyword in conference.keyword_ids.all %}
-                                <a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                                <a href=""> {{keyword.name}} </a>&nbsp;-&nbsp;
                             {% endfor %}
                     </p>
-                        <a href="https://biblioteca.sistedes.es/articulo/cloudwave-agile-service-engineering-for-the-future-internet/">...leer artículo</a>
+                        <a href="">...leer artículo</a>
                     </p>
                 </article>
             {% endfor %}
