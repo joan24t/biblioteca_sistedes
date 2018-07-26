@@ -30,7 +30,7 @@
 
 </head>
 <body class="body_home">
-<header id="cabecera">
+<header id="cabecera" style="max-height: 100px;">
     <div class="wrapper">
         <div id="logo" class="c c-1-2 c-first">
             <p style="margin-left: 90px;"><a href="http://www.sistedes.es"
@@ -57,16 +57,13 @@
                     <a href="https://biblioteca.sistedes.es/contacto/">Contacto</a>
                 </li>
                 {% if request.session.username %}
-                <!--<li id="menu-item-393"-->
-                    <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">-->
-                    <!--<a href="/biblioteca/logout/">Cerrar sesión</a>-->
-                <!--</li>-->
-
 
                 <li class="dropdown-submenu" >
-                    <a class="test" tabindex="-1" href="#" > <i class="fa fa-caret-down" style="font-size:24px"></i><span
+                    <a class="test"  tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-caret-down" style="font-size:24px"></i><span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu" id="arrow-menu" >
+                        <br/>
+                        <div style="border-top: 3px solid #006696; float: right; width: 150px; height: 4px;"></div><br/>
                         <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca">Mis conferencias</a></li><br/>
                         <li style ="font-size: 13px;"><a tabindex="-1" href="#">Mis ediciones</a></li><br/>
                         <li style ="font-size: 13px;"><a tabindex="-1" href="#">Mis tracks</a></li><br/>

@@ -47,3 +47,16 @@ function search_table() {
     }
   }
 }
+
+
+function dropdown(){
+    var element = document.getElementById('arrow-menu'),
+    style = window.getComputedStyle(element),
+    display = style.getPropertyValue('display');
+    if (display === 'none'){
+        document.getElementById("arrow-menu").style= "display:block; position: relative;";
+    }
+    else {
+        document.getElementById("arrow-menu").style= "display:none; position: relative;";
+    }
+}

@@ -1465,6 +1465,7 @@ ul, ol {
     display:none;
 }
 
-.nav li:hover > ul {
+/*
+.nav li:active > ul {
     display:block;
-}
+}*/
