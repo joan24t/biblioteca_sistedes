@@ -1,69 +1,5 @@
-<html lang="en-us">
-<head>
-    {% load static %}
-    <title>Log in | Biblioteca sistedes</title>
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
-    {% block head %}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/grid.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/button_style.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/form_style.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/normalize.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/style.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/js/treeview/jquery.treeview.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/multi.min.css' %}"/>
-
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/treeview/jquery.cookie.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/treeview/jquery.treeview.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/jquery.highlight.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/template.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/tree.collapse.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/multi.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/better-multiselect-filter.js' %}"></script>
-    {% endblock %}
-
-
-    <meta name="robots" content="NONE,NOARCHIVE">
-</head>
-{% load static %}
-<header id="cabecera">
-    <div class="wrapper">
-        <div id="logo" class="c c-1-2 c-first">
-            <p style="margin-left: 90px;"><a href="http://www.sistedes.es"
-                                             title="Volver al sitio principal de SISTEDES (este enlace se abrirá en una ventana emergente)"
-                                             target="_blank"><img
-                    src="{% static 'biblioteca_sistedes/img/logo_1.png' %}"
-                    alt="Sistedes"></a><img
-                    src="{% static 'biblioteca_sistedes/img/logo_2.png' %}" alt="Biblioteca Digital">
-            </p>
-        </div>
-        <nav id="menu-principal" class="c c-1-2 c-last c-right">
-            <ul id="menu-principal-ul" class="menu">
-                <li id="menu-item-379"
-                    class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-379">
-                    <a href="/biblioteca/">Inicio</a></li>
-                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382"><a
-                        href="">Noticias</a></li>
-                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385"><a
-                        href="">Acerca de la Biblioteca</a></li>
-                <li id="menu-item-388"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a
-                        href="">Contacto</a></li>
-                <li id="menu-item-389"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a
-                        href="/biblioteca/login">Iniciar sesión</a></li>
-            </ul>
-        </nav>
-    </div>
-
-</header>
-
-
-<body class=" login" data-admin-utc-offset="0">
-
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block container %}
 <!-- Container -->
 <div id="container" style="margin-top: 200px;">
     <!-- Header -->
@@ -102,12 +38,6 @@
 
         <br class="clear">
     </div>
-    <!-- END Content -->
-
-    <div id="footer"></div>
 </div>
-<!-- END Container -->
-
-
-</body>
-</html>
+{% endblock %}
+    <!-- END Content -->

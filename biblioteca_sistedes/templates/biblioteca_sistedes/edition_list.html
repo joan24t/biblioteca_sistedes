@@ -1,6 +1,5 @@
-{% extends 'biblioteca_sistedes/base.html' %}
-
-{% block content %}
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block container %}
 		<h2><u> Ediciones </u></h2>
 		<input id="myInput"type="text" onkeyup="search_table()">
 		<table id="myTable">
@@ -35,5 +34,4 @@
 				{% endif %}
 			</tbody>
 		</table>
-
 {% endblock%}

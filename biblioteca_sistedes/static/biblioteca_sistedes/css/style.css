@@ -1015,11 +1015,6 @@ input[type=button][disabled].default {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
-
-.module table {
-    border-collapse: collapse;
-}
-
 /* MESSAGES & ERRORS */
 
 ul.messagelist {
@@ -1235,15 +1230,6 @@ a.deletelink:focus, a.deletelink:hover {
     background-image: url(../img/tooltag-add.svg);
 }
 
-/* OBJECT HISTORY */
-
-table#change-history {
-    width: 100%;
-}
-
-table#change-history tbody th {
-    width: 16em;
-}
 
 /* PAGE STRUCTURE */
 

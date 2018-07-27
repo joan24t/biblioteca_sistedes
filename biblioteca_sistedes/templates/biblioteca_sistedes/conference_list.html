@@ -1,8 +1,9 @@
-{% extends 'biblioteca_sistedes/base.html' %}
-
-{% block content %}
-		<h2><u> Conferencias </u></h2>
-		<input id="myInput"type="text" onkeyup="search_table()">
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block container %}
+		<h2><u> Conferencias </u></h2></br>
+		Buscador: <input id="myInput"type="text" onkeyup="search_table()">
+		</br>
+		</br>
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -34,5 +35,4 @@
 				{% endif %}
 			</tbody>
 		</table>
-
 {% endblock%}
