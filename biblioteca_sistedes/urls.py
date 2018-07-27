@@ -35,4 +35,7 @@ urlpatterns = [
     path('keyword_list/', views.KeywordList.as_view(), name='Lista de palabras clave'),
     path('keyword_create/', views.KeywordCreate.as_view(), name='Crear palabra clave'),
     path('keyword_update/<int:pk>/', views.KeywordUpdate.as_view(), name='Modificar palabra clave'),
+    path('user_list/', views.UserList.as_view(), name='Lista de usuarios'),
+    path('user_create/', views.UserCreate.as_view(), name='Crear Usuario'),
+    path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='Actualizar usuario'),
 ]

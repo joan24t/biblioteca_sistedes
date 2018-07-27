@@ -1,8 +1,9 @@
-{% extends 'biblioteca_sistedes/base.html' %}
-
-{% block content %}
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block container %}
 		<h2><u> Tracks </u></h2>
-		<input id="myInput"type="text" onkeyup="search_table()">
+		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
+		</br>
+		</br>
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -22,8 +23,8 @@
 					<td>{{ track.edition_id.name }}</td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca_sistedes/track_update/{{ track.id }}">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca_sistedes/track_delete/{{ track.id }}">Eliminar</a>
+						<a class="btn btn-primary" href="/biblioteca/track_update/{{ track.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca/track_delete/{{ track.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

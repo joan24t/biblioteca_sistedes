@@ -9,8 +9,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from django.core.exceptions import ValidationError
-from .models import Conference, Edition, Author, Track, Article, Sequence, Keyword
-from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleForm, KeywordForm
+from .models import Conference, Edition, Author, Track, Article, Sequence, Keyword, User
+from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleForm, KeywordForm, UserForm
 from django.core.files.storage import FileSystemStorage
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
@@ -255,6 +255,7 @@ class ConferenceCreate(CreateView):
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
 		form = self.form_class(request.POST)
+		print (str(form))
 		if form.is_valid():
 			conference = form.save()
 			return HttpResponseRedirect('/biblioteca/conference_list/')
@@ -593,3 +594,72 @@ class KeywordUpdate(UpdateView):
 			return HttpResponseRedirect('/biblioteca/keyword_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
+
+class UserList(ListView):
+	model = User
+	template_name = 'biblioteca_sistedes/user_list.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(UserList, self).get_context_data(**kwargs)
+		context.update(global_context())
+		return context
+
+class UserCreate(CreateView):
+	model = User
+	template_name = 'biblioteca_sistedes/user_registration.html'
+	form_class = UserForm
+	success_url = reverse_lazy('biblioteca_sistedes:user_list')
+
+	def get_context_data(self, **kwargs):
+		context = super(UserCreate, self).get_context_data(**kwargs)
+		if 'form_user' not in context:
+			context['form_user'] = self.form_class(self.request.GET)
+		context.update(global_context())
+		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST)
+		name = request.POST.get("name","")
+		surnames = request.POST.get("surnames","")
+		email = request.POST.get("email","")
+		username = request.POST.get("username","")
+		password = request.POST.get("password","")
+		rol = request.POST.get("rol", "")
+		print (name + ' ' + surnames + ' ' + email + ' ' + username + ' ' + password + ' ' + rol)
+		user = User.objects.create(name=name, surnames=surnames, email=email, username=username, password=password, rol=rol)
+		if user:
+			return HttpResponseRedirect('/biblioteca/user_list/')
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+
+class UserUpdate(UpdateView):
+	model = User
+	template_name = 'biblioteca_sistedes/user_registration.html'
+	form_class = UserForm
+	success_url = reverse_lazy('biblioteca_sistedes:user_list')
+
+	def get_context_data(self, **kwargs):
+		context = super(UserUpdate, self).get_context_data(**kwargs)
+		pk = self.kwargs.get('pk', 0)
+		user = self.model.objects.get(id=pk)
+		if 'form_user' not in context:
+			context['form_user'] = self.form_class(instance=user)
+		context['id'] = pk
+		context.update(global_context())
+		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		id_user= kwargs['pk']
+		user = self.model.objects.get(id = id_user)
+		form = self.form_class(request.POST, instance=user)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/biblioteca/user_list/')
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+
+

@@ -30,32 +30,54 @@
     <meta name="robots" content="NONE,NOARCHIVE">
 </head>
 {% load static %}
-<header id="cabecera">
+<header id="cabecera" style="max-height: 100px;">
     <div class="wrapper">
         <div id="logo" class="c c-1-2 c-first">
             <p style="margin-left: 90px;"><a href="http://www.sistedes.es"
-                                             title="Volver al sitio principal de SISTEDES (este enlace se abrirá en una ventana emergente)"
-                                             target="_blank"><img
-                    src="{% static 'biblioteca_sistedes/img/logo_1.png' %}"
-                    alt="Sistedes"></a><img
+                  title="Volver al sitio principal de SISTEDES (este enlace se abrirá en una ventana emergente)"
+                  target="_blank"><img src="{% static 'biblioteca_sistedes/img/logo_1.png' %}"
+                                       alt="Sistedes"></a><img
                     src="{% static 'biblioteca_sistedes/img/logo_2.png' %}" alt="Biblioteca Digital">
             </p>
         </div>
-        <nav id="menu-principal" class="c c-1-2 c-last c-right">
-            <ul id="menu-principal-ul" class="menu">
+        <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
+            <ul id="menu-principal-ul" class="nav menu">
                 <li id="menu-item-379"
                     class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-379">
-                    <a href="/biblioteca/">Inicio</a></li>
-                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382"><a
-                        href="">Noticias</a></li>
-                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385"><a
-                        href="">Acerca de la Biblioteca</a></li>
+                    <a href="/biblioteca/">Inicio</a>
+                </li>
+                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382">
+                    <a href="https://biblioteca.sistedes.es/noticias/">Noticias</a>
+                </li>
+                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385">
+                    <a href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a>
+                </li>
                 <li id="menu-item-388"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a
-                        href="">Contacto</a></li>
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">
+                    <a href="https://biblioteca.sistedes.es/contacto/">Contacto</a>
+                </li>
+                {% if request.session.username %}
+
+                <li class="dropdown-submenu" >
+                    <a class="test"  tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" id="arrow-menu" >
+                        <br/>
+                        <div style="border-top: 3px solid #006696; float: right; width: 150px; height: 4px;"></div><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/conference_list/">Mis conferencias</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/edition_list/">Mis ediciones</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/track_list/">Mis tracks</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/user_create/">Registrar usuario</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/logout/">Cerrar sesion</a></li><br/>
+                    </ul>
+                </li>
+
+                {% else %}
                 <li id="menu-item-389"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a
-                        href="/biblioteca/login">Iniciar sesión</a></li>
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">
+                    <a href="/biblioteca/getlogin/">Iniciar sesión</a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </div>

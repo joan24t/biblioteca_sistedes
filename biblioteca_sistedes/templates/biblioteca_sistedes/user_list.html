@@ -1,0 +1,51 @@
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block container %}
+		<h2><u> Usuarios </u></h2>
+		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
+		</br>
+		</br>
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				{% if object_list %}
+				{% for user in object_list %}
+				<tr style="border-bottom: 1px solid black;">
+					<td>{{ user.id }}</td>
+
+					<td ><div>{{ user.name }}</div></td>
+                    <td ><div >{{ user.surnames }}</div></td>
+                    <td ><div >{{ user.email }}</div></td>
+                    {% if user.rol == 1 %}
+                        <td ><div>Administrador</div></td>
+                    {% endif %}
+                    {% if user.rol == 2 %}
+                        <td ><div>Presidente comité de programa</div></td>
+                    {% endif %}
+                    {% if user.rol == 3 %}
+                        <td ><div>Responsable de track</div></td>
+                    {% endif %}
+
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/biblioteca/user_update/{{ user.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca/user_update/{{ user.id }}/">Eliminar</a>
+					</td>
+				</tr>
+				{% endfor %}
+
+				{% else %}
+				<h1>No hay registros de palabras clave</h1>
+				{% endif %}
+			</tbody>
+		</table>
+
+{% endblock%}

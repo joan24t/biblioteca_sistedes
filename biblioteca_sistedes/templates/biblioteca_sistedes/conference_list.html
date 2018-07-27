@@ -1,7 +1,7 @@
 {% extends 'biblioteca_sistedes/base_form.html' %}
 {% block container %}
 		<h2><u> Conferencias </u></h2></br>
-		Buscador: <input id="myInput"type="text" onkeyup="search_table()">
+		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
 		<table id="myTable">
@@ -24,8 +24,8 @@
 					<td>{{ conference.domain }}</td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca_sistedes/conference_update/{{ solicitud.id }}">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca_sistedes/conference_delete/{{ solicitud.id }}">Eliminar</a>
+						<a class="btn btn-primary" href="/biblioteca/conference_update/{{ conference.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/biblioteca/conference_delete/{{ conference.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

@@ -1,9 +1,13 @@
 # -*- encoding:utf-8 -*-
 from django import forms
-from .models import Conference, Edition, Track, Article, Author, Keyword, AccessRight
+from .models import Conference, Edition, Track, Article, Author, Keyword, AccessRight, User
 from django.contrib import admin
 
-
+ROL_CHOICE = (
+    (1, 'Administrador'),
+    (2, 'Presidente de comite de programa'),
+    (3, 'Responsable de track'),
+)
 
 class ConferenceForm(forms.ModelForm):
 
@@ -213,6 +217,35 @@ class KeywordForm(forms.ModelForm):
 		widgets = {
 			'name': forms.TextInput(attrs={
             'id': 'name_key'}),
+		}
+
+class UserForm(forms.ModelForm):
+
+	class Meta:
+		model = User
+		fields = [
+			'name',
+			'surnames',
+			'username',
+			'email',
+			'password',
+			'rol',
+		]
+		labels = {
+			'name': 'Nombre',
+			'surnames': 'Apellidos',
+			'username': 'Nombre de usuario',
+			'email': 'Email',
+			'password': 'Contraseña',
+			'rol': 'Rol',
+		}
+		widgets = {
+			'name': forms.TextInput(attrs={'id': 'name_user'}),
+			'surnames': forms.TextInput(attrs={'id': 'surname_user'}),
+			'username': forms.TextInput(attrs={'id': 'username_user'}),
+			'email': forms.EmailInput(attrs={'id': 'email_user'}),
+			'password': forms.PasswordInput(attrs={'id': 'pass_user'}),
+			'rol': forms.Select(attrs={'id': 'rol_user', 'style': 'height: 40px; font-size: 20px;'}, choices=ROL_CHOICE),
 		}
 
 # class FormLogin(forms.Form):
