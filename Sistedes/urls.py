@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-	path('biblioteca/', include('biblioteca_sistedes.urls')),
-	url('', RedirectView.as_view(url='/biblioteca/', permanent=False), name='index')
+	path('', include('biblioteca_sistedes.urls')),
+	# url('', RedirectView.as_view(url='/biblioteca/', permanent=False), name='index')
     #url(r'^admin/', admin.site.urls),
 ]

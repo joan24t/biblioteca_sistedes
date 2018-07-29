@@ -1,0 +1,44 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+        <h1>Acerca de la Biblioteca</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper"><p>El objetivo de la Biblioteca Digital de SISTEDES es almacenar documentos de interés para
+            los miembros de la sociedad SISTEDES permitiendo así una mayor difusión de las contribuciones científico
+            tecnológicas realizadas por éstos.</p>
+            <p>En particular:</p>
+            <ul>
+                <li>Trabajos publicados en las actas de los congresos JCIS/JISBD/PROLE.</li>
+                <li>Informes técnicos sobre la actividad de SISTEDES</li>
+                <li>Cualquier otro documento de interés para los asociados y/o el público en general.</li>
+            </ul>
+            <p>Con el fin de proporcionar un servicio útil a la comunidad SISTEDES, a la vez que se protegen los
+                intereses posteriores de los autores en cuanto a la publicación, ampliación, o aplicación de las obras
+                contenidas en BDSISTEDES, se han establecido&nbsp;mecanismos necesarios para flexibilizar su
+                almacenamiento y presentación de modo que los responsables últimos de la presentación y difusión de cada
+                obra sean los propios autores.</p>
+            <p>Por ello, la inclusión y visualización de documentos y material en la Biblioteca Digital de SISTEDES
+                tendrá lugar con el consentimiento expreso de los autores, que podrán escoger</p>
+            <ul>
+                <li>El <em>nivel de difusión</em> que desean para su obra, expresado mediante el documento de <em>cesión
+                    de derechos</em> de almacenamiento y difusión a la Biblioteca Digital de SISTEDES (disponible
+                    próximamente), que permite adecuar su finalidad al ordenamiento legal sobre propiedad intelectual.
+                </li>
+                <li>El <em>nivel de detalle</em> con el que se exhibirá su contribución en la Biblioteca Digital de
+                    SISTEDES (título y resumen, trabajo completo, material adicional, etc.), que permite controlar y en
+                    su caso evitar conflictos de originalidad y derechos de copia transferidos a foros de publicación
+                    científica.
+                </li>
+            </ul>
+            <p>La organización y gestión de la Biblioteca Digital de SISTEDES es responsabilidad de la Junta Directiva
+                de SISTEDES, que someterá a aprobación de la Asamblea General de SISTEDES las líneas maestras de
+                funcionamiento de la Biblioteca Digital de SISTEDES y podrá delegar en quien considere oportuno las
+                tareas de administración y dirección técnica de la misma.</p>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

@@ -32,6 +32,15 @@ def index(request):
 def Conferences(request):
 	return render(request, 'biblioteca_sistedes/conferences.html', global_context())
 
+def News(request):
+	return render(request, 'biblioteca_sistedes/news.html', global_context())
+
+def Aboutus(request):
+	return render(request, 'biblioteca_sistedes/about.html', global_context())
+
+def Contactus(request):
+	return render(request, 'biblioteca_sistedes/contactus.html', global_context())
+
 
 # def GetLogin(request):
 # 	return render(request, 'biblioteca_sistedes/login.html')
@@ -47,7 +56,7 @@ def Login(request):
 				user_loged = User.objects.get(username=username)
 				request.session['username'] = username
 				request.session['rol'] = user_loged.rol
-				return HttpResponseRedirect( '/biblioteca/')
+				return HttpResponseRedirect( '/')
 				break
 		else:
 			return HttpResponse('Login incorrecto')
@@ -59,7 +68,7 @@ def Logout(request):
 	if request.session.get('username'):
 		del request.session['username']
 		# del request.session['rol']
-	return HttpResponseRedirect('/biblioteca/')
+	return HttpResponseRedirect('/')
 
 def GetLogin(request):
 	# form_login = FormLogin
@@ -211,31 +220,31 @@ def ConferenceDelete(request, pk=None):
 	conference = get_object_or_404(Conference, pk=pk)
 	if conference:
 		conference.delete()
-		return HttpResponseRedirect('/biblioteca/conference_list/')
+		return HttpResponseRedirect('/conference_list/')
 
 def EditionDelete(request, pk=None):
 	edition = get_object_or_404(Edition, pk=pk)
 	if edition:
 		edition.delete()
-		return HttpResponseRedirect('/biblioteca/edition_list/')
+		return HttpResponseRedirect('/edition_list/')
 
 def TrackDelete(request, pk=None):
 	track = get_object_or_404(Track, pk=pk)
 	if track:
 		track.delete()
-		return HttpResponseRedirect('/biblioteca/track_list/')
+		return HttpResponseRedirect('/track_list/')
 
 def AuthorDelete(request, pk=None):
 	author = get_object_or_404(Author, pk=pk)
 	if author:
 		author.delete()
-		return HttpResponseRedirect('/biblioteca/author_list/')
+		return HttpResponseRedirect('/author_list/')
 
 def ArticleDelete(request, pk=None):
 	article = get_object_or_404(Article, pk=pk)
 	if article:
 		article.delete()
-		return HttpResponseRedirect('/biblioteca/article_list/')
+		return HttpResponseRedirect('/article_list/')
 
 
 class ConferenceList(ListView):
@@ -266,7 +275,7 @@ class ConferenceCreate(CreateView):
 		print (str(form))
 		if form.is_valid():
 			conference = form.save()
-			return HttpResponseRedirect('/biblioteca/conference_list/')
+			return HttpResponseRedirect('/conference_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -295,7 +304,7 @@ class ConferenceUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=conference)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/conference_list/')
+			return HttpResponseRedirect('/conference_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -326,7 +335,7 @@ class EditionCreate(CreateView):
 		form = self.form_class(request.POST or None)
 		if form.is_valid():
 			edition = form.save()
-			return HttpResponseRedirect('/biblioteca/edition_list/')
+			return HttpResponseRedirect('/edition_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -353,7 +362,7 @@ class EditionUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=edition)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/edition_list/')
+			return HttpResponseRedirect('/edition_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -384,7 +393,7 @@ class AuthorCreate(CreateView):
 		form = self.form_class(request.POST or None)
 		if form.is_valid():
 			author = form.save()
-			return HttpResponseRedirect('/biblioteca/author_list/')
+			return HttpResponseRedirect('/author_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -411,7 +420,7 @@ class AuthorUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=author)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/author_list/')
+			return HttpResponseRedirect('/author_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -442,7 +451,7 @@ class TrackCreate(CreateView):
 		form = self.form_class(request.POST or None)
 		if form.is_valid():
 			track = form.save()
-			return HttpResponseRedirect('/biblioteca/track_list/')
+			return HttpResponseRedirect('/track_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -469,7 +478,7 @@ class TrackUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=track)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/track_list/')
+			return HttpResponseRedirect('/track_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -510,7 +519,7 @@ class ArticleCreate(CreateView):
 			article = form.save()
 			article.url_file = uploaded_file_url
 			article.save()
-			return HttpResponseRedirect('/biblioteca/article_list/')
+			return HttpResponseRedirect('/article_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -538,7 +547,7 @@ class ArticleUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=article)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/article_list/')
+			return HttpResponseRedirect('/article_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -571,7 +580,7 @@ class KeywordCreate(CreateView):
 
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/keyword_list/')
+			return HttpResponseRedirect('/keyword_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -599,7 +608,7 @@ class KeywordUpdate(UpdateView):
 
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/keyword_list/')
+			return HttpResponseRedirect('/keyword_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -637,7 +646,7 @@ class UserCreate(CreateView):
 		print (name + ' ' + surnames + ' ' + email + ' ' + username + ' ' + password + ' ' + rol)
 		user = User.objects.create(name=name, surnames=surnames, email=email, username=username, password=password, rol=rol)
 		if user:
-			return HttpResponseRedirect('/biblioteca/user_list/')
+			return HttpResponseRedirect('/user_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
@@ -665,7 +674,7 @@ class UserUpdate(UpdateView):
 		form = self.form_class(request.POST, instance=user)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/biblioteca/user_list/')
+			return HttpResponseRedirect('/user_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 

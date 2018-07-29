@@ -1440,12 +1440,6 @@ a.deletelink:focus, a.deletelink:hover {
     background: #ccc;
 }
 
-ul, ol {
-    list-style:none;
-}
-
-
-
 .nav li a {
     color:#fff;
     text-decoration:none;
@@ -1456,6 +1450,10 @@ ul, ol {
     display:none;
 }
 
+#arrow-menu{
+    display:none;
+    position: relative;
+}
 /*
 .nav li:active > ul {
     display:block;

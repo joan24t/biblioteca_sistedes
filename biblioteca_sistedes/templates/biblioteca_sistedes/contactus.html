@@ -1,0 +1,21 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+        <h1>Contacto</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper"><p>Para obtener más información acerca del funcionamiento de la Biblioteca Digital de
+            SISTEDES, o cualquier otra consulta, pueden enviar un mensaje de correo electrónico a&nbsp;<a
+                    href="mailto:bdigital@sistedes.es">bdigital@sistedes.es</a>.</p>
+            <p>&nbsp;</p>
+            <h4>Equipo técnico</h4>
+            <p>Patricio Reinoso Mendoza (Universitat Politècnica de València)<br>
+                Abel Gómez Llana (Universitat Oberta de Catalunya)<br>
+                José Hilario Canós Cerdá (Universitat Politècnica de València)</p>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

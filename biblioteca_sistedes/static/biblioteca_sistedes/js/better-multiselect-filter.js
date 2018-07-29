@@ -13,6 +13,14 @@ jQuery(document).ready(function() {
             }
 });
 
+
+document.onclick = function(event) {
+    if (!jQuery(event.target).hasClass( "focusout-except" ) && !jQuery(event.target).hasClass( "fa" )) {
+        jQuery("#arrow-menu").css("display", "none");
+    }
+};
+
+
 function showHint(str) {
     if (str.length == 0) {
         document.getElementById("txtHint").innerHTML = "";

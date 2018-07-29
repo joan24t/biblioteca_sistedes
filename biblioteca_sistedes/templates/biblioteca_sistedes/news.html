@@ -1,0 +1,30 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+        <h1>Bienvenidos!</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper"><p><strong>Bienvenidos a la Biblioteca Digital de SISTEDES.</strong></p>
+            <p>&nbsp;</p>
+            <p>Desde su fundación, SISTEDES ha perseguido la promoción de la investigación, la innovación y la
+                transferencia de tecnología entre los distintos agentes involucrados en el avance de la Ingeniería del
+                Software&nbsp; y las Tecnologías de desarrollo de Softrare. Con ese fin, se convirtió en la entidad
+                encargada de la organización de unas jornadas científicas anuales (las Jornadas SISTEDES), así como de
+                ofrecer un conjunto de actividades y servicios a sus socios y a toda la comunidad española que trabaja
+                en las áreas de Ingeniería del Software y las Tecnologías de Desarrollo de Software. Esas conferencias
+                suceden en el tiempo a las jornadas que, desde 1996, se han celebrado en diversos lugares de nuestro
+                país en los ámbitos de la Ingeniería del Software, Bases de Datos y Tecnologías de desarrollo de
+                Software.</p>
+            <p>La Biblioteca Digital de SISTEDES es el instrumento mediante el cual SISTEDES pone a disposición de sus
+                socios y del público en general los fondos documentales asociados a sus actividades. En particular, y
+                como principal valor, esta biblioteca contiene el archivo de actas de las Jornadas SISTEDES, celebradas
+                desde 2006. El archivo incluye, además, las actas de las diferentes jornadas precedentes, celebradas
+                desde 1996. Adicionalmente, la biblioteca contiene los documentos de producción propia como informes,
+                anuarios, etc.</p>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

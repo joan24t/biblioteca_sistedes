@@ -43,45 +43,45 @@
         <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
             <ul id="menu-principal-ul" class="nav menu">
                 <li class="elemento-principal">
-                    <a href="/biblioteca/">Inicio</a>
+                    <a href="/">Inicio</a>
                 </li>
                 <li class="elemento-principal">
-                    <a href="https://biblioteca.sistedes.es/noticias/">Noticias</a>
+                    <a href="/noticias/">Noticias</a>
                 </li>
                 <li class="elemento-principal">
-                    <a href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a>
+                    <a href="/biblioteca/">Acerca de la Biblioteca</a>
                 </li>
                 <li class="elemento-principal">
-                    <a href="https://biblioteca.sistedes.es/contacto/">Contacto</a>
+                    <a href="/contacto/">Contacto</a>
                 </li>
                 {% if request.session.username %}
 
                 <li class="dropdown-submenu" >
-                    <a class="test"  tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
+                    <a class="test" id="user-menu" tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" id="arrow-menu" >
+                    <ul id="arrow-menu" >
                             <div style="border-bottom: 3px solid #006696; float: right; width: 150px; height:30px; margin-top: 5px;">
                                 <span class="username">{{ request.session.username }}</span>
                             </div><br/>
-                        <div style="margin-top: 15px;">
+                        <div style="margin-top: 15px;" class="dropdown-menu">
                         {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/conference_list/">Mis conferencias</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/conference_list/">Mis conferencias</a></li><br/>
                         {% endif %}
                         {% if request.session.rol == 1 or request.session.rol == 2%}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/edition_list/">Mis ediciones</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/edition_list/">Mis ediciones</a></li><br/>
                         {% endif %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/track_list/">Mis tracks</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Mis tracks</a></li><br/>
                         {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/user_create/">Registrar usuario</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/user_create/">Registrar usuario</a></li><br/>
                         {% endif %}
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/logout/">Cerrar sesion</a></li><br/>
+                        <li style ="font-size: 13px;"><a tabindex="-1" href="/logout/">Cerrar sesion</a></li><br/>
                         </div>
                     </ul>
                 </li>
 
                 {% else %}
                 <li class="elemento-principal">
-                    <a href="/biblioteca/getlogin/">Iniciar sesión</a>
+                    <a href="/getlogin/">Iniciar sesión</a>
                 </li>
                 {% endif %}
             </ul>
@@ -89,7 +89,6 @@
     </div>
 
 </header>
-
 
 
 <body class=" login" data-admin-utc-offset="0" style="width: 100%;">
