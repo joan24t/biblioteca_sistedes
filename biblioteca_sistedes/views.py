@@ -38,12 +38,19 @@ def Conferences(request):
 
 def Login(request):
 	form_login = request.POST
+	username = request.POST.get("username", "")
+	password = request.POST.get("password", "")
 	if form_login:
-		username = request.POST.get("username", "")
-		password = request.POST.get("password", "")
-		request.session['username'] = username
-		print ('IIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN  ' + str(request.session.get('username')))
-		return HttpResponseRedirect( '/biblioteca/')
+		users = User.objects.all()
+		for user in users:
+			if user.username == username and user.password == password:
+				user_loged = User.objects.get(username=username)
+				request.session['username'] = username
+				request.session['rol'] = user_loged.rol
+				return HttpResponseRedirect( '/biblioteca/')
+				break
+		else:
+			return HttpResponse('Login incorrecto')
 
 
 def Logout(request):
@@ -51,6 +58,7 @@ def Logout(request):
 	print ('OOOOOOOOOOOOOOOOO UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTTTTTTTTTTTTTT  ' + str(request.session.get('username')))
 	if request.session.get('username'):
 		del request.session['username']
+		# del request.session['rol']
 	return HttpResponseRedirect('/biblioteca/')
 
 def GetLogin(request):

@@ -311,9 +311,14 @@ a.boton:hover
 #menu-principal
 {
 	padding-top: 3em;
-	text-transform: uppercase;
 	font-family: 'Open Sans';
 }
+
+.elemento-principal
+{
+	text-transform: uppercase;
+}
+
 
 #menu-principal a
 {

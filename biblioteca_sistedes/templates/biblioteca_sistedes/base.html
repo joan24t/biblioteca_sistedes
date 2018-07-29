@@ -42,18 +42,16 @@
         </div>
         <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
             <ul id="menu-principal-ul" class="nav menu">
-                <li id="menu-item-379"
-                    class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-379">
+                <li class="elemento-principal">
                     <a href="/biblioteca/">Inicio</a>
                 </li>
-                <li id="menu-item-382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-382">
+                <li class="elemento-principal">
                     <a href="https://biblioteca.sistedes.es/noticias/">Noticias</a>
                 </li>
-                <li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385">
+                <li class="elemento-principal">
                     <a href="https://biblioteca.sistedes.es/biblioteca/">Acerca de la Biblioteca</a>
                 </li>
-                <li id="menu-item-388"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">
+                <li class="elemento-principal">
                     <a href="https://biblioteca.sistedes.es/contacto/">Contacto</a>
                 </li>
                 {% if request.session.username %}
@@ -62,19 +60,27 @@
                     <a class="test"  tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" id="arrow-menu" >
-                        <br/>
-                        <div style="border-top: 3px solid #006696; float: right; width: 150px; height: 4px;"></div><br/>
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/conference_list/">Mis conferencias</a></li><br/>
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/edition_list/">Mis ediciones</a></li><br/>
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/track_list/">Mis tracks</a></li><br/>
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/user_create/">Registrar usuario</a></li><br/>
+                            <div style="border-bottom: 3px solid #006696; float: right; width: 150px; height:30px; margin-top: 5px;">
+                                <span class="username">{{ request.session.username }}</span>
+                            </div><br/>
+                        <div style="margin-top: 15px;">
+                        {% if request.session.rol == 1 %}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/conference_list/">Mis conferencias</a></li><br/>
+                        {% endif %}
+                        {% if request.session.rol == 1 or request.session.rol == 2%}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/edition_list/">Mis ediciones</a></li><br/>
+                        {% endif %}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/track_list/">Mis tracks</a></li><br/>
+                        {% if request.session.rol == 1 %}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/user_create/">Registrar usuario</a></li><br/>
+                        {% endif %}
                         <li style ="font-size: 13px;"><a tabindex="-1" href="/biblioteca/logout/">Cerrar sesion</a></li><br/>
+                        </div>
                     </ul>
                 </li>
 
                 {% else %}
-                <li id="menu-item-389"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388">
+                <li class="elemento-principal">
                     <a href="/biblioteca/getlogin/">Iniciar sesión</a>
                 </li>
                 {% endif %}
@@ -216,22 +222,18 @@
     <div class="wrapper">
         <div class="c c-1-2 c-first">
             <ul id="menu-pie" class="menu">
-                <li id="menu-item-391"
-                    class="first-item menu-item menu-item-type-post_type menu-item-object-page menu-item-391"><a
-                        href="">Acerca de la Biblioteca</a></li>
-                <li id="menu-item-392" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-392"><a
-                        href="">Noticias</a></li>
-                <li id="menu-item-433" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-433"><a
-                        href="">Búsqueda Avanzada</a></li>
-                <li id="menu-item-390"
-                    class="last-item menu-item menu-item-type-post_type menu-item-object-page menu-item-390"><a
-                        href="">Contacto</a></li>
+                <li><a href="">Acerca de la Biblioteca</a></li>
+                <li><a href="">Noticias</a></li>
+                <li href="">Búsqueda Avanzada</a></li>
+                <li href="">Contacto</a></li>
             </ul>
         </div>
         <div class="c c-1-2 c-last c-right redes">
             <a href="https://twitter.com/sistedes" class="twitter"
-               title="Sistedes en Twitter (este enlace se abrirá en una ventana emergente)" rel="nofollow external"><i
-                    class="fa fa-twitter fa-lg"></i></a></div>
+               title="Sistedes en Twitter (este enlace se abrirá en una ventana emergente)" rel="nofollow external">
+                <i class="fa fa-twitter fa-lg"></i>
+            </a>
+        </div>
     </div>
 </footer>
 <div id="cookies" style="">
