@@ -1,6 +1,8 @@
-{% extends 'biblioteca_sistedes/base.html' %}
-
-{% block content %}
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de autores | Biblioteca sistedes</title>
+{% endblock %}
+{% block container %}
 		<h2><u> Autores </u></h2>
 		<input id="myInput"type="text" onkeyup="search_table()">
 		<table id="myTable">

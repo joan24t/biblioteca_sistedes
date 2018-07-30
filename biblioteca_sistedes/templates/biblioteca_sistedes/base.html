@@ -4,7 +4,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7,8,9">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://biblioteca.sistedes.es/wp-content/themes/sistedes/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <title></title>
+    {% block title %}
+        <title>Inicio | Biblioteca sistedes</title>
+    {% endblock %}
     {% load static %}
     {% block head %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">

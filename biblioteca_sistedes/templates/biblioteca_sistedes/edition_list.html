@@ -1,10 +1,13 @@
 {% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de ediciones | Biblioteca sistedes</title>
+{% endblock %}
 {% block container %}
 		<h2><u> Ediciones </u></h2>
 		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
-		<input id="myInput"type="text" onkeyup="search_table()">
+        {% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -17,13 +20,12 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for edition in object_list %}
 				<tr>
 					<td>{{ edition.id }}</td>
 					<td>{{ edition.name }}</td>
 					<td>{{ edition.year }}</td>
-					<td ><div style="width: 200px; height: auto; overflow: auto">{{ edition.conference_id.name }}</div></td>
+					<td >{{ edition.conference_id.name }}</td>
 
 					<td style="width: auto;">
 						<a class="btn btn-primary" href="/edition_view/{{ edition.id }}/">Ver</a>
@@ -32,10 +34,9 @@
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de ediciones</h1>
-				{% endif %}
 			</tbody>
 		</table>
+		{% else %}
+		<h1>No hay registros de ediciones</h1>
+		{% endif %}
 {% endblock%}

@@ -1,8 +1,11 @@
-{% extends 'biblioteca_sistedes/base.html' %}
-
-{% block content %}
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de artículos | Biblioteca sistedes</title>
+{% endblock %}
+{% block container %}
 		<h2><u> Artículos </u></h2>
-		<input id="myInput"type="text" onkeyup="search_table()">
+		Buscador: <input id="myInput"type="text" onkeyup="search_table()">
+		{% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -17,7 +20,6 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for article in object_list %}
 				<tr>
 					<td>{{ article.id }}</td>
@@ -28,16 +30,15 @@
 					<td>{{ article.track_ids }}</td>
 
 					<td style="width: auto;">
+						<a class="btn btn-primary" href="/article_view/{{ article.id }}/">Ver</a>
 						<a class="btn btn-primary" href="/article_update/{{ article.id }}/">Editar</a>
 						<a class="btn btn-danger" href="/article_delete/{{ article.id }}">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de artículos</h1>
-				{% endif %}
 			</tbody>
 		</table>
-
+		{% else %}
+		<h1>No hay registros de artículos</h1>
+		{% endif %}
 {% endblock%}

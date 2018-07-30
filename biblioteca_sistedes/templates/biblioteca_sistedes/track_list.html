@@ -1,9 +1,14 @@
 {% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de tracks | Biblioteca sistedes</title>
+{% endblock %}
 {% block container %}
 		<h2><u> Tracks </u></h2>
+
 		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
+		{% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -15,7 +20,6 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for track in object_list %}
 				<tr>
 					<td>{{ track.id }}</td>
@@ -29,11 +33,10 @@
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de tracks</h1>
-				{% endif %}
 			</tbody>
 		</table>
+		{% else %}
+		<h1>No hay registros de tracks</h1>
+		{% endif %}
 
 {% endblock%}

@@ -1,9 +1,13 @@
 {% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de conferencias | Biblioteca sistedes</title>
+{% endblock %}
 {% block container %}
 		<h2><u> Conferencias </u></h2></br>
 		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
+		{% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -15,12 +19,11 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for conference in object_list %}
 				<tr style="border-bottom: 1px solid black;">
 					<td>{{ conference.id }}</td>
 
-					<td ><div style="width: 500px; height: auto; overflow: auto">{{ conference.name }}</div></td>
+					<td >{{ conference.name }}</td>
 					<td>{{ conference.domain }}</td>
 
 					<td style="width: auto;">
@@ -30,10 +33,9 @@
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de conferencias</h1>
-				{% endif %}
 			</tbody>
 		</table>
+		{% else %}
+		<h1>No hay registros de conferencias</h1>
+		{% endif %}
 {% endblock%}

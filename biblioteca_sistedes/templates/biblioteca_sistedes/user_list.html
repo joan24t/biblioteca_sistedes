@@ -1,9 +1,13 @@
 {% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de usuarios | Biblioteca sistedes</title>
+{% endblock %}
 {% block container %}
 		<h2><u> Usuarios </u></h2>
 		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
+		{% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -17,7 +21,6 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for user in object_list %}
 				<tr style="border-bottom: 1px solid black;">
 					<td>{{ user.id }}</td>
@@ -42,11 +45,9 @@
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de palabras clave</h1>
-				{% endif %}
 			</tbody>
 		</table>
-
+		{% else %}
+		<h1>No hay registros de palabras clave</h1>
+		{% endif %}
 {% endblock%}
