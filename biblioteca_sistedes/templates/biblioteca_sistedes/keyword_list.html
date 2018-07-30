@@ -21,15 +21,13 @@
 					<td ><div style="width: 500px; height: auto; overflow: auto">{{ key.name }}</div></td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca/keyword_update/{{ key.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca/keyword_delete/{{ key.id }}/">Eliminar</a>
+						<a class="btn btn-primary" href="/keyword_view/{{ key.id }}/">Ver</a>
+						<a class="btn btn-primary" href="/keyword_update/{{ key.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/keyword_delete/{{ key.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}
 
-				{% else %}
-				<h1>No hay registros de palabras clave</h1>
-				{% endif %}
 			</tbody>
 		</table>
 

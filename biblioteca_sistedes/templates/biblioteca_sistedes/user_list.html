@@ -36,8 +36,9 @@
                     {% endif %}
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca/user_update/{{ user.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca/user_update/{{ user.id }}/">Eliminar</a>
+						<a class="btn btn-primary" href="/user_view/{{ user.id }}/">Ver</a>
+						<a class="btn btn-primary" href="/user_update/{{ user.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/user_update/{{ user.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

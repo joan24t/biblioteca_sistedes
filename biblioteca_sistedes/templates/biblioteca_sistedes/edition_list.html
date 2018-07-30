@@ -26,8 +26,9 @@
 					<td ><div style="width: 200px; height: auto; overflow: auto">{{ edition.conference_id.name }}</div></td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca/edition_update/{{ edition.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca/edition_delete/{{ edition.id }}/">Eliminar</a>
+						<a class="btn btn-primary" href="/edition_view/{{ edition.id }}/">Ver</a>
+						<a class="btn btn-primary" href="/edition_update/{{ edition.id }}/">Editar</a>
+						<a class="btn btn-danger" href="/edition_delete/{{ edition.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

@@ -41,4 +41,11 @@ urlpatterns = [
     path('noticias/', views.News, name='Noticias'),
     path('contacto/', views.Contactus, name='Contacto'),
     path('biblioteca/', views.Aboutus, name='Acerca de'),
+    path('conference_view/<int:pk>/', views.ConferenceView, name='Ver conferencia'),
+    path('edition_view/<int:pk>/', views.EditionView, name='Ver edicion'),
+    path('track_view/<int:pk>/', views.TrackView, name='Ver track'),
+    path('article_view/<int:pk>/', views.ArticleView, name='Ver articulo'),
+    path('author_view/<int:pk>/', views.AuthorView, name='Ver autor'),
+    path('keyword_view/<int:pk>/', views.KeywordView, name='Ver palabra clave'),
+    path('user_view/<int:pk>/', views.UserView, name='Ver usuario'),
 ]

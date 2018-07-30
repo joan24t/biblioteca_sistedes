@@ -72,7 +72,7 @@
                         {% endif %}
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Mis tracks</a></li><br/>
                         {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/user_create/">Registrar usuario</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
                         {% endif %}
                         <li style ="font-size: 13px;"><a tabindex="-1" href="/logout/">Cerrar sesion</a></li><br/>
                         </div>
@@ -95,16 +95,18 @@
 
 <!-- Container -->
 <div id="container" style="width:90%; margin-top: 100px;">
-{% block container %}
+    <div style="width: 90%; margin: 0 auto; margin: 2% 5% 2% 5%">
+        {% block container %}
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
-                <div class="form-style-10" style="width:50%;">
+            <div class="form-style-10" style="width:50%;">
                 {% block form %}
 
                 {% endblock %}
-                </div>
-        </form></div>
-{% endblock %}
-                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+</div>
     <!-- END Content -->
 
     <div id="footer"></div>

@@ -18,6 +18,7 @@ class Article(models.Model):
     file = models.FileField(upload_to="", null=True, blank=True)
     url_file = models.CharField(max_length=1000)
     description = models.TextField(max_length=1000)
+    user_ids = models.ManyToManyField('User')
 
 class AccessRight(models.Model):
 
@@ -58,6 +59,7 @@ class User(models.Model):
     rol = models.IntegerField()
     edition_ids = models.ManyToManyField('Edition')
     track_ids = models.ManyToManyField('Track')
+    article_ids = models.ManyToManyField('Article')
 
 class Edition(models.Model):
 

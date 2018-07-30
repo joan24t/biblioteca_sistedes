@@ -24,8 +24,9 @@
 					<td>{{ conference.domain }}</td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/biblioteca/conference_update/{{ conference.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/biblioteca/conference_delete/{{ conference.id }}/">Eliminar</a>
+						<a class="btn btn-primary" href="/conference_view/{{ conference.id }}/">Ver    </a>
+						<a class="btn btn-primary" href="/conference_update/{{ conference.id }}/"> Editar </a>
+						<a class="btn btn-danger" href="/conference_delete/{{ conference.id }}/"> Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

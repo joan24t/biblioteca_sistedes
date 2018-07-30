@@ -70,10 +70,82 @@ def Logout(request):
 		# del request.session['rol']
 	return HttpResponseRedirect('/')
 
+
+def ConferenceView(request, pk=None):
+	conference = get_object_or_404(Conference, pk=pk)
+	edition_list = Edition.objects.filter(conference_id = conference.id)
+	context = {
+		'conference': conference,
+		'edition_list': edition_list,
+	}
+	return render(request, 'biblioteca_sistedes/conference_detail.html', context)
+
+
+def EditionView(request, pk=None):
+	edition = get_object_or_404(Edition, pk=pk)
+	track_list = Track.objects.filter(edition_id = edition.id)
+	context = {
+		'edition': edition,
+		'track_list': track_list,
+	}
+	return render(request, 'biblioteca_sistedes/edition_detail.html', context)
+
+def TrackView(request, pk=None):
+	track = get_object_or_404(Track, pk=pk)
+	article_list = Article.objects.filter(track_ids = track.id)
+	context = {
+		'track': track,
+		'article_list': article_list,
+	}
+	return render(request, 'biblioteca_sistedes/track_detail.html', context)
+
+def ArticleView(request, pk=None):
+	article = get_object_or_404(Article, pk=pk)
+	track_list = article.track_ids.all()
+	keyword_list = article.keyword_ids.all()
+	author_list = article.author_ids.all()
+	context = {
+		'article': article,
+		'track_list': track_list,
+		'keyword_list': keyword_list,
+		'author_list': author_list,
+	}
+	return render(request, 'biblioteca_sistedes/article_detail.html', context)
+
+
+def AuthorView(request, pk=None):
+	author = get_object_or_404(Author, pk=pk)
+	article_list = Article.objects.filter(author_ids=author.id)
+	context = {
+		'author': author,
+		'article_list': article_list,
+	}
+	return render(request, 'biblioteca_sistedes/author_detail.html', context)
+
+def KeywordView(request, pk=None):
+	keyword = get_object_or_404(Keyword, pk=pk)
+	article_list = Article.objects.filter(keyword_ids=keyword.id)
+	context = {
+		'keyword': keyword,
+		'article_list': article_list,
+	}
+	return render(request, 'biblioteca_sistedes/keyword_detail.html', context)
+
+def UserView(request, pk=None):
+	user = get_object_or_404(User, pk=pk)
+	article_list = Article.objects.filter(user_ids=user.id)
+	track_list = Track.objects.filter(user_ids=user.id)
+	edition_list = Edition.objects.filter(user_ids=user.id)
+	context = {
+		'user': user,
+		'article_list': article_list,
+		'track_list': track_list,
+		'edition_list': edition_list,
+	}
+	return render(request, 'biblioteca_sistedes/user_detail.html', context)
+
+
 def GetLogin(request):
-	# form_login = FormLogin
-	# context = {'form_login': form_login}
-	# context.update(global_context())
 	return render(request, 'biblioteca_sistedes/login.html')
 
 def GetConferences(request, name=None):
