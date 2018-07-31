@@ -68,12 +68,15 @@
                             </div><br/>
                         <div style="margin-top: 15px;" class="dropdown-menu">
                         {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/conference_list/">Mis conferencias</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/conference_list/">Conferencias</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/edition_list/">Ediciones</a></li><br/>
                         {% endif %}
                         {% if request.session.rol == 1 or request.session.rol == 2%}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/edition_list/">Mis ediciones</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Tracks</a></li><br/>
                         {% endif %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Mis tracks</a></li><br/>
+                        {% if request.session.rol == 1 or request.session.rol == 2 or request.session.rol == 3%}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/article_list/">Artículos</a></li><br/>
+                        {% endif %}
                         {% if request.session.rol == 1 %}
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
                         {% endif %}

@@ -14,6 +14,8 @@ from .forms import ConferenceForm, EditionForm, AuthorForm, TrackForm, ArticleFo
 from django.core.files.storage import FileSystemStorage
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
+from django.core.mail import send_mail
+import django
 
 
 #PUBLIC PART
@@ -43,6 +45,16 @@ def Aboutus(request):
 def Contactus(request):
 	return render(request, 'biblioteca_sistedes/contactus.html', global_context())
 
+def GetListObjects(username, rol, model):
+	if username:
+		if rol == 1:
+			return model.objects.all()
+		else:
+			current_user = User.objects.filter(username=username)[0] or ''
+			object_list = model.objects.filter(user_ids=current_user.id)
+			return object_list
+	else:
+		return []
 
 def GetLogin(request):
 	return render(request, 'biblioteca_sistedes/login.html')
@@ -91,12 +103,15 @@ def Login(request):
 def Logout(request):
 	if request.session.get('username'):
 		del request.session['username']
-		# del request.session['rol']
+	if request.session.get('rol'):
+		del request.session['rol']
 	return HttpResponseRedirect('/')
 
 
 def ConferenceView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and rol == 1:
 		conference = get_object_or_404(Conference, pk=pk)
 		edition_list = Edition.objects.filter(conference_id = conference.id)
 		context = {
@@ -109,7 +124,9 @@ def ConferenceView(request, pk=None):
 
 
 def EditionView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and rol == 1:
 		edition = get_object_or_404(Edition, pk=pk)
 		track_list = Track.objects.filter(edition_id = edition.id)
 		context = {
@@ -121,7 +138,9 @@ def EditionView(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def TrackView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and (rol == 1 or rol == 2):
 		track = get_object_or_404(Track, pk=pk)
 		article_list = Article.objects.filter(track_ids = track.id)
 		context = {
@@ -133,7 +152,8 @@ def TrackView(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def ArticleView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	if username:
 		article = get_object_or_404(Article, pk=pk)
 		track_list = article.track_ids.all()
 		keyword_list = article.keyword_ids.all()
@@ -150,7 +170,8 @@ def ArticleView(request, pk=None):
 
 
 def AuthorView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	if username:
 		author = get_object_or_404(Author, pk=pk)
 		article_list = Article.objects.filter(author_ids=author.id)
 		context = {
@@ -162,7 +183,8 @@ def AuthorView(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def KeywordView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	if username:
 		keyword = get_object_or_404(Keyword, pk=pk)
 		article_list = Article.objects.filter(keyword_ids=keyword.id)
 		context = {
@@ -174,7 +196,9 @@ def KeywordView(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def UserView(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and rol == 1:
 		user = get_object_or_404(User, pk=pk)
 		article_list = Article.objects.filter(user_ids=user.id)
 		track_list = Track.objects.filter(user_ids=user.id)
@@ -309,7 +333,9 @@ def search(request):
 #PRIVATE PART
 
 def ConferenceDelete(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and rol == 1:
 		conference = get_object_or_404(Conference, pk=pk)
 		if conference:
 			conference.delete()
@@ -318,7 +344,9 @@ def ConferenceDelete(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def EditionDelete(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and rol == 1:
 		edition = get_object_or_404(Edition, pk=pk)
 		if edition:
 			edition.delete()
@@ -327,7 +355,9 @@ def EditionDelete(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def TrackDelete(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username and (rol == 1 or rol == 2):
 		track = get_object_or_404(Track, pk=pk)
 		if track:
 			track.delete()
@@ -336,7 +366,9 @@ def TrackDelete(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def AuthorDelete(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username:
 		author = get_object_or_404(Author, pk=pk)
 		if author:
 			author.delete()
@@ -345,7 +377,9 @@ def AuthorDelete(request, pk=None):
 		return HttpResponseRedirect('/')
 
 def ArticleDelete(request, pk=None):
-	if request.session.get('username'):
+	username = request.session.get('username')
+	rol = request.session.get('rol')
+	if username:
 		article = get_object_or_404(Article, pk=pk)
 		if article:
 			article.delete()
@@ -357,7 +391,9 @@ def ArticleDelete(request, pk=None):
 class ConferenceList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			context['object_list'] = Conference.objects.all()
 			context.update(global_context())
@@ -366,11 +402,12 @@ class ConferenceList(ListView):
 			return HttpResponseRedirect('/')
 
 class EditionList(ListView):
-
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
-			context['object_list'] = Edition.objects.all()
+			context['object_list'] = Conference.objects.all()
 			context.update(global_context())
 			return render(request, 'biblioteca_sistedes/edition_list.html' , context)
 		else:
@@ -379,7 +416,8 @@ class EditionList(ListView):
 class AuthorList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		if username:
 			context = {}
 			context['object_list'] = Author.objects.all()
 			context.update(global_context())
@@ -390,9 +428,11 @@ class AuthorList(ListView):
 class TrackList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and (rol == 1 or rol == 2):
 			context = {}
-			context['object_list'] = Track.objects.all()
+			context['object_list'] = GetListObjects(username, rol, Track)
 			context.update(global_context())
 			return render(request, 'biblioteca_sistedes/track_list.html' , context)
 		else:
@@ -402,9 +442,11 @@ class TrackList(ListView):
 class ArticleList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username:
 			context = {}
-			context['object_list'] = Article.objects.all()
+			context['object_list'] = GetListObjects(username, rol, Article)
 			context.update(global_context())
 			return render(request, 'biblioteca_sistedes/article_list.html' , context)
 		else:
@@ -414,7 +456,9 @@ class ArticleList(ListView):
 class KeywordList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			context['object_list'] = Keyword.objects.all()
 			context.update(global_context())
@@ -426,7 +470,9 @@ class KeywordList(ListView):
 class UserList(ListView):
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			context['object_list'] = User.objects.all()
 			context.update(global_context())
@@ -439,7 +485,9 @@ class ConferenceCreate(CreateView):
 
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			conference = Conference.objects.get(id=pk) if pk != 0 else False
@@ -474,7 +522,9 @@ class EditionCreate(CreateView):
 
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			edition = Edition.objects.get(id=pk) if pk != 0 else False
@@ -507,7 +557,8 @@ class AuthorCreate(CreateView):
 	form_class = AuthorForm
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		if username:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			author = Author.objects.get(id=pk) if pk != 0 else False
@@ -541,7 +592,9 @@ class TrackCreate(CreateView):
 	form_class = TrackForm
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and (rol == 1 or rol == 2):
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			track = Track.objects.get(id=pk) if pk != 0 else False
@@ -575,7 +628,8 @@ class ArticleCreate(CreateView):
 	form_class = ArticleForm
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		if username:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			article = Article.objects.get(id=pk) if pk != 0 else False
@@ -622,7 +676,8 @@ class KeywordCreate(CreateView):
 	form_class = KeywordForm
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		if username:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			keyword = Keyword.objects.get(id=pk) if pk != 0 else False
@@ -656,7 +711,9 @@ class UserCreate(CreateView):
 	form_class = UserForm
 
 	def get(self, request, **kwargs):
-		if request.session.get('username'):
+		username = request.session.get('username')
+		rol = request.session.get('rol')
+		if username and rol == 1:
 			context = {}
 			pk = self.kwargs.get('pk', 0)
 			user = User.objects.get(id=pk) if pk != 0 else False
@@ -674,6 +731,7 @@ class UserCreate(CreateView):
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
 		pk = self.kwargs.get('pk', 0)
+		print('AAAAAAAAA' + str(pk))
 		user = User.objects.get(id=pk) if pk != 0 else False
 		if user:
 			form = self.form_class(request.POST, instance=user)
@@ -681,6 +739,12 @@ class UserCreate(CreateView):
 			form = self.form_class(request.POST)
 		if form.is_valid():
 			user = form.save()
+			send_mail(
+				'Hola',
+				'Provando.',
+				'from@example.com',
+				['jchorda22@gmail.com', 'joan_24t@hotmail.com'],
+			)
 			return HttpResponseRedirect('/user_list/')
 		else:
 			return self.render_to_response(self.get_context_data(form=form))

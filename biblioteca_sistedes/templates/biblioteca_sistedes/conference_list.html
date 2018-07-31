@@ -7,7 +7,7 @@
 		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
 		</br>
 		</br>
-		{% if object_list %}
+		{% if object_list%}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -22,7 +22,6 @@
 				{% for conference in object_list %}
 				<tr style="border-bottom: 1px solid black;">
 					<td>{{ conference.id }}</td>
-
 					<td >{{ conference.name }}</td>
 					<td>{{ conference.domain }}</td>
 

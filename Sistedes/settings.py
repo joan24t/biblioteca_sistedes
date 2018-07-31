@@ -138,3 +138,10 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SESSION_SAVE_EVERY_REQUEST = True
 
 ALLOWED_HOSTS = ['192.168.1.6', 'localhost', '127.0.0.1']
+
+#Email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jchorda22@gmail.com'
+EMAIL_HOST_PASSWORD = 'tarrago1'
