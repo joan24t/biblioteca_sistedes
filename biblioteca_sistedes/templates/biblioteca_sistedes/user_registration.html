@@ -5,7 +5,6 @@
 {% block form %}
 <h2><u> Registrar usuario </u></h2>
 {% csrf_token %}
-    <form action='' method='post'>
         <div class="column">
             <div class="form-group">
                 <label for="name_user"><h4>Nombre:</h4></label> {{ form_user.name }}
@@ -39,5 +38,4 @@
             <button class="btn btn-primary" type="submit">Crear usuario</button>
         </div>
     </div>
-    </form>
 {% endblock %}

@@ -68,3 +68,7 @@ function dropdown(){
         document.getElementById("arrow-menu").style= "display:none; position: relative;";
     }
 }
+
+function close_cookies(){
+    document.getElementById("cookies").style= "display:none;";
+}

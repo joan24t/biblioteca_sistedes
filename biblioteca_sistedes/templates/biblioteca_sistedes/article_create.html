@@ -4,8 +4,8 @@
 {% endblock %}
 {% block form %}
 <h2><u> Crear artículo </u></h2>
-<div  class="form-style-10">
-        <div class="column">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="name_ar"><h4>Nombre:</h4></label> {{ form_article.name }}
             </div>
@@ -31,13 +31,12 @@
                 <label for="file_ar"><h4>Adjunto:</h4></label> <input type="file" name="article_file">
             </div>
         </div>
+    </div>
 
-
-        </br>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <button id="button_form" class="btn btn-primary" type="submit">Crear artículo</button>
-            </div>
+    </br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <button id="button_form" class="btn btn-primary" type="submit">Crear artículo</button>
         </div>
-</div>
+    </div>
 {% endblock %}

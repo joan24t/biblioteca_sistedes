@@ -5,21 +5,22 @@
 {% block form %}
 <h2><u> Crear track </u></h2>
 {% csrf_token %}
-<div class="form-style-10">
-    <form action='' method='post'>
-        <div class="column">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="name_tr"><h4>Nombre:</h4></label> {{ form_track.name }}
             </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="ed_tr"><h4>Edición:</h4></label> {{ form_track.edition_id }}
             </div>
         </div>
-            <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Crear track</button>
+    </div>
+    </br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="submit-row">
+            <input class="submit-row" type="submit" value="Crear track">
         </div>
     </div>
-    </form>
-</div>
 {% endblock %}

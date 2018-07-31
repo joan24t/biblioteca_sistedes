@@ -5,7 +5,6 @@
 {% block form %}
 <h2><u> Crear conferencia </u></h2>
 {% csrf_token %}
-<form method="post">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
@@ -24,7 +23,6 @@
             <input class="submit-row" type="submit" value="Crear conferencia">
         </div>
     </div>
-</form>
 {% endblock %}
 
     
