@@ -3,10 +3,18 @@
 	<title>Lista de palabras clave | Biblioteca sistedes</title>
 {% endblock %}
 {% block container %}
+{% load static %}
 		<h2><u> Palabras clave </u></h2>
-		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
-		</br>
-		</br>
+        </br>
+        </br>
+        </br>
+        <button style="float: right;" class="button_form" onclick="window.location.href='/keyword_create/'" >Añadir + </button>
+        <input style="width: 600;" id="myInput" type="text" onkeyup="search_table()">
+        <input alt="Buscar"
+               src="{% static 'biblioteca_sistedes/img/search.png' %}"
+               type="image">
+        </br>
+        </br>
 		{% if object_list %}
 		<table id="myTable">
 			<thead>

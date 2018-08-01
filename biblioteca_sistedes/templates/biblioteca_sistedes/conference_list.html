@@ -3,10 +3,18 @@
 	<title>Lista de conferencias | Biblioteca sistedes</title>
 {% endblock %}
 {% block container %}
-		<h2><u> Conferencias </u></h2></br>
-		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
-		</br>
-		</br>
+{% load static %}
+		<h2><u> Conferencias </u></h2>
+        </br>
+        </br>
+        </br>
+        <button style="float: right;" class="button_form" onclick="window.location.href='/conference_create/'" >Añadir + </button>
+        <input style="width: 600;" id="myInput" type="text" onkeyup="search_table()">
+        <input alt="Buscar"
+               src="{% static 'biblioteca_sistedes/img/search.png' %}"
+               type="image">
+        </br>
+        </br>
 		{% if object_list%}
 		<table id="myTable">
 			<thead>

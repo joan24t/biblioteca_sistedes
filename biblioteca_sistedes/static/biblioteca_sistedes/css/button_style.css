@@ -11,3 +11,26 @@
     margin: 1px 1px;
     cursor: pointer;
 }
+
+.button_form {
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #006696;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button_form:hover {background-color: #007696}
+
+.button_form:active {
+  background-color: #006696;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

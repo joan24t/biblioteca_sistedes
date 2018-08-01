@@ -58,6 +58,9 @@
     -moz-box-sizing: border-box;
     width: 100%;
     padding: 8px;
+    height: 40px;
+    max-width: 100%;
+    min-width: 100%;
 
 }
 
@@ -79,7 +82,7 @@
     color: #fff;
     margin-top: -3px;
 }
-.form-style-10 input[type="button"], 
+.form-style-10 input[type="button"],
 .form-style-10 input[type="submit"]{
     background: #2A88AD;
     padding: 8px 20px 8px 20px;
@@ -95,7 +98,7 @@
     border: 1px solid #257C9E;
     font-size: 20px;
 }
-.form-style-10 input[type="button"]:hover, 
+.form-style-10 input[type="button"]:hover,
 .form-style-10 input[type="submit"]:hover{
     background: #2A6881;
     -moz-box-shadow: inset 0px 2px 2px 0px rgba(0, 102, 150, 0.28);

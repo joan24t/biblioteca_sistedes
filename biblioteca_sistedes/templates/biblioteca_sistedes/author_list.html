@@ -3,10 +3,19 @@
 	<title>Lista de autores | Biblioteca sistedes</title>
 {% endblock %}
 {% block container %}
+{% load static %}
 		<h2><u> Autores </u></h2>
-		Buscador: <input id="myInput"type="text" onkeyup="search_table()">
-		</br>
-		</br>
+        </br>
+        </br>
+        </br>
+        <button style="float: right;" class="button_form" onclick="window.location.href='/author_create/'" >Añadir + </button>
+        <input style="width: 600;" id="myInput" type="text" onkeyup="search_table()">
+        <input alt="Buscar"
+               src="{% static 'biblioteca_sistedes/img/search.png' %}"
+               type="image">
+        </br>
+        </br>
+        {% if object_list %}
 		<table id="myTable">
 			<thead>
 				<tr>
@@ -19,7 +28,6 @@
 
 			</thead>
 			<tbody>
-				{% if object_list %}
 				{% for author in object_list %}
 				<tr>
 					<td>{{ author.id }}</td>
@@ -33,11 +41,8 @@
 					</td>
 				</tr>
 				{% endfor %}
-
-				{% else %}
-				<h1>No hay registros de autores</h1>
-				{% endif %}
 			</tbody>
-		</table>
-
+            {% else %}
+            <h1>No hay registros de autores</h1>
+            {% endif %}
 {% endblock%}
