@@ -5,4 +5,5 @@
 
 # Byte-compiled / optimized / DLL files
 biblioteca_sistedes/__pycache__/
+biblioteca_sistedes/migrations/
 *.py[cod]
