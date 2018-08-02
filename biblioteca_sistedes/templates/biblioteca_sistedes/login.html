@@ -38,7 +38,7 @@
             </form>
 
         </div>
-        {% if request.session.errorLogin == 1 %}
+        {% if errorLogin %}
             <script>
                 alert('Login incorrecto');
             </script>

@@ -145,17 +145,14 @@ def GetTracks(request, name=None, year=None, id=None):
 def Login(request):
     username = request.POST.get("username", "")
     password = request.POST.get("password", "")
-    request.session['errorLogin'] = 0
     if CheckUser(username, password):
         user_loged = User.objects.get(username=username)
         request.session['username'] = username
         request.session['rol'] = user_loged.rol
-        request.session['errorLogin'] = 0
         return HttpResponseRedirect('/')
     else:
-        request.session['errorLogin'] = 1
-        return HttpResponseRedirect('/getlogin/')
-    del request.session['errorLogin']
+        context = {'errorLogin': True}
+        return render(request, 'biblioteca_sistedes/login.html', context)
 
 
 def Logout(request):
