@@ -3,12 +3,13 @@
 	<title>Inicio de sesión | Biblioteca sistedes</title>
 {% endblock %}
 {% block container %}
+
 <!-- Container -->
-<div id="container" style="margin-top: 200px;">
+<div id="container-form" style="margin-top: 200px;">
     <!-- Header -->
     <div id="header">
         <div id="branding">
-            <h1 id="site-name"><a href="/admin/">Inicio de sesión - Biblioteca Sistedes</a></h1>
+            <h1 id="site-name">Inicio de sesión - Biblioteca Sistedes</h1>
         </div>
     </div>
     <!-- END Header -->
@@ -16,7 +17,7 @@
     <!-- Content -->
     <div id="content" class="colM">
         <div id="content-main">
-            <form action="/login/" method="post" id="login-form">{% csrf_token %}
+            <form action="/login/" method="post" id="form_login">{% csrf_token %}
                 <input type="hidden">
                 <div class="form-row">
                     <label class="required" for="id_username">Username:</label> <input type="text" name="username"
@@ -32,12 +33,16 @@
                 <!--{{ form_login.as_p }}-->
 
                 <div class="submit-row">
-                    <label>&nbsp;</label><input type="submit" value="Log in">
+                    <label>&nbsp;</label><input class="form-submit" type="submit" value="Iniciar sesión">
                 </div>
             </form>
 
         </div>
-
+        {% if request.session.errorLogin == 1 %}
+            <script>
+                alert('Login incorrecto');
+            </script>
+        {% endif %}
 
         <br class="clear">
     </div>

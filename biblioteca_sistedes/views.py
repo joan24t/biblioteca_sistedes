@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from .models import Conference, Edition, Author
@@ -11,7 +10,8 @@ from .models import Track, Article, Sequence, Keyword, User
 from .forms import ConferenceForm, EditionForm, AuthorForm
 from .forms import TrackForm, ArticleForm, KeywordForm, UserForm
 from django.core.files.storage import FileSystemStorage
-from django.core.mail import send_mail
+from django.http import JsonResponse
+# from django.core.mail import send_mail
 
 
 # PUBLIC PART
@@ -85,6 +85,30 @@ def GetLogin(request):
     return render(request, 'biblioteca_sistedes/login.html')
 
 
+def CheckUser(username, password=False):
+    users = User.objects.all()
+    for user in users:
+        if user.username == username and user.password == password:
+            return True
+            break
+    else:
+        return False
+
+
+def check_user(request):
+    object = request.GET.get('object', None)
+    value = request.GET.get('value', None)
+    taken = False
+    if object == 'email':
+        taken = User.objects.filter(email__iexact=value).exists()
+    elif object == 'username':
+        taken = User.objects.filter(username__iexact=value).exists()
+    data = {
+        'is_taken': taken
+        }
+    return JsonResponse(data)
+
+
 def GetConferences(request, name=None):
     conference = Conference.objects.filter(domain=name)[:1]
     editions = Edition.objects.filter(conference_id=conference)
@@ -119,20 +143,19 @@ def GetTracks(request, name=None, year=None, id=None):
 
 
 def Login(request):
-    form_login = request.POST
     username = request.POST.get("username", "")
     password = request.POST.get("password", "")
-    if form_login:
-        users = User.objects.all()
-        for user in users:
-            if user.username == username and user.password == password:
-                user_loged = User.objects.get(username=username)
-                request.session['username'] = username
-                request.session['rol'] = user_loged.rol
-                return HttpResponseRedirect('/')
-                break
-        else:
-            return HttpResponse('Login incorrecto')
+    request.session['errorLogin'] = 0
+    if CheckUser(username, password):
+        user_loged = User.objects.get(username=username)
+        request.session['username'] = username
+        request.session['rol'] = user_loged.rol
+        request.session['errorLogin'] = 0
+        return HttpResponseRedirect('/')
+    else:
+        request.session['errorLogin'] = 1
+        return HttpResponseRedirect('/getlogin/')
+    del request.session['errorLogin']
 
 
 def Logout(request):
@@ -914,17 +937,18 @@ class UserCreate(CreateView):
         pk = self.kwargs.get('pk', 0)
         user = User.objects.get(id=pk) if pk != 0 else False
         if user:
-            form = self.form_class(request.POST, instance=user)
-        else:
-            form = self.form_class(request.POST)
+            form = self.form_class(request.POST, instance=user) if user else \
+                self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
-            send_mail(
-                'Hola',
-                'Provando.',
-                'from@example.com',
-                ['jchorda22@gmail.com', 'joan_24t@hotmail.com'],
-                )
+            # send_mail(
+            #     'Hola',
+            #     'Provando.',
+            #     'from@example.com',
+            #     ['jchorda22@gmail.com', 'joan_24t@hotmail.com'],
+            #     )
             return HttpResponseRedirect('/user_list/')
         else:
-            return self.render_to_response(self.get_context_data(form=form))
+            return self.render_to_response(
+                self.get_context_data(form=form)
+                )

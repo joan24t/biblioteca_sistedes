@@ -32,68 +32,69 @@
 
 </head>
 <body class="body_home">
-<header id="cabecera" style="max-height: 100px;">
-    <div class="wrapper">
-        <div id="logo" class="c c-1-2 c-first">
-            <p style="margin-left: 90px;"><a href="http://www.sistedes.es"
-                  title="Volver al sitio principal de SISTEDES (este enlace se abrirá en una ventana emergente)"
-                  target="_blank"><img src="{% static 'biblioteca_sistedes/img/logo_1.png' %}"
-                                       alt="Sistedes"></a><img
-                    src="{% static 'biblioteca_sistedes/img/logo_2.png' %}" alt="Biblioteca Digital">
-            </p>
+    <header id="cabecera" style="max-height: 100px;">
+        <div class="wrapper">
+            <div id="logo" class="c c-1-2 c-first">
+                <p style="margin-left: 90px;"><a href="http://www.sistedes.es"
+                      title="Volver al sitio principal de SISTEDES (este enlace se abrirá en una ventana emergente)"
+                      target="_blank"><img src="{% static 'biblioteca_sistedes/img/logo_1.png' %}"
+                                           alt="Sistedes"></a><img
+                        src="{% static 'biblioteca_sistedes/img/logo_2.png' %}" alt="Biblioteca Digital">
+                </p>
+            </div>
+            <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
+                <ul id="menu-principal-ul" class="nav menu">
+                    <li class="elemento-principal">
+                        <a href="/">Inicio</a>
+                    </li>
+                    <li class="elemento-principal">
+                        <a href="/noticias/">Noticias</a>
+                    </li>
+                    <li class="elemento-principal">
+                        <a href="/biblioteca/">Acerca de la Biblioteca</a>
+                    </li>
+                    <li class="elemento-principal">
+                        <a href="/contacto/">Contacto</a>
+                    </li>
+                    {% if request.session.username %}
+
+                    <li class="dropdown-submenu" >
+                        <a class="test" id="user-menu" tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
+                                class="caret"></span></a>
+                        <ul id="arrow-menu" >
+                                <div class="user-section">
+                                    <span class="username">{{ request.session.username }}</span>
+                                </div><br/>
+                                <div>
+                            <div class="dropdown-menu">
+                            {% if request.session.rol == 1 %}
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/conference_list/">Conferencias</a></li><br/>
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/edition_list/">Ediciones</a></li><br/>
+                            {% endif %}
+                            {% if request.session.rol == 1 or request.session.rol == 2%}
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Tracks</a></li><br/>
+                            {% endif %}
+                            {% if request.session.rol == 1 or request.session.rol == 2 or request.session.rol == 3%}
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/article_list/">Artículos</a></li><br/>
+                            {% endif %}
+                            {% if request.session.rol == 1 %}
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
+                            {% endif %}
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/logout/">Cerrar sesion</a></li><br/>
+                            </div>
+                        </ul>
+                    </li>
+
+                    {% else %}
+                    <li class="elemento-principal">
+                        <a href="/getlogin/">Iniciar sesión</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
-        <nav id="menu-principal" class="c c-1-2-e c-last c-right" style="margin-left: -50px; display: inline;">
-            <ul id="menu-principal-ul" class="nav menu">
-                <li class="elemento-principal">
-                    <a href="/">Inicio</a>
-                </li>
-                <li class="elemento-principal">
-                    <a href="/noticias/">Noticias</a>
-                </li>
-                <li class="elemento-principal">
-                    <a href="/biblioteca/">Acerca de la Biblioteca</a>
-                </li>
-                <li class="elemento-principal">
-                    <a href="/contacto/">Contacto</a>
-                </li>
-                {% if request.session.username %}
 
-                <li class="dropdown-submenu" >
-                    <a class="test" id="user-menu" tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
-                            class="caret"></span></a>
-                    <ul id="arrow-menu" >
-                            <div style="border-bottom: 3px solid #006696; float: right; width: 150px; height:30px; margin-top: 5px;">
-                                <span class="username">{{ request.session.username }}</span>
-                            </div><br/>
-                        <div style="margin-top: 15px;" class="dropdown-menu">
-                        {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/conference_list/">Conferencias</a></li><br/>
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/edition_list/">Ediciones</a></li><br/>
-                        {% endif %}
-                        {% if request.session.rol == 1 or request.session.rol == 2%}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/track_list/">Tracks</a></li><br/>
-                        {% endif %}
-                        {% if request.session.rol == 1 or request.session.rol == 2 or request.session.rol == 3%}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/article_list/">Artículos</a></li><br/>
-                        {% endif %}
-                        {% if request.session.rol == 1 %}
-                            <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
-                        {% endif %}
-                        <li style ="font-size: 13px;"><a tabindex="-1" href="/logout/">Cerrar sesion</a></li><br/>
-                        </div>
-                    </ul>
-                </li>
-
-                {% else %}
-                <li class="elemento-principal">
-                    <a href="/getlogin/">Iniciar sesión</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-
-</header>
+    </header>
 <main id="contenido">
     <div class="contenedor1">
         {% block sidebar %}

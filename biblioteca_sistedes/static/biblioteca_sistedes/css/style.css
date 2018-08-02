@@ -1448,13 +1448,44 @@ a.deletelink:focus, a.deletelink:hover {
 
 .nav li ul {
     display:none;
+    border-color: black;
+    border-radius: 2px;
 }
 
 #arrow-menu{
     display:none;
-    position: relative;
+    float: right;
+    background-color: white;
+    width: 140px;
+    height:200px;
+    border-bottom: 3px solid #006696;
+    margin-top: 10px;
+    border: 2px solid #006696;
+    padding: 4px;
 }
+
 /*
 .nav li:active > ul {
     display:block;
 }*/
+
+.dropdown-menu{
+    margin-top: 15px;
+    background-color: white;
+    float: right;
+    width: 130px;
+    height:150px;
+}
+
+.dropdown-menu a{
+    font-size: 17px;
+    text-decoration: underline;
+}
+
+.user-section{
+    border-bottom: 3px solid #006696;
+    float: right;
+    width: 140px;
+    height:30px;
+    margin-top: 5px;"
+}

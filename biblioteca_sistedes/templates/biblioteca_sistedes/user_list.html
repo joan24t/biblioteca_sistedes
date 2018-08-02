@@ -2,11 +2,19 @@
 {% block title %}
 	<title>Lista de usuarios | Biblioteca sistedes</title>
 {% endblock %}
+{% load static %}
 {% block container %}
-		<h2><u> Usuarios </u></h2>
-		Buscador: <input id="myInput" type="text" onkeyup="search_table()">
-		</br>
-		</br>
+        <h2><u> Usuarios </u></h2>
+        </br>
+        </br>
+        </br>
+        <button style="float: right;" onclick="window.location.href='/user_create/'" class="button_form">Añadir + </button>
+        <input placeholder="Buscar..."style="width: 600;" id="myInput" type="text" onkeyup="search_table()">
+        <input alt="Buscar"
+               src="{% static 'biblioteca_sistedes/img/search.png' %}"
+               type="image">
+        </br>
+        </br>
 		{% if object_list %}
 		<table id="myTable">
 			<thead>
@@ -41,7 +49,7 @@
 					<td style="width: auto;">
 						<!--<a class="btn btn-primary" href="/user_view/{{ user.id }}/">Ver</a>-->
 						<a class="btn btn-primary" href="/user_update/{{ user.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/user_update/{{ user.id }}/">Eliminar</a>
+						<a class="btn btn-danger" href="/user_delete/{{ user.id }}/">Eliminar</a>
 					</td>
 				</tr>
 				{% endfor %}

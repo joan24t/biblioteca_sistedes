@@ -16,10 +16,18 @@
             <div class="form-group">
                 <label for="username_user"><h4>Nombre de usuario:</h4></label> {{ form_user.username }}
             </div>
+             <div class="error-username">
+                 <i class="fa fa-times"></i>
+                  <span class="text-error-username"></span>
+             </div>
         </div>
         <div>
             <div class="form-group">
                 <label for="email_user"><h4>Email:</h4></label> {{ form_user.email }}
+            </div>
+            <div class="error-email">
+                <i class="fa fa-times"></i>
+                 <span class="text-error-email"></span>
             </div>
             </br>
             <div class="form-group">
@@ -28,14 +36,18 @@
             <div class="form-group">
                 <label for="pass_user_2"><h4>Repetir constraseña:</h4></label> <input id="pass_user_2" type="password">
             </div>
+            <div class="match-password">
+                <i class="fa fa-times"></i>
+                 <span class="text-match-password"></span>
+            </div>
             <div class="form-group">
                 <label for="rol_user"><h4>Rol:</h4></label> {{ form_user.rol }}
             </div>
         </div>
         </br>
-            <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Crear usuario</button>
+        <div>
+            <div>
+                <input style="background-color: #006699;" class="form-submit" type="submit" value="Crear usuario">
+            </div>
         </div>
-    </div>
 {% endblock %}
