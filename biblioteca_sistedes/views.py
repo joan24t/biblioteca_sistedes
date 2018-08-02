@@ -542,7 +542,7 @@ class EditionList(ListView):
         rol = request.session.get('rol')
         if username and rol == 1:
             context = {}
-            context['object_list'] = Conference.objects.all()
+            context['object_list'] = Edition.objects.all()
             context.update(global_context())
             return render(
                 request,
