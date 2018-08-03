@@ -58,12 +58,16 @@
                     </li>
                     {% if request.session.username %}
 
-                    <li class="dropdown-submenu" >
+                    <li class="dropdown-submenu">
                         <a class="test" id="user-menu" tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
                                 class="caret"></span></a>
                         <ul id="arrow-menu" >
                                 <div class="user-section">
-                                    <span class="username">{{ request.session.username }}</span>
+                                    {% if request.session.username|length >= 7 %}
+                                        <span class="username">{{ request.session.username|slice:"0:7" }}...</span>
+                                    {% else %}
+                                        <span class="username">{{ request.session.username }}</span>
+                                    {% endif %}
                                 </div><br/>
                                 <div>
                             <div class="dropdown-menu">

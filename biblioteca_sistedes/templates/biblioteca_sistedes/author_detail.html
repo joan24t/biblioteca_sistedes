@@ -18,7 +18,6 @@
 </br>
 <h3><u> Artículos </u></h3>
 <div class="col-md-8 col-md-offset-2">
-    {% if article_list %}
     <table id="myTable">
         <thead>
         <tr>
@@ -44,9 +43,9 @@
             <td>{{ article.track_ids }}</td>
 
             <td style="width: auto;">
-                <a class="btn btn-primary" href="/article_view/{{ article.id }}/">Ver</a>
-                <a class="btn btn-primary" href="/article_update/{{ article.id }}/">Editar</a>
-                <a class="btn btn-danger" href="/article_delete/{{ article.id }}">Eliminar</a>
+                <a class="btn btn-primary" href="/article_view/{{ article.id }}/"><i class="fa fa-eye fa-2x"></i></a>
+                <a class="btn btn-primary" href="/article_update/{{ article.id }}/"><i class="fa fa-edit fa-2x"></i></a>
+                <a class="btn btn-danger" href="/article_delete/{{ article.id }}"><i class="fa fa-trash fa-2x"></i></a>
             </td>
         </tr>
         {% endfor %}
@@ -54,7 +53,7 @@
 
         </tbody>
     </table>
-    {% else %}
+    {% if article_list|length == 0 %}
     <h1>No hay registros de artículos</h1>
     {% endif %}
 </div>

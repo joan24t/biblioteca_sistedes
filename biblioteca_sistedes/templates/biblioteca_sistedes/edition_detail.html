@@ -37,23 +37,22 @@
 
 			</thead>
 			<tbody>
-				{% if track_list %}
 				{% for track in track_list %}
 				<tr>
 					<td>{{ track.id }}</td>
 					<td >{{ track.name }}</td>
 
 					<td style="width: auto;">
-                        <a class="btn btn-primary" href="/track_view/{{ track.id }}/">Ver</a>
-						<a class="btn btn-primary" href="/track_update/{{ track.id }}/">Editar</a>
-						<a class="btn btn-danger" href="/track_delete/{{ track.id }}/">Eliminar</a>
+                        <a class="btn btn-primary" href="/track_view/{{ track.id }}/"><i class="fa fa-eye fa-2x"></i></a>
+						<a class="btn btn-primary" href="/track_update/{{ track.id }}/"><i class="fa fa-edit fa-2x"></i></a>
+						<a class="btn btn-danger" href="/track_delete/{{ track.id }}/"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
 				{% endfor %}
 
 			</tbody>
 		</table>
-        {% else %}
+    {% if track_list|length == 0 %}
         <h1>No hay registros de tracks</h1>
         {% endif %}
     </div>

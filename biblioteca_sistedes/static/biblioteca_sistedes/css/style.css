@@ -73,13 +73,13 @@ a
 	transition: all .5s ease;
 }
 
-a:hover
+/* a:hover
 {
 	text-decoration: none;
 	color: #000;
 	background: #f5da81;
 	border-bottom: 0;
-}
+} */
 
 #cabecera a,
 .i-link a,
@@ -488,72 +488,6 @@ a.boton:hover
 
 
 /**
- * Formularios
- */
-.wpcf7-text,
-.wpcf7-textarea
-{
-	border: 1px solid #333;
-	width: 60%;
-	padding: .25em;
-}
-
-.wpcf7-text:focus,
-.wpcf7-textarea:focus
-{
-	border-color: #006699;
-	background: #f0faff;
-}
-
-.wpcf7-textarea
-{
-	width: 95%;
-	resize: none;
-}
-
-.wpcf7-textarea:focus
-{
-	border-color: #006699;
-	background: #f0faff;
-}
-
-.wpcf7-not-valid
-{
-	border-color: #990000;
-	background: #fff0f0;
-}
-
-.wpcf7-submit
-{
-	margin-top: 1em;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	cursor: pointer;
-	border-radius: .25em;
-	display: inline-block;
-	color: #fff;
-	padding: .25em 1em;
-	background: #006699;
-	border-bottom: 2px solid #00334d;
-	font-family: 'Open Sans';
-}
-
-.wpcf7-submit:hover
-{
-	background: #5aae00;
-	border-color: #326100;
-}
-
-.wpcf7-submit[disabled="disabled"],
-.wpcf7-submit[disabled="disabled"]:hover
-{
-	background: #999;
-	border-color: #333;
-}
-
-
-/**
  * Shortcodes
  */
 .s
@@ -686,15 +620,6 @@ a.boton:hover
 	background: #111;
 }
 
-.mapa_google
-{
-	width: 100%;
-	min-height: 380px;
-	color: #111;
-}
-
-.mapa_google img {max-width: inherit;}
-
 .social
 {
 	border-radius: 50%;
@@ -708,14 +633,7 @@ a.boton:hover
 	display: inline-block;
 	margin: 0 .25em;
 }
-.social.facebook {background: #3b5998;}
 .social.twitter {background: #00aced;}
-.social.linkedin {background: #007bb6;}
-.social.googleplus {background: #dd4b39;}
-.social.youtube {background: #bb0000;}
-.social.instagram {background: #517fa4;}
-.social.pinterest {background: #cb2027;}
-
 .social:hover
 {
 	background: #333;
@@ -896,7 +814,7 @@ a.boton:hover
 
 /* FORM DEFAULTS */
 
-input, textarea, select, .form-row p, form .button {
+/* input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
@@ -932,11 +850,9 @@ select {
 
 select[multiple] {
     min-height: 150px;
-}
-
+} */
 /* FORM BUTTONS */
-
-.button, input[type=submit], input[type=button], .submit-row input, a.button {
+/* .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: #79aec8;
     padding: 10px 15px;
     border: none;
@@ -976,7 +892,7 @@ a.button {
 input[type=submit][disabled].default,
 input[type=button][disabled].default {
     opacity: 0.4;
-}
+} */
 
 
 /* MODULES */
@@ -1454,14 +1370,14 @@ a.deletelink:focus, a.deletelink:hover {
 
 #arrow-menu{
     display:none;
-    float: right;
     background-color: white;
     width: 140px;
-    height:200px;
+    height:190px;
     border-bottom: 3px solid #006696;
-    margin-top: 10px;
     border: 2px solid #006696;
     padding: 4px;
+    border-radius: 10px;
+    margin:15 0 auto auto;
 }
 
 /*
@@ -1470,11 +1386,12 @@ a.deletelink:focus, a.deletelink:hover {
 }*/
 
 .dropdown-menu{
-    margin-top: 15px;
+    margin-top: 5px;
     background-color: white;
     float: right;
-    width: 130px;
     height:150px;
+    text-align: left;
+    width: 140px;
 }
 
 .dropdown-menu a{
@@ -1488,4 +1405,19 @@ a.deletelink:focus, a.deletelink:hover {
     width: 140px;
     height:30px;
     margin-top: 5px;"
+    background: #006696;
+}
+.fa-eye,
+.fa-edit,
+.fa-trash{
+    color: grey;
+}
+.fa-eye:hover{
+    color: #006696;
+}
+.fa-edit:hover{
+    color: black
+}
+.fa-trash:hover{
+    color: red
 }
