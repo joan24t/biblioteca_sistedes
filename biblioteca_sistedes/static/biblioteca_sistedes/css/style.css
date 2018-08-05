@@ -813,8 +813,8 @@ a.boton:hover
 .txtPequeno {font-size: 0.75em; color: #000;}
 
 /* FORM DEFAULTS */
-
-/* input, textarea, select, .form-row p, form .button {
+/*
+input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
@@ -822,6 +822,7 @@ a.boton:hover
     font-weight: normal;
     font-size: 13px;
 }
+
 .form-row div.help {
     padding: 2px 3px;
 }
@@ -852,13 +853,14 @@ select[multiple] {
     min-height: 150px;
 } */
 /* FORM BUTTONS */
-/* .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #79aec8;
+ .button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #006699;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
+
 }
 
 a.button {
@@ -892,7 +894,7 @@ a.button {
 input[type=submit][disabled].default,
 input[type=button][disabled].default {
     opacity: 0.4;
-} */
+}
 
 
 /* MODULES */
@@ -1396,7 +1398,6 @@ a.deletelink:focus, a.deletelink:hover {
 
 .dropdown-menu a{
     font-size: 17px;
-    text-decoration: underline;
 }
 
 .user-section{
@@ -1411,6 +1412,12 @@ a.deletelink:focus, a.deletelink:hover {
 .fa-edit,
 .fa-trash{
     color: grey;
+    text-decoration: block;
+}
+.fa-eye,
+.fa-edit,
+.fa-trash a{
+    text-decoration: none;
 }
 .fa-eye:hover{
     color: #006696;
@@ -1420,4 +1427,10 @@ a.deletelink:focus, a.deletelink:hover {
 }
 .fa-trash:hover{
     color: red
+}
+
+.footer-form{
+    height: 50px;
+    display: inline;
+    margin: 0 0 0 0;
 }

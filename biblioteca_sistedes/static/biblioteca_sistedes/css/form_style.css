@@ -85,16 +85,28 @@
 }
 
 .form-submit {
-    margin-top: 1em;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	cursor: pointer;
 	border-radius: .25em;
-	display: inline-block;
 	color: #fff;
+    font-size: 20px;
 	padding: .25em 1em;
 	background: #006699;
 	border-bottom: 2px solid #00334d;
 	font-family: 'Open Sans';
+}
+.cancel-button{
+    font-size: 20px;
+    background: #EA9090;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin-top:50px;
+    height: 48px;
+
+}
+
+.cancel-button a{
+    color: #fff;
+    text-decoration: none;
 }

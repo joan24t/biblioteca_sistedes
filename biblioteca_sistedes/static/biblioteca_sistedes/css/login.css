@@ -55,6 +55,13 @@ body.login {
     width: 100%;
     border-bottom: none;
 }
+.login .form-login {
+    padding: 4px 0;
+    float: left;
+    width: 100%;
+    border-bottom: none;
+    margin: 0 0 10 0;
+}
 
 .login .form-row label {
     padding-right: 0.5em;
@@ -81,7 +88,7 @@ body.login {
 .login .submit-row {
     clear: both;
     padding: 1em 0 0 9.4em;
-    margin: 0;
+    margin-top: 10px;
     border: none;
     background: none;
     text-align: left;
