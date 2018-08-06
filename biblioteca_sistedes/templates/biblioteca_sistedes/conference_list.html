@@ -33,9 +33,9 @@
 					<td>{{ conference.domain }}</td>
 
 					<td style="width: auto;">
-						<a class="btn btn-primary" href="/conference_view/{{ conference.id }}/"><i class="fa fa-eye fa-2x"></i></a>&ensp;&ensp;
-						<a class="btn btn-primary" href="/conference_update/{{ conference.id }}/"><i class="fa fa-edit fa-2x"></i> </a>&ensp;&ensp;
-						<a class="btn btn-danger" href="/conference_delete/{{ conference.id }}/"><i class="fa fa-trash fa-2x"></i></a>
+						<a href="/conference_view/{{ conference.id }}/"><i class="fa fa-eye fa-2x"></i></a>
+						<a href="/conference_update/{{ conference.id }}/"><i class="fa fa-edit fa-2x"></i></a>
+						<a href="/conference_delete/{{ conference.id }}/"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
 				{% endfor %}

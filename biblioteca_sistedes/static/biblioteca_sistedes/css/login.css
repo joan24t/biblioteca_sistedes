@@ -130,6 +130,7 @@ body.login {
     color: #801A1A;
     font-weight: bold;
     display: none;
-
+    position:absolute;
+    width:525px;
 
 }

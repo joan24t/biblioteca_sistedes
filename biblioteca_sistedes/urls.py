@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/', views.Login, name='Login'),
     path('logout/', views.Logout, name='Logout'),
     path('busqueda/', views.search, name='Busqueda avanzada'),
+    path('download/<int:pk>/', views.download, name='Descargar fichero'),
     path(
         'conference_list/',
         views.ConferenceList.as_view(),

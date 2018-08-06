@@ -5,24 +5,24 @@
 {% block form %}
 <h2><u> Crear edición </u></h2>
 {% csrf_token %}
-        <div class="column">
-            <div class="form-group">
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="name_ed"><h4>Nombre:</h4></label> {{ form_edition.name }}
             </div>
-            <div class="form-group">
+            <div class="form-row-component">
                 <label for="year_ed"><h4>Año:</h4></label> {{ form_edition.year }}
             </div>
-            </br>
-            <div class="form-group">
+        </div>
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="place_ed"><h4>Lugar:</h4></label> {{ form_edition.place }}
             </div>
-        </div>
-        <div>
-            <div class="form-group">
+            <div class="form-row-component">
                 <label for="top_ed"><h4>Tópico:</h4></label> {{ form_edition.topic }}
             </div>
-            </br>
-            <div class="form-group">
+        </div>
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="con_ed"><h4>Conferencia:</h4></label> {{ form_edition.conference_id }}
             </div>
         </div>

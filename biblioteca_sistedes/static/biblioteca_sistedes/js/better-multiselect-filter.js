@@ -37,10 +37,12 @@ jQuery(document).ready(function() {
 });
 function check_password(pass1, pass2){
     if (pass1 != pass2){
+        jQuery(".form-submit").prop('disabled', true);
         jQuery(".match-password").css("display", "block");
         jQuery(".text-match-password").text("Las contraseñas no coinciden");
     }
     else{
+        jQuery(".form-submit").prop('disabled', false);
         jQuery(".match-password").css("display", "none");
     }
 }
@@ -58,9 +60,11 @@ function check_data(value, object){
       success: function (data) {
         if (data.is_taken) {
           jQuery(".error-" + object).css("display", "block");
+          jQuery(".form-submit").prop('disabled', true);
           jQuery(".text-error-" + object).text(text);
         }
         else{
+           jQuery(".form-submit").prop('disabled', false);
            jQuery(".error-" + object).css("display", "none");
         }
       }

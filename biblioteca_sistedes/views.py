@@ -11,6 +11,10 @@ from .forms import ConferenceForm, EditionForm, AuthorForm
 from .forms import TrackForm, ArticleForm, KeywordForm, UserForm
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
+from django.conf import settings
+import os
+from django.http import HttpResponse
+from django.http import Http404
 # from django.core.mail import send_mail
 
 
@@ -67,6 +71,19 @@ def Contactus(request):
         'biblioteca_sistedes/contactus.html',
         global_context()
         )
+
+
+def download(request, pk=None):
+    article = Article.objects.filter(id=pk)[0]
+    print("AAAAAAAAAAAAAAAA " + article.name)
+    file_path = os.path.join(settings.MEDIA_ROOT, article.url_file)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/pdf")
+            response['Content-Disposition'] = 'inline; filename=' + \
+                os.path.basename(file_path)
+            return response
+    raise Http404
 
 
 def GetListObjects(username, rol, model):
@@ -933,9 +950,8 @@ class UserCreate(CreateView):
         self.object = self.get_object
         pk = self.kwargs.get('pk', 0)
         user = User.objects.get(id=pk) if pk != 0 else False
-        if user:
-            form = self.form_class(request.POST, instance=user) if user else \
-                self.form_class(request.POST)
+        form = self.form_class(request.POST, instance=user) if user else \
+            self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
             # send_mail(

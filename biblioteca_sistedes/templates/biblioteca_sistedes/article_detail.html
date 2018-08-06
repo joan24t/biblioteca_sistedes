@@ -17,7 +17,7 @@
             <label><h4>Descripción:</h4></label> {{ article.description }}
         </div>
         <div class="form-group">
-            <label><h4>Archivo:</h4></label> {{ article.file }}
+            <label><h4>Archivo:</h4></label> <a href="/download/{{article.id }}" target="_blank"> {{ article.name }} </a>
         </div>
     </div>
 </div>
@@ -78,7 +78,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-    {% if author_list| length == 0 %}
+    {% if author_list|length == 0 %}
     <h1>No hay registros de autores</h1>
     {% endif %}
 </div>
@@ -108,7 +108,7 @@
                 {% endfor %}
 			</tbody>
 		</table>
-    {% if track_list| length == 0 %}
+    {% if track_list|length == 0 %}
     <h1>No hay registros de tracks</h1>
     {% endif %}
 </div>

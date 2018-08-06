@@ -60,7 +60,7 @@ body
 	line-height: 1.4em;
 }
 
-a
+.arbolNavegacion a
 {
 	color: #0077b3;
 	border-bottom: 1px dotted #0077b3;
@@ -1418,6 +1418,12 @@ a.deletelink:focus, a.deletelink:hover {
 .fa-edit,
 .fa-trash a{
     text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fa-trash{
+    text-decoration: none;
+    margin-left: 10px;
 }
 .fa-eye:hover{
     color: #006696;

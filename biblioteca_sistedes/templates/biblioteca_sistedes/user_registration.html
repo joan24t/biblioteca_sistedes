@@ -5,46 +5,51 @@
 {% block form %}
 <h2><u> Registrar usuario </u></h2>
 {% csrf_token %}
-        <div class="column">
-            <div class="form-group">
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="name_user"><h4>Nombre:</h4></label> {{ form_user.name }}
             </div>
-            <div class="form-group">
+            <div class="form-row-component">
                 <label for="surname_user"><h4>Apellidos:</h4></label> {{ form_user.surnames }}
             </div>
-            </br>
-            <div class="form-group">
-                <label for="username_user"><h4>Nombre de usuario:</h4></label> {{ form_user.username }}
-            </div>
-             <div class="error-username">
-                 <i class="fa fa-times"></i>
-                  <span class="text-error-username"></span>
+        </div>
+        <div class="form-row">
+            <div class="form-row-component">
+                <div>
+                    <label for="username_user"><h4>Nombre de usuario:</h4></label> {{ form_user.username }}
+                </div>
+                 <div class="error-username">
+                     <i class="fa fa-times"></i>
+                      <span class="text-error-username"></span>
+                 </div>
+             </div>
+             <div class="form-row-component">
+                     <div class="col-md-4 mb-3">
+                         <label for="email_user"><h4>Email:</h4></label> {{ form_user.email }}
+                     </div>
+                     <div class="error-email">
+                         <i class="fa fa-times"></i>
+                          <span class="text-error-email"></span>
+                     </div>
              </div>
         </div>
-        <div>
-            <div class="form-group">
-                <label for="email_user"><h4>Email:</h4></label> {{ form_user.email }}
-            </div>
-            <div class="error-email">
-                <i class="fa fa-times"></i>
-                 <span class="text-error-email"></span>
-            </div>
-            </br>
-            <div class="form-group">
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="pass_user"><h4>Constraseña:</h4></label> {{ form_user.password }}
             </div>
-            <div class="form-group">
-                <label for="pass_user_2"><h4>Repetir constraseña:</h4></label> <input id="pass_user_2" type="password">
+            <div class="form-row-component">
+                <div>
+                    <label for="pass_user_2"><h4>Repetir constraseña:</h4></label> <input id="pass_user_2" type="password">
+                </div>
+                <div class="match-password">
+                    <i class="fa fa-times"></i>
+                     <span class="text-match-password"></span>
+                </div>
             </div>
-            <div class="match-password">
-                <i class="fa fa-times"></i>
-                 <span class="text-match-password"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-row-component">
                 <label for="rol_user"><h4>Rol:</h4></label> {{ form_user.rol }}
             </div>
         </div>
-        </br>
         <div>
             <div>
                 <input style="background-color: #006699;" class="form-submit" type="submit" value="Crear usuario">
