@@ -60,7 +60,9 @@ body
 	line-height: 1.4em;
 }
 
-.arbolNavegacion a
+.arbolNavegacion a,
+#buscadorSidebar a,
+.divContenido a
 {
 	color: #0077b3;
 	border-bottom: 1px dotted #0077b3;
