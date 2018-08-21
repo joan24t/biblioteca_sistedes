@@ -70,6 +70,8 @@ class Edition(models.Model):
 
     # Attributes
     name = models.CharField(max_length=100)
+    preamble = models.TextField(max_length=1000)
+    description = models.TextField(max_length=10000)
     year = models.IntegerField()
     place = models.CharField(max_length=100)
     topic = models.CharField(max_length=100)

@@ -49,6 +49,8 @@ class EditionForm(forms.ModelForm):
             'place',
             'topic',
             'conference_id',
+            'preamble',
+            'description',
             ]
         labels = {
             'name': 'Nombre',
@@ -56,6 +58,8 @@ class EditionForm(forms.ModelForm):
             'place': 'Place',
             'topic': 'Topic',
             'conference_id': 'Conference',
+            'preamble': 'Preamble',
+            'description': 'Description',
             }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -76,6 +80,12 @@ class EditionForm(forms.ModelForm):
 
             'conference_id': forms.Select(attrs={
                 'id': 'con_ed',
+                }),
+            'preamble': forms.Textarea(attrs={
+                'id': 'pre_ed',
+                }),
+            'description': forms.Textarea(attrs={
+                'id': 'desc_ed',
                 }),
             }
 

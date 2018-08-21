@@ -166,6 +166,7 @@ def Login(request):
         user_loged = User.objects.get(username=username)
         request.session['username'] = username
         request.session['rol'] = user_loged.rol
+        request.session['user'] = user_loged
         return HttpResponseRedirect('/')
     else:
         context = {'errorLogin': True}
@@ -177,6 +178,8 @@ def Logout(request):
         del request.session['username']
     if request.session.get('rol'):
         del request.session['rol']
+    if request.session.get('user'):
+        del request.session['user']
     return HttpResponseRedirect('/')
 
 
@@ -738,6 +741,8 @@ class EditionCreate(CreateView):
             form = self.form_class(request.POST)
         if form.is_valid():
             edition = form.save()
+            logged_user = request.session.get('user')
+            edition.user_ids.add(logged_user)
             return HttpResponseRedirect('/edition_list/')
         else:
             return self.render_to_response(self.get_context_data(form=form))
@@ -817,6 +822,8 @@ class TrackCreate(CreateView):
             form = self.form_class(request.POST)
         if form.is_valid():
             track = form.save()
+            logged_user = request.session.get('user')
+            track.user_ids.add(logged_user)
             return HttpResponseRedirect('/track_list/')
         else:
             return self.render_to_response(self.get_context_data(form=form))
@@ -875,6 +882,8 @@ class ArticleCreate(CreateView):
 
         if form.is_valid():
             article = form.save()
+            logged_user = request.session.get('user')
+            article.user_ids.add(logged_user)
             article.url_file = uploaded_file_url
             article.save()
             return HttpResponseRedirect('/article_list/')

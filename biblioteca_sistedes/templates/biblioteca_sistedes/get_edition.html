@@ -12,11 +12,14 @@
     </header>
     <section id="interior" class="s">
         <div class="wrapper">
+            {% for ed in edition %}
             <hr>
-            <p><em>García Molina, J. (Ed.), Actas de las XXI Jornadas de Ingeniería del Software y Bases de Datos (JISBD
-                2016). Salamanca, septiembre de 2016.</em></p>
+            <p><em>{{ed.preamble}}</em></p>
             <hr>
-            <p>Sesiones dentro de esta conferencia:</p>
+            {% endfor %}
+            {% for ed in edition %}
+            <p>{{ed.description}}</p>
+            {% endfor %}
             <ul>
                 {% for track in new_tracks %}
                 <li><a href="/biblioteca/conferencias/{{ track.edition_id.conference_id.domain }}/{{ track.edition_id.year }}/{{ track.id }}">{{ track.name }}</a></li>
