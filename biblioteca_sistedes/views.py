@@ -134,6 +134,15 @@ def GetConferences(request, name=None):
     return render(request, 'biblioteca_sistedes/get_conference.html', context)
 
 
+def GetArticle(request, pk=None):
+    article = Article.objects.get(id=pk)
+    context = {
+        'article': article,
+        }
+    context.update(global_context())
+    return render(request, 'biblioteca_sistedes/get_article.html', context)
+
+
 def GetEditions(request, name=None, year=None):
     conference = Conference.objects.filter(domain=name)[:1]
     edition = Edition.objects.filter(

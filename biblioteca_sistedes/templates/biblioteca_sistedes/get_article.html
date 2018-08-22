@@ -1,0 +1,51 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+<title>Info artículo | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+        {% if article.name %}
+        <h1>{{article.name}}</h1>
+        {% endif %}
+    </header>
+    <!-- abstract -->
+    {% if article.description %}
+    <div class="entry-content">
+        <h3>Resumen:</h3>
+        <p>{{article.description}}</p>
+    </div>
+    {% endif %}
+
+    <!-- keywords -->
+
+    <div id="entry-keywords" class="entry-content">
+        <h3>Palabras Clave:</h3>
+        {% for key in article.keyword_ids.all %}
+        <p><a href="/tag/c/?post_type={{key.name}}">{{key.name}}</a> - </p>
+        {% endfor %}
+    </div>
+
+    <!-- autores -->
+    <div id="div-authors" class="entry-content">
+        <h3>Autor(es):</h3>
+        <ul style="font-size: 0.80em;">
+            {% for au in article.author_ids.all %}
+            <li><strong><a href="/autor/?txtAutor={{au.name}}">{{au.name}}</a></strong> {<a href="mailto:{{au.email}}" target="_blank" title="este enlace se abrirá en una ventana emergente">{{au.email}}</a>}<br><span style="font-style: italic; ">Grupo UCASE de Ingeniería del Software, Departamento de Ingeniería Informática, Universidad de Cádiz, Cádiz, España</span><br></li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <!-- texto para citas //-->
+    <div id="entry-pdf" class="entry-content">
+        <h3>Handle:</h3>
+        <a href="http://hdl.handle.net/11705/JISBD/2015/012" target="blank">11705/JISBD/2015/012</a>	</div>
+
+        <div id="entry-pdf" class="entry-content">
+            <h3>Descargas:</h3>
+            <p>Este artículo tiene una licencia de uso <a href="http://es.creativecommons.org/blog/licencias/" target="_blank" title="este enlace se abrirá en una ventana emergente">CreativeCommons - Reconocimiento (by)</a></p>
+            <p>Descarga el artículo haciendo <a href="/download/{{article.id }}" target="_blank" title="este enlace se abrirá en una ventana emergente">click aquí.</a></p>
+        </div>
+    </article>
+    {% endblock %}

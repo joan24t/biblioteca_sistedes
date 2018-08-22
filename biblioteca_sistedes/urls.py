@@ -141,4 +141,9 @@ urlpatterns = [
         ),
     path('user_view/<int:pk>/', views.UserView, name='Ver usuario'),
     path('check_user/', views.check_user, name='validate_username'),
+    path(
+        'articulo/<int:pk>/',
+        views.GetArticle,
+        name='Ver artículo'
+        ),
     ]

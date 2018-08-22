@@ -12,7 +12,7 @@
         <div class="articulo" id="articulo_2613">
             <header class="wrapper">
                 <h3>
-                    <a id="text-hightlight" href="https://biblioteca.sistedes.es/articulo/ecological-debt-outlining-a-measure-to-evaluate-software-greenability/"> {{ conference.name }}</a></h3>
+                    <a id="text-hightlight" href="/articulo/{{conference.id}}"> {{ conference.name }}</a></h3>
             </header>
             <div style="font-size: 0.8em;">
                 <p id="text-hightlight">
@@ -22,7 +22,7 @@
             <p style="font-size: 0.8em;" id="text-hightlight">
                 <strong>Autores: </strong>
                 {% for author in conference.author_ids.all %}
-                 <a href="/autor/?txtAutor=Ignacio García-Rodríguez de Guzmán">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
+                 <a href="/autor/?txtAutor={{author.name}} {{author.middle_name}} {{author.last_name}}">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                 {% endfor %}
                 <br/>
                 <strong> Palabras Clave: </strong>
