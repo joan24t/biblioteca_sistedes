@@ -1376,7 +1376,6 @@ a.deletelink:focus, a.deletelink:hover {
     display:none;
     background-color: white;
     width: 140px;
-    height:190px;
     border-bottom: 3px solid #006696;
     border: 2px solid #006696;
     padding: 4px;
@@ -1393,7 +1392,7 @@ a.deletelink:focus, a.deletelink:hover {
     margin-top: 5px;
     background-color: white;
     float: right;
-    height:150px;
+    height:auto;
     text-align: left;
     width: 140px;
 }

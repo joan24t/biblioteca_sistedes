@@ -1,6 +1,6 @@
 {% extends 'biblioteca_sistedes/base.html' %}
 {% block title %}
-	<title>Info track | Biblioteca sistedes</title>
+	<title>Info edición | Biblioteca sistedes</title>
 {% endblock %}
 {% block content %}
 {% csrf_token %}
@@ -9,24 +9,27 @@
         <li><a href="/">Inicio</a></li>
         <li><a href="/biblioteca/">Biblioteca</a></li>
         <li><a href="/conferencias/">Conferencias</a></li>
-        <li><a href="/conferencias/{{ track.edition_id.conference_id.domain }}/">{{ track.edition_id.conference_id.name }}</a></li>
-        <li><a href="/conferencias/{{ track.edition_id.conference_id.domain }}/{{track.edition_id.year}}/">{{track.edition_id.name}}</a></li>
-        <li><a href="/conferencias/{{ track.edition_id.conference_id.domain }}/{{track.edition_id.year}}/{{tr.id}}">{{track.name}}</a></li>
+        {% for ed in edition %}
+        <li><a href="/conferencias/{{ ed.conference_id.domain }}/">{{ ed.conference_id.name }}</a></li>
+        <li><a href="/conferencias/{{ ed.conference_id.domain }}/{{ed.year}}/">{{ed.name}}</a></li>
+        {% endfor %}
     </ul>
 </div>
 <article class="page page_168">
     <header class="wrapper">
-        <h1> {{ track.name }} </h1>
+        {% for ed in edition %}
+        <h1> {{ ed.name }} </h1>
+        {% endfor %}
     </header>
     <section id="interior" class="s">
         <div class="wrapper">
-            {% if track.preamble %}
+            {% for ed in edition %}
                 <hr>
-                <p>{{ track.preamble }}</p>
+                <p>{{ ed.preamble }}</p>
                 <hr>
-            {% endif %}
+            {% endfor %}
             <p>&nbsp;</p>
-            <p>{{ track.description }}</p>
+            <p>{{ edition.description }}</p>
             {% if articles %}
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}

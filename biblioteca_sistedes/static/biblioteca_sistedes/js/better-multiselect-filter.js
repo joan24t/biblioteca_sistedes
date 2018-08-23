@@ -35,6 +35,7 @@ jQuery(document).ready(function() {
 
     });
 });
+
 function check_password(pass1, pass2){
     if (pass1 != pass2){
         jQuery(".form-submit").prop('disabled', true);
@@ -71,6 +72,24 @@ function check_data(value, object){
     });
 }
 
+function check_rol(){
+    jQuery.ajax({
+      url: '/check_rol/',
+      dataType: 'json',
+      success: function (data) {
+        if (data.rol == 2) {
+          document.getElementById("arrow-menu").style= "display:block; position: relative; height: 120px;";
+        }
+        else if (data.rol == 3){
+            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 90px;";
+        }
+        else{
+            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 240px;";
+        }
+      }
+    });
+}
+
 document.onclick = function(event) {
     if (!jQuery(event.target).hasClass( "focusout-except" ) && !jQuery(event.target).hasClass( "fa" )) {
         jQuery("#arrow-menu").css("display", "none");
@@ -84,14 +103,6 @@ function showHint(str) {
         return;
     } else {
         document.getElementById("txtHint").innerHTML = str;
-//        var xmlhttp = new XMLHttpRequest();
-//        xmlhttp.onreadystatechange = function() {
-//            if (this.readyState == 4 && this.status == 200) {
-//                document.getElementById("txtHint").innerHTML = this.responseText;
-//            }
-//        }
-//        xmlhttp.open("GET", "gethint.php?q="+str, true);
-//        xmlhttp.send();
     }
 }
 
@@ -119,7 +130,7 @@ function dropdown(){
     style = window.getComputedStyle(element),
     display = style.getPropertyValue('display');
     if (display === 'none'){
-        document.getElementById("arrow-menu").style= "display:block; position: relative;";
+        check_rol();
     }
     else {
         document.getElementById("arrow-menu").style= "display:none; position: relative;";

@@ -111,6 +111,13 @@ def CheckUser(username, password=False):
         return False
 
 
+def check_rol(request):
+    rol = request.session.get('rol')
+    return JsonResponse({
+        'rol': rol
+        })
+
+
 def check_user(request):
     object = request.GET.get('object', None)
     value = request.GET.get('value', None)
@@ -151,7 +158,16 @@ def GetEditions(request, name=None, year=None):
     tracks = Track.objects.filter(edition_id=edition)
     context = {'edition': edition, 'new_tracks': tracks}
     context.update(global_context())
-    return render(request, 'biblioteca_sistedes/get_edition.html', context)
+    if len(tracks) != 0:
+        return render(request, 'biblioteca_sistedes/get_edition.html', context)
+    else:
+        articles = Article.objects.filter(edition_id=edition)
+        context.update({'articles': articles})
+        return render(
+            request,
+            'biblioteca_sistedes/get_article_from_edition.html',
+            context
+            )
 
 
 def GetListOfTracks(request, name=None):

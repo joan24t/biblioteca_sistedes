@@ -15,6 +15,7 @@ class Article(models.Model):
     keyword_ids = models.ManyToManyField('Keyword')
     access_right_ids = models.ManyToManyField('AccessRight')
     track_ids = models.ManyToManyField('Track')
+    edition_id = models.ForeignKey('Edition', on_delete=models.CASCADE)
     file = models.FileField(upload_to="", null=True, blank=True)
     url_file = models.CharField(max_length=1000)
     description = models.TextField(max_length=1000)

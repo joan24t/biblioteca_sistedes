@@ -10,8 +10,8 @@
         <li><a href="/biblioteca/">Biblioteca</a></li>
         <li><a href="/conferencias/">Conferencias</a></li>
         {% for ed in edition %}
-        <li><a href="/biblioteca/conferencias/{{ ed.conference_id.domain }}/">{{ ed.conference_id.name }}</a></li>
-        <li><a href="/biblioteca/conferencias/{{ ed.conference_id.domain }}/{{ed.year}}/">{{ed.name}}</a></li>
+        <li><a href="/conferencias/{{ ed.conference_id.domain }}/">{{ ed.conference_id.name }}</a></li>
+        <li><a href="/conferencias/{{ ed.conference_id.domain }}/{{ed.year}}/">{{ed.name}}</a></li>
         {% endfor %}
     </ul>
 </div>

@@ -5,12 +5,15 @@
 {% block form %}
 <h2><u> Crear track </u></h2>
 {% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="name_tr"><h4>Nombre:</h4></label> {{ form_track.name }}
-            </div>
+    <div class="form-row">
+        <div class="form-row-component">
+            <label for="name_tr"><h4>Nombre:</h4></label> {{ form_track.name }}
         </div>
+        <div class="form-row-component">
+            <label for="ed_tr"><h4>Edición:</h4></label> {{ form_track.edition_id }}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="ed_tr"><h4>Preámbulo:</h4></label> {{ form_track.preamble }}
@@ -19,11 +22,6 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="ed_tr"><h4>Descripción:</h4></label> {{ form_track.description }}
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="ed_tr"><h4>Edición:</h4></label> {{ form_track.edition_id }}
             </div>
         </div>
     </div>

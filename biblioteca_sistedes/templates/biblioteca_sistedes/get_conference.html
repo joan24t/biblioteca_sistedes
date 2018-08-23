@@ -10,7 +10,7 @@
         <li><a href="/biblioteca/">Biblioteca</a></li>
         <li><a href="/conferencias/">Conferencias</a></li>
         {% for conf in conference %}
-        <li><a href="/biblioteca/conferencias/{{ conf.domain }}/">{{ conf.name }}</a></li>
+        <li><a href="/conferencias/{{ conf.domain }}/">{{ conf.name }}</a></li>
         {% endfor %}
     </ul>
 </div>

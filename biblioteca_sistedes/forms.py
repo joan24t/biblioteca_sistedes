@@ -196,6 +196,9 @@ class ArticleForm(forms.ModelForm):
         self.fields['track_ids'].required = False
 
         self.fields['file'].required = False
+        self.fields['edition_id'].queryset = Edition.objects.all()
+        self.fields['edition_id'].label_from_instance = lambda obj: '%s' % \
+            obj.name
 
     class Meta:
         model = Article
@@ -203,6 +206,7 @@ class ArticleForm(forms.ModelForm):
             'name',
             'description',
             'year',
+            'edition_id',
             'author_ids',
             'keyword_ids',
             'access_right_ids',
@@ -211,7 +215,8 @@ class ArticleForm(forms.ModelForm):
             ]
         labels = {
             'name': 'Nombre',
-            'year': 'Edicion',
+            'year': 'Ano',
+            'edition_id': 'Edicion',
             'description': 'Descripcion',
             'author_ids': 'Autores',
             'keyword_ids': 'Palabras clave',
@@ -244,7 +249,10 @@ class ArticleForm(forms.ModelForm):
             'track_ids': forms.SelectMultiple(attrs={
                 'id': 'track_ar',
                 'class': 'multiselect',
-                })
+                }),
+            'edition_id': forms.Select(attrs={
+                'id': 'ed_ar',
+                }),
             }
 
 
