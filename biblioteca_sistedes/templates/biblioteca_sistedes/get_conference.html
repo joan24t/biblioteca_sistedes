@@ -4,6 +4,16 @@
 {% endblock %}
 {% block content %}
 {% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/conferencias/">Conferencias</a></li>
+        {% for conf in conference %}
+        <li><a href="/biblioteca/conferencias/{{ conf.domain }}/">{{ conf.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 <article class="page page_77">
     <header class="wrapper">
         {% for conf in conference %}

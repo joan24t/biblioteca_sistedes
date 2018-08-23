@@ -18,7 +18,6 @@
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nombre</th>
 					<th>Edición</th>
 					<th>Acciones</th>
@@ -27,9 +26,9 @@
 			</thead>
 			<tbody>
 				{% for track in object_list %}
+                {% if logged_user in track.user_ids.all or logged_user.rol == 1 %}
 				<tr>
-					<td>{{ track.id }}</td>
-					<td ><div style="width: 300px; height: auto; overflow: auto">{{ track.name }}</div></td>
+					<td >{{ track.name }}</td>
 					<td>{{ track.edition_id.name }}</td>
 
 					<td style="width: auto;">
@@ -38,6 +37,7 @@
 						<a class="btn btn-danger" href="/track_delete/{{ track.id }}/"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
+                {% endif %}
 				{% endfor %}
 			</tbody>
 		</table>

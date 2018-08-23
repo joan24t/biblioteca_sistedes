@@ -75,7 +75,6 @@ def Contactus(request):
 
 def download(request, pk=None):
     article = Article.objects.filter(id=pk)[0]
-    print("AAAAAAAAAAAAAAAA " + article.name)
     file_path = os.path.join(settings.MEDIA_ROOT, article.url_file)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
@@ -155,6 +154,47 @@ def GetEditions(request, name=None, year=None):
     return render(request, 'biblioteca_sistedes/get_edition.html', context)
 
 
+def GetListOfTracks(request, name=None):
+    tracks = Track.objects.all()
+    track_name = name.split()
+    final_list = []
+    for tr in tracks:
+        array_description = tr.description.split()
+        array_title = tr.name.split()
+        for tn in track_name:
+            for ad in array_description:
+                if tn == ad:
+                    final_list.append(tr)
+            for at in array_title:
+                if tn == at:
+                    final_list.append(tr)
+    context = {
+        'track_list': list(set(final_list)),
+        }
+    context.update(global_context())
+    return render(request, 'biblioteca_sistedes/list_of_tracks.html', context)
+
+
+def GetListOfArticles(request):
+    txtAutor = request.GET.get('txtAutor') or False
+    articles = Article.objects.all()
+    final_list = []
+    for ar in articles:
+        for au in ar.author_ids.all():
+            if txtAutor == au.name + ' ' + au.middle_name + ' ' + au.last_name:
+                final_list.append(ar)
+    context = {
+        'article_list': list(set(final_list)),
+        'author_name': txtAutor,
+        }
+    context.update(global_context())
+    return render(
+        request,
+        'biblioteca_sistedes/list_of_articles.html',
+        context
+        )
+
+
 def GetTracks(request, name=None, year=None, id=None):
     conference = Conference.objects.filter(domain=name)[:1]
     edition = Edition.objects.filter(
@@ -217,9 +257,11 @@ def EditionView(request, pk=None):
     if username and rol == 1:
         edition = get_object_or_404(Edition, pk=pk)
         track_list = Track.objects.filter(edition_id=edition.id)
+        logged_user = User.objects.get(username=username)
         context = {
             'edition': edition,
             'track_list': track_list,
+            'logged_user': logged_user,
             }
         return render(
             request,
@@ -234,11 +276,13 @@ def TrackView(request, pk=None):
     username = request.session.get('username')
     rol = request.session.get('rol')
     if username and (rol == 1 or rol == 2):
+        logged_user = User.objects.get(username=username)
         track = get_object_or_404(Track, pk=pk)
         article_list = Article.objects.filter(track_ids=track.id)
         context = {
             'track': track,
             'article_list': article_list,
+            'logged_user': logged_user,
             }
         return render(
             request,
@@ -256,11 +300,13 @@ def ArticleView(request, pk=None):
         track_list = article.track_ids.all()
         keyword_list = article.keyword_ids.all()
         author_list = article.author_ids.all()
+        logged_user = User.objects.get(username=username)
         context = {
             'article': article,
             'track_list': track_list,
             'keyword_list': keyword_list,
             'author_list': author_list,
+            'logged_user': logged_user,
             }
         return render(
             request,
@@ -605,7 +651,9 @@ class TrackList(ListView):
         username = request.session.get('username')
         rol = request.session.get('rol')
         if username and (rol == 1 or rol == 2):
+            logged_user = User.objects.get(username=username)
             context = {}
+            context['logged_user'] = logged_user
             context['object_list'] = GetListObjects(username, rol, Track)
             context.update(global_context())
             return render(
@@ -624,7 +672,9 @@ class ArticleList(ListView):
         rol = request.session.get('rol')
         if username:
             context = {}
+            logged_user = User.objects.get(username=username)
             context['object_list'] = GetListObjects(username, rol, Article)
+            context['logged_user'] = logged_user
             context.update(global_context())
             return render(
                 request,

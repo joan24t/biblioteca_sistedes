@@ -1,0 +1,34 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Listado de artículos | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+
+    <h1>El autor {{author_name}} ha publicado {{ article_list|length }} artículo(s):</h1>
+    {% for ar in article_list.all %}
+        <article>
+            <header class="wrapper">
+                <h3>
+                    <a id="text-hightlight" href="/articulo/{{ar.id}}"> {{ ar.name }}</a>
+                </h3>
+            </header>
+            <div style="font-size: 0.8em;">
+                <p id="text-hightlight">
+                  {{  ar.description }}
+                </p>
+            </div>
+            <p style="font-size: 0.8em;" id="text-hightlight">
+                <strong>Autores: </strong>
+                {% for author in ar.author_ids.all %}
+                 <a href="/autor/?txtAutor={{author.name}} {{author.middle_name}} {{author.last_name}}/">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
+                {% endfor %}
+                <br/>
+                <strong> Palabras Clave: </strong>
+                {% for keyword in ar.keyword_ids.all %}
+                    <a href="/tag/{{keyword.name}}/"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                {% endfor %}
+            </p>
+        </article>
+    {% endfor %}
+{% endblock %}

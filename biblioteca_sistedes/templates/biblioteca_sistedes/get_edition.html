@@ -4,6 +4,17 @@
 {% endblock %}
 {% block content %}
 {% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/conferencias/">Conferencias</a></li>
+        {% for ed in edition %}
+        <li><a href="/biblioteca/conferencias/{{ ed.conference_id.domain }}/">{{ ed.conference_id.name }}</a></li>
+        <li><a href="/biblioteca/conferencias/{{ ed.conference_id.domain }}/{{ed.year}}/">{{ed.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 <article class="page page_1781">
     <header class="wrapper">
         {% for ed in edition %}

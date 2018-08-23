@@ -18,7 +18,6 @@
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nombre</th>
 					<th>Autores</th>
 					<th>Palabras clave</th>
@@ -31,8 +30,8 @@
 
 			<tbody>
 				{% for article in object_list %}
+                {% if logged_user in article.user_ids.all or logged_user.rol == 1 %}
 				<tr>
-					<td>{{ article.id }}</td>
 					<td>{{ article.name }}</td>
 					<td>{{ article.author_ids }}</td>
 					<td>{{ article.keyword_ids }}</td>
@@ -45,6 +44,7 @@
 						<a class="btn btn-danger" href="/article_delete/{{ article.id }}"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
+                {% endif %}
 				{% endfor %}
 			</tbody>
 		</table>

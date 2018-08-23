@@ -40,6 +40,8 @@ class EditionForm(forms.ModelForm):
         self.fields['conference_id'].queryset = Conference.objects.all()
         self.fields['conference_id'].label_from_instance = lambda obj: '%s' \
             % obj.name
+        self.fields['preamble'].required = False
+        self.fields['description'].required = False
 
     class Meta:
         model = Edition

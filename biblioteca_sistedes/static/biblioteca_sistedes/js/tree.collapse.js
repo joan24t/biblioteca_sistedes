@@ -60,15 +60,16 @@ jQuery(document).ready( function( ) {
         var parts = String(window.location.href).split('/');
         var section = parts[parts.length - 2];
         var section2 = parts[parts.length - 3];
+        var section3 = parts[parts.length - 4];
         var current = jQuery("." + String(section))
         var current2 = jQuery("." + String(section2))
-        if (current2.length){
+        if (current2.length && (section3 == 'conferencias')){
             activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit" + "-li-hitarea"), jQuery(".first-hit-li"));
             activate_tree(jQuery(".child-" + section2), current2, jQuery(".hit-" + section2 + "-li-hitarea"), jQuery(".hit-" + section2 + "-li"));
             activate_tree(jQuery(".child-" + section2 + "-" + section), jQuery("." + section2 + "-" + section), jQuery(".hit-" + section2 + "-" + section + "-li-hitarea"), jQuery(".hit-" + section2 + "-" + section + "-li"));
 
         }
-        else if (current.length){
+        else if (current.length && (section2 == 'conferencias')){
             activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit" + "-li-hitarea"), jQuery(".first-hit-li"));
             activate_tree(jQuery(".child-" + section), current, jQuery(".hit-" + section + "-li-hitarea"), jQuery(".hit-" + section + "-li"));
 

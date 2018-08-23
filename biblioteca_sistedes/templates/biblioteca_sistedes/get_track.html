@@ -4,6 +4,16 @@
 {% endblock %}
 {% block content %}
 {% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/conferencias/">Conferencias</a></li>
+        <li><a href="/biblioteca/conferencias/{{ track.edition_id.conference_id.domain }}/">{{ track.edition_id.conference_id.name }}</a></li>
+        <li><a href="/biblioteca/conferencias/{{ track.edition_id.conference_id.domain }}/{{track.edition_id.year}}/">{{track.edition_id.name}}</a></li>
+        <li><a href="/biblioteca/conferencias/{{ track.edition_id.conference_id.domain }}/{{track.edition_id.year}}/{{tr.id}}">{{track.name}}</a></li>
+    </ul>
+</div>
 <article class="page page_168">
     <header class="wrapper">
         <h1> {{ track.name }} </h1>
@@ -16,8 +26,8 @@
                 <hr>
             {% endif %}
             <p>&nbsp;</p>
+            <p>{{ track.description }}</p>
             {% if articles %}
-            <p>Listado de artículos correspondientes al track {{ track.name }}</p>
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}
                 <li>

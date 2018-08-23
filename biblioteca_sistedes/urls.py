@@ -146,4 +146,14 @@ urlpatterns = [
         views.GetArticle,
         name='Ver artículo'
         ),
+    path(
+        'tag/<slug:name>/',
+        views.GetListOfTracks,
+        name='Listado de tracks'
+        ),
+    path(
+        'autor/',
+        views.GetListOfArticles,
+        name='Listado de artículos'
+        ),
     ]

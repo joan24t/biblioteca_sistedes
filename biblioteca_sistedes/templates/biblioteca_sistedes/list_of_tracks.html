@@ -1,0 +1,18 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Listado de tracks | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+
+{% for tr in track_list %}
+<article>
+    <header class="wrapper">
+        <h1>{{ tr.name }}</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper"><p>{{ tr.description }}</p></div>
+    </section>
+</article>
+{% endfor %}
+{% endblock %}
