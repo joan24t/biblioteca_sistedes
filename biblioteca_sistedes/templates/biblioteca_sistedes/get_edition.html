@@ -33,7 +33,7 @@
             {% endfor %}
             <ul>
                 {% for track in new_tracks %}
-                <li><a href="/biblioteca/conferencias/{{ track.edition_id.conference_id.domain }}/{{ track.edition_id.year }}/{{ track.id }}">{{ track.name }}</a></li>
+                <li><a href="/conferencias/{{ track.edition_id.conference_id.domain }}/{{ track.edition_id.year }}/{{ track.id }}">{{ track.name }}</a></li>
                 {% endfor %}
             </ul>
             <p>&nbsp;</p>
