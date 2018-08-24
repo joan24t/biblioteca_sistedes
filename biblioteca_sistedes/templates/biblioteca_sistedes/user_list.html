@@ -18,7 +18,6 @@
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Email</th>
@@ -30,8 +29,6 @@
 			<tbody>
 				{% for user in object_list %}
 				<tr style="border-bottom: 1px solid black;">
-					<td>{{ user.id }}</td>
-
 					<td ><div>{{ user.name }}</div></td>
                     <td ><div >{{ user.surnames }}</div></td>
                     <td ><div >{{ user.email }}</div></td>
@@ -48,7 +45,7 @@
 					<td style="width: auto;">
 						<!--<a class="btn btn-primary" href="/user_view/{{ user.id }}/">Ver</a>-->
 						<a class="btn btn-primary" href="/user_update/{{ user.id }}/"><i class="fa fa-edit fa-2x"></i></a>
-						<a class="btn btn-danger" href="/user_delete/{{ user.id }}/"><i class="fa fa-trash fa-2x"></i></a>
+						<a class="btn btn-danger" href="/user_delete/{{ user.id }}/" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
 				{% endfor %}

@@ -11,6 +11,12 @@
             <label><h4>Nombre:</h4></label> {{ track.name }}
             <label><h4>Preámbulo:</h4></label> {{ track.preamble }}
             <label><h4>Descripción:</h4></label> {{ track.description }}
+            <label><h4>Responsables del track:</h4>
+            <ul>
+            {% for user in track.user_ids.all %}
+                <li> {{user.name}} {{user.surnames}} </li>
+            {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
@@ -43,7 +49,7 @@
                 <a class="btn btn-primary" href="/article_view/{{ article.id }}/"><i class="fa fa-eye fa-2x"></i></a>
                 {% if logged_user in article.user_ids.all or logged_user.rol == 1 %}
                 <a class="btn btn-primary" href="/article_update/{{ article.id }}/"><i class="fa fa-edit fa-2x"></i></a>
-                <a class="btn btn-danger" href="/article_delete/{{ article.id }}"><i class="fa fa-trash fa-2x"></i></a>
+                <a class="btn btn-danger" href="/article_delete/{{ article.id }}" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
                 {% endif %}
             </td>
         </tr>

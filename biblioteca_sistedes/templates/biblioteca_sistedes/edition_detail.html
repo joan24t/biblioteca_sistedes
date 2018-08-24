@@ -45,7 +45,7 @@
                         <a class="btn btn-primary" href="/track_view/{{ track.id }}/"><i class="fa fa-eye fa-2x"></i></a>
                         {% if logged_user in track.user_ids.all or logged_user.rol == 1 %}
 						<a class="btn btn-primary" href="/track_update/{{ track.id }}/"><i class="fa fa-edit fa-2x"></i></a>
-						<a class="btn btn-danger" href="/track_delete/{{ track.id }}/"><i class="fa fa-trash fa-2x"></i></a>
+						<a class="btn btn-danger" href="/track_delete/{{ track.id }}/" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
                         {% endif %}
                     </td>
 				</tr>

@@ -140,3 +140,8 @@ function dropdown(){
 function close_cookies(){
     document.getElementById("cookies").style= "display:none;";
 }
+
+function clicked(e)
+{
+    if(!confirm('¿Estás seguro de eliminar el registro?'))e.preventDefault();
+}

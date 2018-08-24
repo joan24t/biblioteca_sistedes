@@ -247,11 +247,12 @@ def Logout(request):
         del request.session['user']
     return HttpResponseRedirect('/')
 
+# PRIVATE
+
 
 def ConferenceView(request, pk=None):
     username = request.session.get('username')
-    rol = request.session.get('rol')
-    if username and rol == 1:
+    if username:
         conference = get_object_or_404(Conference, pk=pk)
         edition_list = Edition.objects.filter(conference_id=conference.id)
         context = {
@@ -269,8 +270,7 @@ def ConferenceView(request, pk=None):
 
 def EditionView(request, pk=None):
     username = request.session.get('username')
-    rol = request.session.get('rol')
-    if username and rol == 1:
+    if username:
         edition = get_object_or_404(Edition, pk=pk)
         track_list = Track.objects.filter(edition_id=edition.id)
         logged_user = User.objects.get(username=username)
@@ -290,8 +290,7 @@ def EditionView(request, pk=None):
 
 def TrackView(request, pk=None):
     username = request.session.get('username')
-    rol = request.session.get('rol')
-    if username and (rol == 1 or rol == 2):
+    if username:
         logged_user = User.objects.get(username=username)
         track = get_object_or_404(Track, pk=pk)
         article_list = Article.objects.filter(track_ids=track.id)
@@ -312,6 +311,8 @@ def TrackView(request, pk=None):
 def ArticleView(request, pk=None):
     username = request.session.get('username')
     if username:
+        logged_user = User.objects.get(username=username)
+        article = get_object_or_404(Article, pk=pk)
         article = get_object_or_404(Article, pk=pk)
         track_list = article.track_ids.all()
         keyword_list = article.keyword_ids.all()
@@ -547,8 +548,6 @@ def search(request):
         context
         )
 
-# PRIVATE PART
-
 
 def ConferenceDelete(request, pk=None):
     username = request.session.get('username')
@@ -557,9 +556,9 @@ def ConferenceDelete(request, pk=None):
         conference = get_object_or_404(Conference, pk=pk)
         if conference:
             conference.delete()
-            return HttpResponseRedirect('/conference_list/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def EditionDelete(request, pk=None):
@@ -569,7 +568,7 @@ def EditionDelete(request, pk=None):
         edition = get_object_or_404(Edition, pk=pk)
         if edition:
             edition.delete()
-            return HttpResponseRedirect('/edition_list/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect('/')
 
@@ -577,11 +576,12 @@ def EditionDelete(request, pk=None):
 def TrackDelete(request, pk=None):
     username = request.session.get('username')
     rol = request.session.get('rol')
-    if username and (rol == 1 or rol == 2):
-        track = get_object_or_404(Track, pk=pk)
+    track = get_object_or_404(Track, pk=pk)
+    logged_user = User.objects.get(username=username)
+    if username and (rol == 1 or (logged_user in track.user_ids.all())):
         if track:
             track.delete()
-            return HttpResponseRedirect('/track_list/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect('/')
 
@@ -592,18 +592,20 @@ def AuthorDelete(request, pk=None):
         author = get_object_or_404(Author, pk=pk)
         if author:
             author.delete()
-            return HttpResponseRedirect('/author_list/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect('/')
 
 
 def ArticleDelete(request, pk=None):
     username = request.session.get('username')
-    if username:
-        article = get_object_or_404(Article, pk=pk)
+    rol = request.session.get('rol')
+    article = get_object_or_404(Article, pk=pk)
+    logged_user = User.objects.get(username=username)
+    if username and (rol == 1 or (logged_user in article.user_ids.all())):
         if article:
             article.delete()
-            return HttpResponseRedirect('/article_list/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect('/')
 
@@ -705,8 +707,7 @@ class KeywordList(ListView):
 
     def get(self, request, **kwargs):
         username = request.session.get('username')
-        rol = request.session.get('rol')
-        if username and rol == 1:
+        if username:
             context = {}
             context['object_list'] = Keyword.objects.all()
             context.update(global_context())
@@ -869,13 +870,17 @@ class TrackCreate(CreateView):
         username = request.session.get('username')
         rol = request.session.get('rol')
         if username and (rol == 1 or rol == 2):
+            logged_user = request.session.get('user')
             context = {}
             pk = self.kwargs.get('pk', 0)
             track = Track.objects.get(id=pk) if pk != 0 else False
             if 'form_track' not in context:
                 if track:
-                    context['form_track'] = self.form_class(instance=track)
-                    context['id'] = pk
+                    if logged_user in track.user_ids.all() or rol == 1:
+                        context['form_track'] = self.form_class(instance=track)
+                        context['id'] = pk
+                    else:
+                        return HttpResponseRedirect('/')
                 else:
                     context['form_track'] = self.form_class(self.request.GET)
             context.update(global_context())
@@ -915,10 +920,21 @@ class ArticleCreate(CreateView):
             article = Article.objects.get(id=pk) if pk != 0 else False
             if 'form_article' not in context:
                 if article:
-                    context['form_article'] = self.form_class(instance=article)
-                    context['id'] = pk
+                    logged_user = request.session.get('user')
+                    if logged_user in article.user_ids.all() or \
+                            logged_user.rol == 1:
+                        context['form_article'] = self.form_class(
+                            instance=article,
+                            username=request.session.get('username'),
+                            )
+                        context['id'] = pk
+                    else:
+                        return HttpResponseRedirect('/')
                 else:
-                    context['form_article'] = self.form_class(self.request.GET)
+                    context['form_article'] = self.form_class(
+                        self.request.GET,
+                        username=request.session.get('username'),
+                        )
             context.update(global_context())
             return render(
                 request,

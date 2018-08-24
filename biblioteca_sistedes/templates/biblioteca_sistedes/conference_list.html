@@ -33,7 +33,7 @@
 					<td style="width: auto;">
 						<a href="/conference_view/{{ conference.id }}/"><i class="fa fa-eye fa-2x"></i></a>
 						<a href="/conference_update/{{ conference.id }}/"><i class="fa fa-edit fa-2x"></i></a>
-						<a href="/conference_delete/{{ conference.id }}/"><i class="fa fa-trash fa-2x"></i></a>
+						<a href="/conference_delete/{{ conference.id }}/" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
 				</tr>
 				{% endfor %}

@@ -5,22 +5,18 @@
 {% block form %}
 <h2><u> Crear conferencia </u></h2>
 {% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="name_con"><h4>Nombre:</h4></label> {{ form_conference.name }}
-            </div>
+    <div class="form-row">
+        <div class="form-row-component">
+            <label for="name_con"><h4>Nombre:</h4></label> {{ form_conference.name }}
         </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="dom_con"><h4>Dominio:</h4></label> {{ form_conference.domain }}
-            </div>
+        <div class="form-row-component">
+            <label for="dom_con"><h4>Dominio:</h4></label> {{ form_conference.domain }}
         </div>
     </div>
     </br>
     <div>
         <div class="footer-form">
-            <input class="form-submit" type="submit" value="Crear conferencia">
+            <input class="form-submit" type="submit" value="Guardar conferencia">
             <button onclick="window.location.href='/conference_list/'" class="cancel-button">Cancelar</button>
         </div>
 

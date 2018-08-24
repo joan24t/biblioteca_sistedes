@@ -135,6 +135,10 @@ class TrackForm(forms.ModelForm):
             obj.name
         self.fields['preamble'].required = False
         self.fields['description'].required = False
+        self.fields['user_ids'].queryset = User.objects.filter(rol=3)
+        self.fields['user_ids'].label_from_instance = lambda obj: '%s' % \
+            obj.name
+        self.fields['user_ids'].required = True
 
     class Meta:
         model = Track
@@ -143,12 +147,14 @@ class TrackForm(forms.ModelForm):
             'preamble',
             'description',
             'edition_id',
+            'user_ids',
             ]
         labels = {
             'name': 'Nombre',
             'preamble': 'Preambulo',
             'description': 'Descripcion',
             'edition_id': 'Edicion',
+            'user_ids': 'Responsables del track',
             }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -166,14 +172,22 @@ class TrackForm(forms.ModelForm):
             'edition_id': forms.Select(attrs={
                 'id': 'ed_tr',
                 }),
+            'user_ids': forms.SelectMultiple(attrs={
+                'id': 'user_tr',
+                'class': 'multiselect',
+                }),
             }
 
 
 class ArticleForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        users = []
+        if kwargs.get('username'):
+            username = kwargs.pop('username')
+            user = User.objects.get(username=username)
+            users.append(user)
         super(ArticleForm, self).__init__(*args, **kwargs)
-
         self.fields['author_ids'].queryset = Author.objects.all()
         self.fields['author_ids'].label_from_instance = lambda obj: '%s' % \
             obj.name
@@ -189,10 +203,13 @@ class ArticleForm(forms.ModelForm):
             % obj.name
         self.fields['access_right_ids'].required = False
 
-        self.fields['track_ids'].queryset = Track.objects.all()
+        self.fields['track_ids'].queryset = Track.objects.filter(
+            user_ids__in=users,
+            ) if kwargs.get('username') else Track.objects.all()
         self.fields['track_ids'].label_from_instance = lambda obj: obj.name + \
             ' ' + \
-            '(' + str(obj.edition_id.conference_id.domain) + ')'
+            '(' + str(obj.edition_id.name) + ' - ' + \
+            str(obj.edition_id.conference_id.domain.upper()) + ')'
         self.fields['track_ids'].required = False
 
         self.fields['file'].required = False

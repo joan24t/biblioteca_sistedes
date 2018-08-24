@@ -13,22 +13,25 @@
             <label for="ed_tr"><h4>Edición:</h4></label> {{ form_track.edition_id }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
+    <div class="form-row">
+        <div class="form-row-component-alone">
                 <label for="ed_tr"><h4>Preámbulo:</h4></label> {{ form_track.preamble }}
-            </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="ed_tr"><h4>Descripción:</h4></label> {{ form_track.description }}
-            </div>
+    </div>
+    <div class="form-row">
+        <div class="form-row-component-alone">
+            <label for="ed_tr"><h4>Descripción:</h4></label> {{ form_track.description }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-row-component-alone">
+            <label for="user_tr"><h4>Responsables del track:</h4></label> {{ form_track.user_ids }}
         </div>
     </div>
     </br>
     <div>
         <div>
-            <input style="background-color: #006699;" class="form-submit" type="submit" value="Crear track">
+            <input style="background-color: #006699;" class="form-submit" type="submit" value="Guardar track">
             <button onclick="window.location.href='/track_list/'" class="cancel-button">Cancelar</button>
         </div>
     </div>

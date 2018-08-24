@@ -39,7 +39,7 @@
                     <td style="width: auto;">
                         <a class="btn btn-primary" href="/edition_view/{{ edition.id }}/"><i class="fa fa-eye fa-2x"></i></a>
 						<a class="btn btn-primary" href="/edition_update/{{ edition.id }}/"><i class="fa fa-edit fa-2x"></i></a>
-						<a class="btn btn-danger" href="/edition_delete/{{ edition.id }}/"><i class="fa fa-trash fa-2x"></i></a>
+						<a class="btn btn-danger" href="/edition_delete/{{ edition.id }}/" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
 					</td>
                 </tr>
 				{% endfor %}
