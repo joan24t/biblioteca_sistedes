@@ -24,6 +24,7 @@
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/tree.collapse.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/multi.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/better-multiselect-filter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/table_pagination.js' %}"></script>
     {% endblock %}
 
 
@@ -106,7 +107,7 @@
 
 <!-- Container -->
 <div id="container" style="width:90%; margin-top: 100px;">
-    <div style="width: 90%; margin: 0 auto; margin: 2% 5% 2% 5%">
+    <div class="general-div">
         {% block container %}
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <div class="form-style-10" style="width:75%;">

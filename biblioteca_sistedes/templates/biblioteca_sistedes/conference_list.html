@@ -18,7 +18,6 @@
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nombre</th>
 					<th>Dominio</th>
 					<th>Acciones</th>
@@ -28,7 +27,6 @@
 			<tbody>
 				{% for conference in object_list %}
 				<tr style="border-bottom: 1px solid black;">
-					<td>{{ conference.id }}</td>
 					<td >{{ conference.name }}</td>
 					<td>{{ conference.domain }}</td>
 

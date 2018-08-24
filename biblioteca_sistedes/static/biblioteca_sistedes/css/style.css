@@ -1441,3 +1441,22 @@ a.deletelink:focus, a.deletelink:hover {
     display: inline;
     margin: 0 0 0 0;
 }
+
+.general-div{
+    width: 90%;
+    margin: 0 auto;
+    margin: 2% 5% 2% 5%;
+}
+
+.general-search{
+    margin: auto;
+    margin-left:0px;
+}
+
+.general-div #buttons{
+    text-align: center;
+}
+
+#buttons{
+    margin-top: 30px;
+}
