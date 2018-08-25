@@ -78,10 +78,10 @@ function check_rol(){
       dataType: 'json',
       success: function (data) {
         if (data.rol == 2) {
-          document.getElementById("arrow-menu").style= "display:block; position: relative; height: 120px;";
+          document.getElementById("arrow-menu").style= "display:block; position: relative; height: 160px;";
         }
         else if (data.rol == 3){
-            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 90px;";
+            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 135px;";
         }
         else{
             document.getElementById("arrow-menu").style= "display:block; position: relative; height: 240px;";

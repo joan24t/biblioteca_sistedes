@@ -86,10 +86,8 @@
                             {% if request.session.rol == 1 %}
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
                             {% endif %}
-                            {% if request.session.rol == 1 %}
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/author_list/">Autores</a></li><br/>
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/keyword_list/">Palabras clave</a></li><br/>
-                            {% endif %}
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/logout/">Cerrar sesion</a></li><br/>
                             </div>
                         </ul>
@@ -170,18 +168,18 @@
                     </li>
                     <li class="expandable lastExpandable">
                         <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
-                        <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/" class="">Boletines de
+                        <a href="#" class="">Boletines de
                             Prensa</a>
                         <ul class="children" style="">
                             <li class="expandable lastExpandable">
                                 <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
-                                <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/2018-2/">2018</a>
+                                <a href="#">2018</a>
                                 <ul class="children" style="">
                                     <li>
-                                        <a href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/2018-2/boletin-no-1-febrero-de-2018/">Boletín
+                                        <a href="#">Boletín
                                             nº 1. Febrero de 2018</a></li>
                                     <li class="last"><a
-                                            href="https://biblioteca.sistedes.es/boletin/boletines-de-prensa/2018-2/boletin-no-2-abril-de-2018/">Boletín
+                                            href="#">Boletín
                                         nº 2. Abril de 2018</a></li>
                                 </ul>
                             </li>
@@ -251,14 +249,5 @@
         </div>
     </div>
 </footer>
-<div id="cookies" style="">
-    <div class="cookies_es_inner"><p>Utilizamos cookies propias y de terceros con fines estadísticos para poder mejorar
-        tu navegación y nuestros servicios.</p>
-        <p>Si continúas navegando, consideramos que aceptas su uso. Para más información, consulta nuestra <a
-                href="" target="_blank"
-                title="Revisar política de cookies (este enlace se abrirá en una ventana emergente)">política de
-            cookies</a>.</p>
-        <p><a class="cookies-close" href="#" onclick="close_cookies()">aceptar</a></p></div>
-</div>
 </body>
 </html>
