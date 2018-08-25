@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 from django import forms
 from .models import Conference, Edition, Track, Article
-from .models import Author, Keyword, AccessRight, User
+from .models import Author, Keyword, AccessRight, User, Bulletin
 
 ROL_CHOICE = (
     (1, 'Administrador'),
@@ -319,6 +319,31 @@ class UserForm(forms.ModelForm):
             'rol': forms.Select(attrs={
                 'id': 'rol_user', 'style': 'height: 40px; font-size: 20px;'},
                 choices=ROL_CHOICE
+                ),
+            }
+
+
+class BulletinForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(BulletinForm, self).__init__(*args, **kwargs)
+        self.fields['date'].required = True
+
+    class Meta:
+        model = Bulletin
+        fields = [
+            'name',
+            'date',
+            ]
+        labels = {
+            'name': 'Nombre',
+            'date': 'Fecha',
+            }
+        widgets = {
+            'name': forms.TextInput(attrs={'id': 'name_bul'}),
+            'date': forms.DateInput(
+                format='%d/%m/%Y',
+                attrs={'id': 'date_bul'},
                 ),
             }
 

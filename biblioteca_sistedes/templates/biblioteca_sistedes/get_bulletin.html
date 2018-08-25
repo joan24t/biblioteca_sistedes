@@ -1,0 +1,34 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Info conferencia | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/bulletins/press-bulletins">Boletines de Prensa</a></li>
+        {% if year %}
+        <li><a href="/bulletins/press-bulletins/{{year}}">{{ year }}</a></li>
+        {% endif %}
+        {% if bulletin %}
+        <li><a href="/bulletins/press-bulletins/{{bulletin.date.year}}/{{bulletin.id}}">{{ bulletin.name }}</a></li>
+        {% endif %}
+    </ul>
+</div>
+<article>
+    <header class="wrapper">
+            {% if bulletin %}
+                <h1>{{ bulletin.name }}</h1>
+            {% endif %}
+    </header>
+    {% if bulletin %}
+    <section id="interior" class="s"><div class="wrapper"><p>{{bulletin.name}}</p>
+        <p>Handle: <a href="#">{{bulletin.handle}}</a></p>
+        <p><a href="/download/{{bulletin.id }}?type=b" target="_blank">Descargar</a></p>
+        </div>
+    </section>
+    {% endif %}
+</article>
+{% endblock %}

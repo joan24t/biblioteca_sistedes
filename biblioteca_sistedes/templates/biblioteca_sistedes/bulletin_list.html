@@ -1,0 +1,45 @@
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Lista de boletines | Biblioteca sistedes</title>
+{% endblock %}
+{% block container %}
+{% load static %}
+		<h2><u> Boletines </u></h2>
+        </br>
+        </br>
+        </br>
+        <button style="float: right;" class="button_form" onclick="window.location.href='/bulletin_create/'" >Añadir + </button>
+        <input placeholder="Buscar..." style="width: 600;" id="myInput" type="text" onkeyup="search_table()">
+        <input alt="Buscar"
+               src="{% static 'biblioteca_sistedes/img/search.png' %}"
+               type="image">
+        </br>
+        </br>
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Fecha</th>
+                    <th>Acciones</th>
+				</tr>
+
+			</thead>
+
+			<tbody>
+				{% for bulletin in object_list %}
+				<tr>
+					<td>{{ bulletin.name }}</td>
+					<td>{{ bulletin.date }}</td>
+					<td style="width: auto;">
+						<a class="btn btn-primary" href="/bulletin_view/{{ bulletin.id }}/"><i class="fa fa-eye fa-2x"></i></a>
+						<a class="btn btn-primary" href="/bulletin_update/{{ bulletin.id }}/"><i class="fa fa-edit fa-2x"></i></a>
+						<a class="btn btn-danger" href="/bulletin_delete/{{ bulletin.id }}" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% if object_list|length == 0 %}
+		<h1>No hay registros de boletines</h1>
+		{% endif %}
+{% endblock%}

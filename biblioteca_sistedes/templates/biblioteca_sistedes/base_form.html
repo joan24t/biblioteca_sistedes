@@ -60,14 +60,15 @@
                 <li class="dropdown-submenu">
                     <a class="test" id="user-menu" tabindex="-1" href="#" onclick="dropdown()"> <i class="fa fa-user"></i> <i class="fa fa-caret-down" style="font-size:24px"></i><span
                             class="caret"></span></a>
-                    <ul id="arrow-menu">
+                    <ul id="arrow-menu" >
                             <div class="user-section">
                                 {% if request.session.username|length >= 7 %}
                                     <span class="username">{{ request.session.username|slice:"0:7" }}...</span>
                                 {% else %}
                                     <span class="username">{{ request.session.username }}</span>
                                 {% endif %}
-                            </div><br/>
+                            </div>
+                            <br/>
                             <div>
                         <div class="dropdown-menu">
                         {% if request.session.rol == 1 %}
@@ -82,6 +83,7 @@
                         {% endif %}
                         {% if request.session.rol == 1 %}
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
+                            <li style ="font-size: 13px;"><a tabindex="-1" href="/bulletin_list/">Boletines</a></li><br/>
                         {% endif %}
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/author_list/">Autores</a></li><br/>
                             <li style ="font-size: 13px;"><a tabindex="-1" href="/keyword_list/">Palabras clave</a></li><br/>

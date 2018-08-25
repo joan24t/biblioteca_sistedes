@@ -134,6 +134,7 @@ urlpatterns = [
     path('track_view/<int:pk>/', views.TrackView, name='Ver track'),
     path('article_view/<int:pk>/', views.ArticleView, name='Ver articulo'),
     path('author_view/<int:pk>/', views.AuthorView, name='Ver autor'),
+    path('bulletin_view/<int:pk>/', views.BulletinView, name='Ver boletín'),
     path(
         'keyword_view/<int:pk>/',
         views.KeywordView,
@@ -156,5 +157,41 @@ urlpatterns = [
         'autor/',
         views.GetListOfArticles,
         name='Listado de artículos'
+        ),
+    path(
+        'bulletins/press-bulletins/',
+        views.GetPressBulletins,
+        name='Press bulletins'
+        ),
+    path(
+        'bulletins/press-bulletins/<int:year>',
+        views.GetPressBulletinsByYear,
+        name='Press bulletins by year'
+        ),
+
+    path(
+        'bulletins/press-bulletins/<int:year>/<int:pk>',
+        views.GetBulletin,
+        name='Boletín info'
+        ),
+    path(
+        'bulletin_list/',
+        views.BulletinList.as_view(),
+        name='Lista de boletines'
+        ),
+    path(
+        'bulletin_create/',
+        views.BulletinCreate.as_view(),
+        name='Crear boletín'
+        ),
+    path(
+        'bulletin_update/<int:pk>/',
+        views.BulletinCreate.as_view(),
+        name='Actualizar boletín'
+        ),
+    path(
+        'bulletin_delete/<int:pk>/',
+        views.BulletinDelete,
+        name='Eliminar boletín'
         ),
     ]

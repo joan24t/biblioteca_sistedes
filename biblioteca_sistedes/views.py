@@ -6,9 +6,9 @@ from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from .models import Conference, Edition, Author
-from .models import Track, Article, Sequence, Keyword, User
+from .models import Track, Article, Sequence, Keyword, User, Bulletin
 from .forms import ConferenceForm, EditionForm, AuthorForm
-from .forms import TrackForm, ArticleForm, KeywordForm, UserForm
+from .forms import TrackForm, ArticleForm, KeywordForm, UserForm, BulletinForm
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.conf import settings
@@ -74,8 +74,15 @@ def Contactus(request):
 
 
 def download(request, pk=None):
-    article = Article.objects.filter(id=pk)[0]
-    file_path = os.path.join(settings.MEDIA_ROOT, article.url_file)
+    type = request.GET.get('type')
+    object = None
+    file_path = ''
+    if type == 'a':
+        object = Article.objects.get(id=pk)
+        file_path = os.path.join(settings.MEDIA_ROOT, object.url_file)
+    elif type == 'b':
+        object = Bulletin.objects.get(id=pk)
+        file_path = os.path.join(settings.BULLETIN_ROOT, object.url_file)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/pdf")
@@ -130,6 +137,44 @@ def check_user(request):
         'is_taken': taken
         }
     return JsonResponse(data)
+
+
+def GetBulletin(request, year=False, pk=False):
+    bulletin = Bulletin.objects.get(id=pk) or False
+    context = {
+        'bulletin': bulletin,
+        'year': year,
+        }
+    context.update(global_context())
+    return render(
+        request,
+        'biblioteca_sistedes/get_bulletin.html',
+        context,
+        )
+
+
+def GetPressBulletins(request):
+    return render(
+        request,
+        'biblioteca_sistedes/press_bulletins.html',
+        global_context()
+        )
+
+
+def GetPressBulletinsByYear(request, year=False):
+    bulletins_by_year = [
+        b for b in Bulletin.objects.all() if b.date.year == year
+        ]
+    context = {
+        'bulletins_by_year': bulletins_by_year,
+        'year': year,
+        }
+    context.update(global_context())
+    return render(
+        request,
+        'biblioteca_sistedes/press_bulletins_by_year.html',
+        context,
+        )
 
 
 def GetConferences(request, name=None):
@@ -352,6 +397,23 @@ def AuthorView(request, pk=None):
         return HttpResponseRedirect('/')
 
 
+def BulletinView(request, pk=None):
+    username = request.session.get('username')
+    rol = request.session.get('rol')
+    if username and rol == 1:
+        bulletin = get_object_or_404(Bulletin, pk=pk)
+        context = {
+            'bulletin': bulletin,
+            }
+        return render(
+            request,
+            'biblioteca_sistedes/bulletin_detail.html',
+            context
+            )
+    else:
+        return HttpResponseRedirect('/')
+
+
 def KeywordView(request, pk=None):
     username = request.session.get('username')
     if username:
@@ -394,10 +456,14 @@ def UserView(request, pk=None):
 
 
 def global_context():
+    years = [b.date.year for b in Bulletin.objects.all()]
+    year_list = set(list(years))
     context = {
         "conferences": Conference.objects.all(),
         "editions": Edition.objects.all(),
         "tracks": Track.objects.all(),
+        "bulletin_years": year_list,
+        "bulletins": Bulletin.objects.all(),
         }
     return context
 
@@ -561,6 +627,18 @@ def ConferenceDelete(request, pk=None):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def BulletinDelete(request, pk=None):
+    username = request.session.get('username')
+    rol = request.session.get('rol')
+    if username and rol == 1:
+        bulletin = get_object_or_404(Bulletin, pk=pk)
+        if bulletin:
+            bulletin.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def EditionDelete(request, pk=None):
     username = request.session.get('username')
     rol = request.session.get('rol')
@@ -622,6 +700,24 @@ class ConferenceList(ListView):
             return render(
                 request,
                 'biblioteca_sistedes/conference_list.html',
+                context
+                )
+        else:
+            return HttpResponseRedirect('/')
+
+
+class BulletinList(ListView):
+
+    def get(self, request, **kwargs):
+        username = request.session.get('username')
+        rol = request.session.get('rol')
+        if username and rol == 1:
+            context = {}
+            context['object_list'] = Bulletin.objects.all()
+            context.update(global_context())
+            return render(
+                request,
+                'biblioteca_sistedes/bulletin_list.html',
                 context
                 )
         else:
@@ -978,6 +1074,80 @@ class ArticleCreate(CreateView):
             article.url_file = uploaded_file_url
             article.save()
             return HttpResponseRedirect('/article_list/')
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+
+class BulletinCreate(CreateView):
+    form_class = BulletinForm
+
+    def get(self, request, **kwargs):
+        username = request.session.get('username')
+        rol = request.session.get('rol')
+        if username and rol == 1:
+            context = {}
+            pk = self.kwargs.get('pk', 0)
+            bulletin = Bulletin.objects.get(id=pk) if pk != 0 else False
+            if 'form_bulletin' not in context:
+                if bulletin:
+                    month = '0' + str(bulletin.date.month) \
+                        if bulletin.date.month <= 9 \
+                            else str(bulletin.date.month)
+                    day = '0' + str(bulletin.date.day) \
+                        if bulletin.date.day <= 9 else str(bulletin.date.day)
+                    date = str(bulletin.date.year) + \
+                        '-' + month + \
+                        '-' + day
+                    context['date'] = date
+                    context['form_bulletin'] = self.form_class(
+                        instance=bulletin,
+                        )
+                    context['id'] = pk
+                else:
+                    context['form_bulletin'] = self.form_class(
+                        self.request.GET,
+                        )
+            context.update(global_context())
+            return render(
+                request,
+                'biblioteca_sistedes/bulletin_create.html',
+                context
+                )
+        else:
+            return HttpResponseRedirect('/')
+
+    def post(self, request, *args, **kwargs):
+        fs = FileSystemStorage(location=settings.BULLETIN_ROOT)
+        self.object = self.get_object
+        pk = self.kwargs.get('pk', 0)
+        bulletin = Bulletin.objects.get(id=pk) if pk != 0 else False
+        if bulletin:
+            if bulletin.url_file and bulletin.url_file != '':
+                fs.delete(bulletin.url_file)
+            form = self.form_class(
+                request.POST or None,
+                request.FILES or None,
+                instance=bulletin
+                )
+
+        else:
+            form = self.form_class(request.POST or None, request.FILES or None)
+
+        myfile = request.FILES.get('bulletin_file')
+        uploaded_file_url = ''
+        if myfile:
+            sufix_number = Sequence.get_last_number()
+            next_number = int(sufix_number) + 1
+            file_name = 'file_' + str(next_number)
+            Sequence(number=next_number).save()
+            filename = fs.save(file_name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+        if form.is_valid():
+            bulletin = form.save()
+            bulletin.url_file = uploaded_file_url
+            bulletin.save()
+            return HttpResponseRedirect('/bulletin_list/')
         else:
             return self.render_to_response(self.get_context_data(form=form))
 

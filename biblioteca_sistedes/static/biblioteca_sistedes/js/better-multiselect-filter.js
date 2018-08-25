@@ -84,7 +84,7 @@ function check_rol(){
             document.getElementById("arrow-menu").style= "display:block; position: relative; height: 135px;";
         }
         else{
-            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 240px;";
+            document.getElementById("arrow-menu").style= "display:block; position: relative; height: 260px;";
         }
       }
     });

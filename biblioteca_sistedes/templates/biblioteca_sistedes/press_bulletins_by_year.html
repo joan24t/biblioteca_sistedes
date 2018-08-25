@@ -1,0 +1,33 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Info Boletín | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/bulletins/press-bulletins">Boletines de Prensa</a></li>
+        {% if year %}
+        <li><a href="/bulletins/press-bulletins/{{year}}">{{ year }}</a></li>
+        {% endif %}
+    </ul>
+</div>
+<article class="page page_77">
+    <header class="wrapper">
+        {% if year %}
+            <h1> {{ year }}</h1>
+        {% endif %}
+    </header>
+    <section id="interior" class="s">
+            <ul>
+                {% for bulletin in bulletins_by_year %}
+                    <li><a href="/bulletins/press-bulletins/{{bulletin.date.year}}/{{bulletin.id}}">{{ bulletin.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

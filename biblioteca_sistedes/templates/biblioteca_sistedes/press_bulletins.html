@@ -1,0 +1,26 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Boletines de prensa | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+            <h1>Boletines de Prensa</h1>
+    </header>
+    <section id="interior" class="s"><div class="wrapper"><p>El Boletín informativo de SISTEDES es una publicación bimensual que recopila noticias recientes y relevantes,&nbsp;tanto para los socios como para todo aquel que pueda estar interesado<br>
+    en la Asociacion. En los boletines se recogen tanto&nbsp;las noticias de los hechos acaecidos en el periodo correspondiente,&nbsp;como aquellas de interés que vayan a suceder próximamente<br>
+    (congresos organizados por los socios, cursos, seminarios, tesis leídas, premios, etc.). Los <a href="https://www.sistedes.es/socios/corresponsales">Corresponsales de SISTEDES</a> colaboran con la directiva de la asociación proporcionando el contenido de los boletines. Si usted desea contribuir a los mismos, puede contactar con los editores enviando un mensaje de correo electrónico a la dirección&nbsp;<a href="mailto:noticias@sistedes.es">noticias@sistedes.es</a>.</p>
+        <p>&nbsp;</p>
+        <p><strong>ACCESO A LOS BOLETINES</strong></p>
+        <p>&nbsp;</p>
+        <ul>
+            {% for year in bulletin_years %}
+                  <li><a href="/bulletins/press-bulletins/{{year}}">Año {{year}}</a></li>
+            {% endfor %}
+        </ul>
+        </div>
+    </section>
+</article>
+
+{% endblock %}

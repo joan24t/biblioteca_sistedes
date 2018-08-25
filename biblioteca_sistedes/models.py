@@ -108,3 +108,12 @@ class Sequence(models.Model):
         sequence = Sequence.objects.order_by('-number')
         number = sequence[0].number if sequence else -1
         return number
+
+
+class Bulletin(models.Model):
+
+    # Attributes
+    name = models.CharField(max_length=100)
+    date = models.DateField()
+    url_file = models.CharField(max_length=1000)
+    handle = models.CharField(max_length=100)

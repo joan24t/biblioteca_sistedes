@@ -1,0 +1,28 @@
+{% extends 'biblioteca_sistedes/base_form.html' %}
+{% block title %}
+	<title>Crear boletín | Biblioteca sistedes</title>
+{% endblock %}
+{% block form %}
+<h2><u> Crear boletín </u></h2>
+{% csrf_token %}
+        <div class="form-row">
+            <div class="form-row-component">
+                <label for="name_bul"><h4>Nombre:</h4></label> {{ form_bulletin.name }}
+            </div>
+            <div class="form-row-component">
+                <label for="date_bul"><h4>Fecha:</h4></label> <input type="date" value="{{date}}" name="date" id="date_bul" required class="hasDatepicker">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-component-alone">
+                <label for="bulletin_file"><h4>Adjunto:</h4></label> <input type="file" name="bulletin_file">
+            </div>
+        </div>
+        </br>
+        <div>
+            <div>
+                <input style="background-color: #006699;" class="form-submit" type="submit" value="Guardar boletín">
+                <button onclick="window.location.href='/bulletin_list/'" class="cancel-button">Cancelar</button>
+            </div>
+        </div>
+{% endblock %}

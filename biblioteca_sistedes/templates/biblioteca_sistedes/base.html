@@ -85,6 +85,7 @@
                             {% endif %}
                             {% if request.session.rol == 1 %}
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/user_list/">Usuarios</a></li><br/>
+                                <li style ="font-size: 13px;"><a tabindex="-1" href="/bulletin_list/">Boletines</a></li><br/>
                             {% endif %}
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/author_list/">Autores</a></li><br/>
                                 <li style ="font-size: 13px;"><a tabindex="-1" href="/keyword_list/">Palabras clave</a></li><br/>
@@ -152,12 +153,10 @@
                 <ul id="tree2" class="treeview-famfamfam treeview">
                     <li class="expandable lastExpandable">
                         <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
-                        <a href="#" class="">Documentos
-                            SISTEDES</a>
+                        <a href="#" class="">Documentos SISTEDES</a>
                         <ul class="children" style="">
                             <li>
-                                <a href="#">Boletín
-                                    de noticias de SISTEDES</a></li>
+                                <a href="#">Boletín de noticias de SISTEDES</a></li>
                             <li>
                                 <a href="#">Documentación
                                     JISBD 2015</a></li>
@@ -168,21 +167,21 @@
                     </li>
                     <li class="expandable lastExpandable">
                         <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
-                        <a href="#" class="">Boletines de
-                            Prensa</a>
+                        <a href="/bulletins/press-bulletins/" class="">Boletines de Prensa</a>
                         <ul class="children" style="">
+                            {% for year in bulletin_years %}
                             <li class="expandable lastExpandable">
                                 <div class="hitarea expandable-hitarea lastExpandable-hitarea"></div>
-                                <a href="#">2018</a>
-                                <ul class="children" style="">
-                                    <li>
-                                        <a href="#">Boletín
-                                            nº 1. Febrero de 2018</a></li>
-                                    <li class="last"><a
-                                            href="#">Boletín
-                                        nº 2. Abril de 2018</a></li>
+                                <a href="/bulletins/press-bulletins/{{year}}">{{year}}</a>
+                                <ul class="children">
+                                    {% for b in bulletins %}
+                                        {% if b.date.year == year %}
+		                                  <li><a href="/bulletins/press-bulletins/{{year}}/{{b.id}}">{{b.name}}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </li>
+                            {% endfor %}
                         </ul>
                     </li>
                 </ul>
