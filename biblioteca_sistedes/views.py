@@ -15,6 +15,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.http import Http404
+import datetime
 # from django.core.mail import send_mail
 
 
@@ -1146,10 +1147,40 @@ class BulletinCreate(CreateView):
         if form.is_valid():
             bulletin = form.save()
             bulletin.url_file = uploaded_file_url
+            bulletin.name = bulletin.name + \
+                self.get_name_month(bulletin.date)
             bulletin.save()
             return HttpResponseRedirect('/bulletin_list/')
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
+    def get_name_month(self, date=False):
+        month = ''
+        if date.month == 1:
+            month = 'Enero'
+        elif date.month == 2:
+            month = 'Febrero'
+        elif date.month == 3:
+            month = 'Marzo'
+        elif date.month == 4:
+            month = 'Abril'
+        elif date.month == 5:
+            month = 'Mayo'
+        elif date.month == 6:
+            month = 'Junio'
+        elif date.month == 7:
+            month = 'Julio'
+        elif date.month == 8:
+            month = 'Agosto'
+        elif date.month == 9:
+            month = 'Septiembre'
+        elif date.month == 10:
+            month = 'Octubre'
+        elif date.month == 11:
+            month = 'Noviembre'
+        elif date.month == 12:
+            month = 'Diciembre'
+        return ' ' + month + ' de ' + str(date.year)
 
 
 class KeywordCreate(CreateView):
