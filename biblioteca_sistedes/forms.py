@@ -2,6 +2,7 @@
 from django import forms
 from .models import Conference, Edition, Track, Article
 from .models import Author, Keyword, AccessRight, User, Bulletin
+import datetime
 
 ROL_CHOICE = (
     (1, 'Administrador'),
@@ -45,6 +46,10 @@ class EditionForm(forms.ModelForm):
 
     class Meta:
         model = Edition
+        choices = [(year, year) for year in range(
+            2000,
+            datetime.datetime.now().year + 1
+            )]
         fields = [
             'name',
             'year',
@@ -68,9 +73,11 @@ class EditionForm(forms.ModelForm):
                 'id': 'name_ed',
                 }),
 
-            'year': forms.NumberInput(attrs={
-                'id': 'year_ed',
-                }),
+            'year': forms.Select(
+                choices=choices,
+                attrs={
+                    'id': 'year_ed',
+                    }),
 
             'place': forms.TextInput(attrs={
                 'id': 'place_ed'

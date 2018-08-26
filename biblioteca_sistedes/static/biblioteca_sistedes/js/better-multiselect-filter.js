@@ -10,6 +10,16 @@ jQuery(document).ready(function() {
         check_data(email, 'email');
     });
 
+    jQuery('#name_con').keyup(function(){
+        var nameconference = jQuery(this).val();
+        check_data(nameconference, 'name-conference');
+    });
+
+    jQuery('#dom_con').keyup(function(){
+        var domainconference = jQuery(this).val();
+        check_data(domainconference, 'domain-conference');
+    });
+
     jQuery('#pass_user_2').keyup(function(){
         var password_1 = jQuery('[name="password"]').val();
         var password_2 = jQuery(this).val();
@@ -24,13 +34,24 @@ jQuery(document).ready(function() {
     });
 });
 
-function check_error(){
-    if(jQuery('.error-username').css('display') == 'block' || jQuery('.error-email').css('display') == 'block' || jQuery('.match-password').css('display') == 'block')
-    {
-        jQuery(".form-submit").prop('disabled', true);
+function check_error(object){
+    if (object == 'u'){
+        if(jQuery('.error-username').css('display') == 'block' || jQuery('.error-email').css('display') == 'block' || jQuery('.match-password').css('display') == 'block')
+        {
+            jQuery(".form-submit").prop('disabled', true);
+        }
+        else{
+            jQuery(".form-submit").prop('disabled', false);
+        }
     }
-    else{
-        jQuery(".form-submit").prop('disabled', false);
+    else if (object == 'c'){
+        if(jQuery('.error-name-conference').css('display') == 'block' || jQuery('.error-domain-conference').css('display') == 'block')
+        {
+            jQuery(".form-submit").prop('disabled', true);
+        }
+        else{
+            jQuery(".form-submit").prop('disabled', false);
+        }
     }
 }
 
@@ -39,20 +60,24 @@ function check_password(pass1, pass2){
         jQuery(".form-submit").prop('disabled', true);
         jQuery(".match-password").css("display", "block");
         jQuery(".text-match-password").text("Las contraseñas no coinciden");
-        check_error()
+        check_error('u')
     }
     else{
         jQuery(".form-submit").prop('disabled', false);
         jQuery(".match-password").css("display", "none");
-        check_error()
+        check_error('u')
     }
 }
 
 
 function check_data(value, object){
-    var text = object == 'email' ? 'Email no disponible.' : 'Nombre de usuario no disponible'
+    var text = ''
+    if (object == 'email') text = 'Email no disponible.'
+    else if (object == 'username') text = 'Nombre de usuario no disponible'
+    else if (object == 'name-conference') text = 'Nombre de conferencia no disponible.'
+    else if (object == 'domain-conference') text = 'Abreviatura no disponible.'
     jQuery.ajax({
-      url: '/check_user/',
+      url: '/check_data/',
       data: {
         'value': value,
         'object': object,
@@ -63,12 +88,22 @@ function check_data(value, object){
           jQuery(".error-" + object).css("display", "block");
           jQuery(".form-submit").prop('disabled', true);
           jQuery(".text-error-" + object).text(text);
-          check_error()
+          if (object == 'email' || object == 'username'){
+              check_error('u')
+            }
+          else if (object == 'name-conference' || object == 'domain-conference'){
+              check_error('c')
+          }
         }
         else{
-           jQuery(".form-submit").prop('disabled', false);
-           jQuery(".error-" + object).css("display", "none");
-           check_error()
+            jQuery(".form-submit").prop('disabled', false);
+            jQuery(".error-" + object).css("display", "none");
+            if (object == 'email' || object == 'username'){
+                check_error('u')
+              }
+            else if (object == 'name-conference' || object == 'domain-conference'){
+                check_error('c')
+            }
         }
       }
     });

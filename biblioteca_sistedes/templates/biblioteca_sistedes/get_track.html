@@ -22,11 +22,11 @@
         <div class="wrapper">
             {% if track.preamble %}
                 <hr>
-                <p>{{ track.preamble }}</p>
+                <p>{{ track.preamble|safe  }}</p>
                 <hr>
             {% endif %}
             <p>&nbsp;</p>
-            <p>{{ track.description }}</p>
+            <p>{{ track.description|safe  }}</p>
             {% if articles %}
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}

@@ -14,7 +14,7 @@
             <label><h4>Año:</h4></label> {{ article.year }}
         </div>
         <div class="form-group">
-            <label><h4>Descripción:</h4></label> {{ article.description }}
+            <label><h4>Descripción:</h4></label> {{ article.description|safe  }}
         </div>
         <div class="form-group">
             <label><h4>Responsables del track:</h4>

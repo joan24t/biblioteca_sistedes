@@ -25,11 +25,13 @@
         <div class="wrapper">
             {% for ed in edition %}
                 <hr>
-                <p>{{ ed.preamble }}</p>
+                <p>{{ ed.preamble|safe }}</p>
                 <hr>
             {% endfor %}
             <p>&nbsp;</p>
-            <p>{{ edition.description }}</p>
+            {% for ed in edition  %}
+            <p>{{ ed.description|safe }}</p>
+            {% endfor %}
             {% if articles %}
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}

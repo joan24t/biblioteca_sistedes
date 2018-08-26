@@ -25,11 +25,11 @@
         <div class="wrapper">
             {% for ed in edition %}
             <hr>
-            <p><em>{{ed.preamble}}</em></p>
+            <p><em>{{ed.preamble|safe}}</em></p>
             <hr>
             {% endfor %}
             {% for ed in edition %}
-            <p>{{ed.description}}</p>
+            <p>{{ed.description|safe}}</p>
             {% endfor %}
             <ul>
                 {% for track in new_tracks %}

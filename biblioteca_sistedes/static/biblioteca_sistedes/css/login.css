@@ -123,6 +123,30 @@ body.login {
 
 }
 
+.error-name-conference{
+    background: #E06464;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    color: #801A1A;
+    font-weight: bold;
+    display: none;
+
+
+}
+
+.error-domain-conference{
+    background: #E06464;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    color: #801A1A;
+    font-weight: bold;
+    display: none;
+
+
+}
+
 .match-password{
     background: #E06464;
     padding: 10px;

@@ -8,9 +8,17 @@
     <div class="form-row">
         <div class="form-row-component">
             <label for="name_con"><h4>Nombre:</h4></label> {{ form_conference.name }}
+            <div class="error-name-conference">
+                <i class="fa fa-times"></i>
+                 <span class="text-error-name-conference"></span>
+            </div>
         </div>
         <div class="form-row-component">
-            <label for="dom_con"><h4>Dominio:</h4></label> {{ form_conference.domain }}
+            <label for="dom_con"><h4>Abreviatura:</h4></label> {{ form_conference.domain }}
+            <div class="error-domain-conference">
+                <i class="fa fa-times"></i>
+                 <span class="text-error-domain-conference"></span>
+            </div>
         </div>
     </div>
     </br>

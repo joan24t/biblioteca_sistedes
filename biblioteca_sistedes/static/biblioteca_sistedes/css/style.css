@@ -1460,3 +1460,7 @@ a.deletelink:focus, a.deletelink:hover {
 #buttons{
     margin-top: 30px;
 }
+
+#desc_tr{
+    height:600px;
+}

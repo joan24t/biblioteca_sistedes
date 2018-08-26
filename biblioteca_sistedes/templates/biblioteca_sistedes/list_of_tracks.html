@@ -11,7 +11,7 @@
         <h1>{{ tr.name }}</h1>
     </header>
     <section id="interior" class="s">
-        <div class="wrapper"><p>{{ tr.description }}</p></div>
+        <div class="wrapper"><p>{{ tr.description|safe  }}</p></div>
     </section>
 </article>
 {% endfor %}

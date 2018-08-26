@@ -6,6 +6,8 @@
     {% endblock %}
     <link href="https://biblioteca.sistedes.es/wp-content/themes/sistedes/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     {% block head %}
+    <script src="{% static 'biblioteca_sistedes/js/editor_html.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/grid.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/login.css' %}"/>

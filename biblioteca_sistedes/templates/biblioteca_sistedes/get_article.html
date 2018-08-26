@@ -14,7 +14,7 @@
     {% if article.description %}
     <div class="entry-content">
         <h3>Resumen:</h3>
-        <p>{{article.description}}</p>
+        <p>{{article.description|safe }}</p>
     </div>
     {% endif %}
 

@@ -15,7 +15,6 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.http import Http404
-import datetime
 # from django.core.mail import send_mail
 
 
@@ -126,7 +125,7 @@ def check_rol(request):
         })
 
 
-def check_user(request):
+def check_data(request):
     object = request.GET.get('object', None)
     value = request.GET.get('value', None)
     taken = False
@@ -134,6 +133,10 @@ def check_user(request):
         taken = User.objects.filter(email__iexact=value).exists()
     elif object == 'username':
         taken = User.objects.filter(username__iexact=value).exists()
+    elif object == 'name-conference':
+        taken = Conference.objects.filter(name__iexact=value).exists()
+    elif object == 'domain-conference':
+        taken = Conference.objects.filter(domain__iexact=value).exists()
     data = {
         'is_taken': taken
         }

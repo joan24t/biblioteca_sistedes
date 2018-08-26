@@ -9,8 +9,8 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <label><h4>Nombre:</h4></label> {{ track.name }}
-            <label><h4>Preámbulo:</h4></label> {{ track.preamble }}
-            <label><h4>Descripción:</h4></label> {{ track.description }}
+            <label><h4>Preámbulo:</h4></label> {{ track.preamble|safe  }}
+            <label><h4>Descripción:</h4></label> {{ track.description|safe  }}
             <label><h4>Responsables del track:</h4>
             <ul>
             {% for user in track.user_ids.all %}
