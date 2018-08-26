@@ -160,6 +160,33 @@
       </div>
 
     </div>
+
+    <!-- Modal content article file-->
+    <div id="myModal-file" class="modal-file" style="display: none:">
+    <div class="modal-content-file">
+      <div class="modal-header-file">
+        <span class="close-file">&times;</span>
+        <h2>Cambiar archivo</h2>
+      </div>
+      <div class="general-div" style="width:90%;">
+          <form method="post" action="/upload_file/" enctype="multipart/form-data">{% csrf_token %}
+              <input type="hidden" id="articleId" name="articleId">
+                  <div >
+                      <div>
+                          <label for="articleFile"><h4>Adjunto:</h4></label> <input name="articleFile" id="articleFile" type="file">
+                      </div>
+
+                  </div>
+                  <br/>
+                  <div>
+                      <input style="background-color: #006699;" class="form-submit-wizard-file" type="submit" value="Cambiar adjunto">
+                      <button type="button" id="close-form-file" class="cancel-button-wizard">Cancelar</button>
+                  </div>
+          </form>
+      </div>
+    </div>
+
+  </div>
 </div>
     <!-- END Content -->
 

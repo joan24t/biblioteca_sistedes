@@ -1412,6 +1412,7 @@ a.deletelink:focus, a.deletelink:hover {
 .fa-eye,
 .fa-edit,
 .fa-trash,
+.fa-upload,
 .fa-key{
     color: grey;
     text-decoration: block;
@@ -1421,7 +1422,8 @@ a.deletelink:focus, a.deletelink:hover {
 .fa-trash a{
     text-decoration: none;
 }
-.fa-trash{
+.fa-trash,
+.fa-upload{
     margin-left: 5px;
 }
 .fa-key,
@@ -1430,6 +1432,9 @@ a.deletelink:focus, a.deletelink:hover {
 }
 .fa-eye:hover{
     color: #006696;
+}
+.fa-upload:hover{
+    color: #993366;
 }
 .fa-edit:hover{
     color: black

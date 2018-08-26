@@ -1306,6 +1306,30 @@ def change_password(request):
         return HttpResponseRedirect('/')
 
 
+def upload_file(request):
+    username = request.session.get('username')
+    if username:
+        articleid = request.POST.get('articleId')
+        myfile = request.FILES.get('articleFile')
+        uploaded_file_url = ''
+        article = get_object_or_404(Article, pk=articleid) or False
+        fs = FileSystemStorage()
+        if article.url_file and article.url_file != '':
+            fs.delete(article.url_file)
+        if myfile:
+            sufix_number = Sequence.get_last_number()
+            next_number = int(sufix_number) + 1
+            file_name = 'file_' + str(next_number)
+            Sequence(number=next_number).save()
+            filename = fs.save(file_name, myfile)
+            uploaded_file_url = fs.url(filename)
+            article.url_file = uploaded_file_url
+            article.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect('/')
+
+
 def UserDelete(request, pk=None):
     username = request.session.get('username')
     rol = request.session.get('rol')

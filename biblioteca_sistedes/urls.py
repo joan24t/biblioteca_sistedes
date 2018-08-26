@@ -213,6 +213,11 @@ urlpatterns = [
     path(
         'change_password/',
         views.change_password,
-        name='Informes técnicos'
+        name='Cambiar contraseña'
+        ),
+    path(
+        'upload_file/',
+        views.upload_file,
+        name='Subir archivo'
         ),
     ]
