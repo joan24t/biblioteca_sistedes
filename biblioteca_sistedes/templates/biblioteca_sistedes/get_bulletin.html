@@ -8,12 +8,12 @@
     <ul class="breadcrumbs">
         <li><a href="/">Inicio</a></li>
         <li><a href="/biblioteca/">Biblioteca</a></li>
-        <li><a href="/bulletins/press-bulletins">Boletines de Prensa</a></li>
+        <li><a href="/boletines/boletines-prensa/">Boletines de Prensa</a></li>
         {% if year %}
-        <li><a href="/bulletins/press-bulletins/{{year}}">{{ year }}</a></li>
+        <li><a href="/boletines/boletines-prensa/{{year}}">{{ year }}</a></li>
         {% endif %}
         {% if bulletin %}
-        <li><a href="/bulletins/press-bulletins/{{bulletin.date.year}}/{{bulletin.id}}">{{ bulletin.name }}</a></li>
+        <li><a href="/boletines/boletines-prensa/{{bulletin.date.year}}/{{bulletin.id}}">{{ bulletin.name }}</a></li>
         {% endif %}
     </ul>
 </div>

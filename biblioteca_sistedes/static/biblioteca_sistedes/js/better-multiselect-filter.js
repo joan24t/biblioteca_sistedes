@@ -1,16 +1,4 @@
 jQuery(document).ready(function() {
-   var inp = document.getElementsByClassName("multiselect");
-        for(i = 0; i < inp.length; i++){
-               multi( inp[i],{
-          // enable search
-          enable_search: true,
-          // placeholder of search input
-          search_placeholder: 'Search...',
-          non_selected_header: null,
-          selected_header: null,
-                });
-
-            }
 
     jQuery('[name="username"]').keyup(function(){
         var username = jQuery(this).val();
@@ -36,15 +24,27 @@ jQuery(document).ready(function() {
     });
 });
 
+function check_error(){
+    if(jQuery('.error-username').css('display') == 'block' || jQuery('.error-email').css('display') == 'block' || jQuery('.match-password').css('display') == 'block')
+    {
+        jQuery(".form-submit").prop('disabled', true);
+    }
+    else{
+        jQuery(".form-submit").prop('disabled', false);
+    }
+}
+
 function check_password(pass1, pass2){
     if (pass1 != pass2){
         jQuery(".form-submit").prop('disabled', true);
         jQuery(".match-password").css("display", "block");
         jQuery(".text-match-password").text("Las contraseñas no coinciden");
+        check_error()
     }
     else{
         jQuery(".form-submit").prop('disabled', false);
         jQuery(".match-password").css("display", "none");
+        check_error()
     }
 }
 
@@ -63,10 +63,12 @@ function check_data(value, object){
           jQuery(".error-" + object).css("display", "block");
           jQuery(".form-submit").prop('disabled', true);
           jQuery(".text-error-" + object).text(text);
+          check_error()
         }
         else{
            jQuery(".form-submit").prop('disabled', false);
            jQuery(".error-" + object).css("display", "none");
+           check_error()
         }
       }
     });

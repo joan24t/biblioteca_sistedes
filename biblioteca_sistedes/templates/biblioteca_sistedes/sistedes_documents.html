@@ -1,0 +1,22 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Documentos Sistedes | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<article>
+    <header class="wrapper">
+            <h1>Documentos SISTEDES</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper">
+            <p>En este área, SISTEDES pone a disposición de sus miembros y simpatizantes su archivo documental,
+                en el que se incluyen todo tipo de publicaciones (documentos, informes, …) de interés para las
+                comunidades&nbsp;de Ingeniería del Software, Bases de Datos y Tecnologías de Desarrollo de Software.</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p><span style="color: #99ccff;"><em>(en construcción)</em></span></p>
+        </div>
+    </section>
+</article>
+{% endblock %}

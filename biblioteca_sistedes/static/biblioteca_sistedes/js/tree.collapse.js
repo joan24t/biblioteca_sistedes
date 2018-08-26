@@ -61,17 +61,42 @@ jQuery(document).ready( function( ) {
         var section = parts[parts.length - 2];
         var section2 = parts[parts.length - 3];
         var section3 = parts[parts.length - 4];
-        var current = jQuery("." + String(section))
-        var current2 = jQuery("." + String(section2))
-        if (current2.length && (section3 == 'conferencias')){
-            activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit" + "-li-hitarea"), jQuery(".first-hit-li"));
+        var section4 = parts[parts.length - 5];
+        var current = jQuery('.' + String(section))
+        var current2 = jQuery('.' + String(section2))
+        var current3 = jQuery('.' + String(section3))
+        var bulletin = jQuery(".boletines-" + String(section))
+        var bulletin2 = jQuery(".boletines-" + String(section2))
+        if (current3.length && (section4 == 'conferencias')){
+            activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit-li-hitarea"), jQuery(".first-hit-li"));
+            activate_tree(jQuery(".child-" + section3), current3, jQuery(".hit-" + section3 + "-li-hitarea"), jQuery(".hit-" + section3 + "-li"));
+            activate_tree(jQuery(".child-" + section3 + "-" + section2), jQuery("." + section3 + "-" + section2), jQuery(".hit-" + section3 + "-" + section2 + "-li-hitarea"), jQuery(".hit-" + section3 + "-" + section2 + "-li"));
+            jQuery(".track-to-select-" + section).addClass( "selected" );
+        }
+        else if (current2.length && (section3 == 'conferencias')){
+            activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit-li-hitarea"), jQuery(".first-hit-li"));
             activate_tree(jQuery(".child-" + section2), current2, jQuery(".hit-" + section2 + "-li-hitarea"), jQuery(".hit-" + section2 + "-li"));
             activate_tree(jQuery(".child-" + section2 + "-" + section), jQuery("." + section2 + "-" + section), jQuery(".hit-" + section2 + "-" + section + "-li-hitarea"), jQuery(".hit-" + section2 + "-" + section + "-li"));
 
         }
         else if (current.length && (section2 == 'conferencias')){
-            activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit" + "-li-hitarea"), jQuery(".first-hit-li"));
+            activate_tree(jQuery(".first-child"), jQuery(".conferencias-selected"), jQuery(".first-hit-li-hitarea"), jQuery(".first-hit-li"));
             activate_tree(jQuery(".child-" + section), current, jQuery(".hit-" + section + "-li-hitarea"), jQuery(".hit-" + section + "-li"));
+
+        }
+        else if (bulletin2.length && (section3 == 'boletines-prensa')){
+            activate_tree(jQuery(".first-child-boletin"), jQuery(".boletines-selected"), jQuery(".first-hit-li-hitarea"), jQuery(".first-hit-li-boletines"));
+            activate_tree(jQuery(".child-" + section2), bulletin2, jQuery(".hit-" + section2 + "-li-hitarea"), jQuery(".hit-" + section2 + "-li"));
+            jQuery(".bulletin-to-select-" + section).addClass( "selected" );
+        }
+        else if (bulletin.length && (section2 == 'boletines-prensa')){
+            activate_tree(jQuery(".first-child-boletin"), jQuery(".boletines-selected"), jQuery(".first-hit-li-hitarea"), jQuery(".first-hit-li-boletines"));
+            activate_tree(jQuery(".child-" + section), bulletin, jQuery(".hit-" + section + "-li-hitarea"), jQuery(".hit-" + section + "-li"));
+
+        }
+        else if (current.length && (section2 == 'documentos-sistedes')){
+            activate_tree(jQuery(".first-child-documentos"), jQuery(".documentos-selected"), jQuery(".first-hit-li-documentos-hitarea"), jQuery(".first-hit-li-documentos"));
+            jQuery("." + section).addClass( "selected" );
 
         }
 

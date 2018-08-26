@@ -162,6 +162,30 @@ def GetPressBulletins(request):
         )
 
 
+def GetSistedesDocuments(request):
+    return render(
+        request,
+        'biblioteca_sistedes/sistedes_documents.html',
+        global_context()
+        )
+
+
+def GetSistedesDocumentation(request):
+    return render(
+        request,
+        'biblioteca_sistedes/documentation.html',
+        global_context()
+        )
+
+
+def GetSistedesInforms(request):
+    return render(
+        request,
+        'biblioteca_sistedes/informs.html',
+        global_context()
+        )
+
+
 def GetPressBulletinsByYear(request, year=False):
     bulletins_by_year = [
         b for b in Bulletin.objects.all() if b.date.year == year

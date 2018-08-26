@@ -1,0 +1,30 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Documentación | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/documentos-sistedes/">Documentos SISTEDES</a></li>
+        <li><a href="/documentos-sistedes/documentacion/">Documentación JISBD 2015</a></li>
+    </ul>
+</div>
+<article class="page page_627">
+    <header class="wrapper">
+            <h1>Documentación JISBD 2015</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper">
+            <p>En este área se ofrecen documentos relevantes relacionados con la XX edición de las
+            JISBD. Puede obtener, si lo desea:</p>
+            <ul>
+                <li><a href="/wp-content/uploads/2015/09/Ghezzi-JISBD2015.pdf">Transparencias </a>de la conferencia invitada:&nbsp;<em>Evaluating research (and researchers): should we care?-A software engineering perspective</em>, impartida por el Prof. Dr. Carlo Ghezzi.</li>
+                <li><a href="https://drive.google.com/open?id=0BxKnkWLvWBrTQzIyYU5JUG1tVWc">Transparencias </a>del tutorial: <em>Desarrollando Software como Servicio: Tutorial para Docentes</em>, impartido por el Prof. Dr. Armando Fox.</li>
+            </ul>
+        </div>
+    </section>
+</article>
+{% endblock %}

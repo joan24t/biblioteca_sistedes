@@ -1,0 +1,26 @@
+{% extends 'biblioteca_sistedes/base.html' %}
+{% block title %}
+	<title>Informes técnicos | Biblioteca sistedes</title>
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="navegacionTop">
+    <ul class="breadcrumbs">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/biblioteca/">Biblioteca</a></li>
+        <li><a href="/documentos-sistedes/">Documentos SISTEDES</a></li>
+        <li><a href="/documentos-sistedes/informes/">Informes técnicos</a></li>
+    </ul>
+</div>
+<article>
+    <header class="wrapper">
+            <h1>Informes técnicos</h1>
+    </header>
+    <section id="interior" class="s">
+        <div class="wrapper">
+            <p>&nbsp;</p>
+            <p><span style="color: #99ccff;"><em>(en construcción)</em></span></p>
+        </div>
+    </section>
+</article>
+{% endblock %}

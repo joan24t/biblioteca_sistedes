@@ -96,7 +96,7 @@ urlpatterns = [
         name='Ver todas las ediciones'
         ),
     path(
-        'conferencias/<slug:name>/<int:year>/<int:id>',
+        'conferencias/<slug:name>/<int:year>/<int:id>/',
         views.GetTracks,
         name='Ver todos los tracks'
         ),
@@ -159,18 +159,18 @@ urlpatterns = [
         name='Listado de artículos'
         ),
     path(
-        'bulletins/press-bulletins/',
+        'boletines/boletines-prensa/',
         views.GetPressBulletins,
         name='Press bulletins'
         ),
     path(
-        'bulletins/press-bulletins/<int:year>',
+        'boletines/boletines-prensa/<int:year>/',
         views.GetPressBulletinsByYear,
         name='Press bulletins by year'
         ),
 
     path(
-        'bulletins/press-bulletins/<int:year>/<int:pk>',
+        'boletines/boletines-prensa/<int:year>/<int:pk>/',
         views.GetBulletin,
         name='Boletín info'
         ),
@@ -193,5 +193,20 @@ urlpatterns = [
         'bulletin_delete/<int:pk>/',
         views.BulletinDelete,
         name='Eliminar boletín'
+        ),
+    path(
+        'documentos-sistedes/',
+        views.GetSistedesDocuments,
+        name='Documentos Sistedes'
+        ),
+    path(
+        'documentos-sistedes/documentacion/',
+        views.GetSistedesDocumentation,
+        name='Documentation'
+        ),
+    path(
+        'documentos-sistedes/informes/',
+        views.GetSistedesInforms,
+        name='Informes técnicos'
         ),
     ]
