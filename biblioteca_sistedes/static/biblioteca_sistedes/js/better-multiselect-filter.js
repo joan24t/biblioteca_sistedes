@@ -1,7 +1,9 @@
 jQuery(document).ready(function() {
 
-    sortTable();
-
+    var table = document.getElementById("myTable");
+    if (table) {
+        sortTable();
+    }
     jQuery('[name="username"]').keyup(function(){
         var username = jQuery(this).val();
         check_data(username, 'username');

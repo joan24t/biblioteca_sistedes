@@ -16,7 +16,9 @@ var $table, $n, $rowCount, $firstRow, $hasHead, $tr, $i, $ii, $j, $th, $pageCoun
 
 jQuery( document ).ready(function() {
 // get the table element
-$table = document.getElementById("myTable"),
+$table = document.getElementById("myTable");
+
+if ($table){
 // number of rows per page
 $n = 10,
 // number of rows of the table
@@ -42,6 +44,7 @@ if ($pageCount > 1) {
     $table.insertAdjacentHTML("afterend","<div id='buttons'></div");
     // the first sort, default page is the first one
     sort(1);
+}
 }
 });
 // ($p) is the selected page number. it will be generated when a user clicks a button

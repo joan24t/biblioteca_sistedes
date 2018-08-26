@@ -1,5 +1,5 @@
-window.onload = function() {
-    var inp = document.getElementsByClassName("multiselect");
+jQuery(document).ready(function() {
+    var inp = jQuery(".multiselect");
     for(i = 0; i < inp.length; i++){
            multi( inp[i],{
       // enable search
@@ -11,4 +11,4 @@ window.onload = function() {
             });
 
         }
-}
+});
