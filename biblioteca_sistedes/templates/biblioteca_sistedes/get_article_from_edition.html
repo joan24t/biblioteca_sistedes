@@ -9,29 +9,29 @@
         <li><a href="/">Inicio</a></li>
         <li><a href="/biblioteca/">Biblioteca</a></li>
         <li><a href="/conferencias/">Conferencias</a></li>
-        {% for ed in edition %}
-        <li><a href="/conferencias/{{ ed.conference_id.domain }}/">{{ ed.conference_id.name }}</a></li>
-        <li><a href="/conferencias/{{ ed.conference_id.domain }}/{{ed.year}}/">{{ed.name}}</a></li>
-        {% endfor %}
+        {% if edition %}
+        <li><a href="/conferencias/{{ edition.conference_id.domain }}/">{{ edition.conference_id.name }}</a></li>
+        <li><a href="/conferencias/{{ edition.conference_id.domain }}/{{edition.year}}-{{edition.id}}/">{{edition.name}}</a></li>
+        {% endif%}
     </ul>
 </div>
 <article class="page page_168">
     <header class="wrapper">
-        {% for ed in edition %}
-        <h1> {{ ed.name }} </h1>
-        {% endfor %}
+        {% if edition %}
+        <h1> {{ edition.name }} </h1>
+        {% endif %}
     </header>
     <section id="interior" class="s">
         <div class="wrapper">
-            {% for ed in edition %}
+            {% if edition %}
                 <hr>
-                <p>{{ ed.preamble|safe }}</p>
+                <p>{{ edition.preamble|safe }}</p>
                 <hr>
-            {% endfor %}
+            {% endif %}
             <p>&nbsp;</p>
-            {% for ed in edition  %}
-            <p>{{ ed.description|safe }}</p>
-            {% endfor %}
+            {% if edition  %}
+            <p>{{ edition.description|safe }}</p>
+            {% endif %}
             {% if articles %}
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}

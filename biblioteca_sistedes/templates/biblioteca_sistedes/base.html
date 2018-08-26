@@ -124,15 +124,15 @@
                                 <ul class="children child-{{ conference.domain }}">
                                     {% for edition in editions %}
                                     {% if edition.conference_id.id == conference.id%}
-                                    <li class="expandable hit-{{ edition.conference_id.domain }}-{{ edition.year }}-li">
-                                        <div class="hitarea hit-{{ edition.conference_id.domain }}-{{ edition.year }}-area" ></div>
-                                        <a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}/" class="{{ edition.conference_id.domain }}-{{ edition.year }}">{{ edition.name }}</a>
-                                        <ul class="children child-{{ edition.conference_id.domain }}-{{ edition.year }}">
+                                    <li class="expandable hit-{{ edition.conference_id.domain }}-{{ edition.year }}-{{ edition.id }}-li">
+                                        <div class="hitarea hit-{{ edition.conference_id.domain }}-{{ edition.year }}-{{ edition.id }}-area" ></div>
+                                        <a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}-{{edition.id}}/" class="{{ edition.conference_id.domain }}-{{ edition.year }}-{{ edition.id }}">{{ edition.name }}</a>
+                                        <ul class="children child-{{ edition.conference_id.domain }}-{{ edition.year }}-{{ edition.id }}">
                                             {% for track in tracks %}
                                             {% if track.edition_id.id == edition.id %}
 
                                             <li>
-                                                <a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}/{{ track.id }}">{{ track.name }}</a>
+                                                <a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}-{{edition.id}}/{{ track.id }}" class="track-to-select-{{track.id}}">{{ track.name }}</a>
                                             </li>
                                             {% endif %}
                                             {% endfor %}

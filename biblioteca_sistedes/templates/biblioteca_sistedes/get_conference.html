@@ -33,7 +33,7 @@
             <p>&nbsp;</p>
             <ul>
                 {% for edition in new_editions %}
-                    <li><a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}/">{{ edition.name }}</a></li>
+                    <li><a href="/conferencias/{{ edition.conference_id.domain }}/{{ edition.year }}-{{edition.id}}/">{{ edition.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>

@@ -91,12 +91,12 @@ urlpatterns = [
         name='Ver todas las conferencias'
         ),
     path(
-        'conferencias/<slug:name>/<int:year>/',
+        'conferencias/<slug:name>/<int:year>-<int:id>/',
         views.GetEditions,
         name='Ver todas las ediciones'
         ),
     path(
-        'conferencias/<slug:name>/<int:year>/<int:id>/',
+        'conferencias/<slug:name>/<int:year>-<int:ided>/<int:id>/',
         views.GetTracks,
         name='Ver todos los tracks'
         ),

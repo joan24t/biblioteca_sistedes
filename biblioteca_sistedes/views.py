@@ -222,12 +222,8 @@ def GetArticle(request, pk=None):
     return render(request, 'biblioteca_sistedes/get_article.html', context)
 
 
-def GetEditions(request, name=None, year=None):
-    conference = Conference.objects.filter(domain=name)[:1]
-    edition = Edition.objects.filter(
-            year=year,
-            conference_id=conference,
-        )[:1]
+def GetEditions(request, name=None, year=None, id=None):
+    edition = Edition.objects.get(id=id)
     tracks = Track.objects.filter(edition_id=edition)
     context = {'edition': edition, 'new_tracks': tracks}
     context.update(global_context())
@@ -284,7 +280,7 @@ def GetListOfArticles(request):
         )
 
 
-def GetTracks(request, name=None, year=None, id=None):
+def GetTracks(request, name=None, year=None, id=None, ided=None):
     conference = Conference.objects.filter(domain=name)[:1]
     edition = Edition.objects.filter(
             year=year,
