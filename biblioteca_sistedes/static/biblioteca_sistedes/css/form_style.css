@@ -141,6 +141,18 @@
     height: 48px;
 
 }
+.cancel-button-wizard{
+    font-size: 20px;
+    background: #EA9090;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin-top:10px;
+    height: 40px;
+
+}
+
 
 .cancel-button a{
     color: #fff;

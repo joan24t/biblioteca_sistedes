@@ -159,3 +159,16 @@ body.login {
     width:525px;
 
 }
+
+.match-password-wizard{
+    background: #E06464;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    color: #801A1A;
+    font-weight: bold;
+    display: none;
+    position:absolute;
+    width:495px;
+
+}

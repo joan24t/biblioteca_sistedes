@@ -64,6 +64,7 @@ urlpatterns = [
         name='Actualizar autor'
         ),
     path('author_delete/<int:pk>/', views.AuthorDelete, name='Eliminar autor'),
+    path('user_delete/<int:pk>/', views.UserDelete, name='Eliminar autor'),
     path(
         'article_list/',
         views.ArticleList.as_view(),
@@ -207,6 +208,11 @@ urlpatterns = [
     path(
         'documentos-sistedes/informes/',
         views.GetSistedesInforms,
+        name='Informes técnicos'
+        ),
+    path(
+        'change_password/',
+        views.change_password,
         name='Informes técnicos'
         ),
     ]

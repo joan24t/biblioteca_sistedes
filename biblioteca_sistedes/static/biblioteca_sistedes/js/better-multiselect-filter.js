@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {
 
+    sortTable();
+
     jQuery('[name="username"]').keyup(function(){
         var username = jQuery(this).val();
         check_data(username, 'username');
@@ -23,13 +25,26 @@ jQuery(document).ready(function() {
     jQuery('#pass_user_2').keyup(function(){
         var password_1 = jQuery('[name="password"]').val();
         var password_2 = jQuery(this).val();
-        check_password(password_1, password_2);
+        check_password(password_1, password_2, 'n');
     });
 
     jQuery('[name="password"]').keyup(function(){
         var password_1 = jQuery(this).val();
         var password_2 = jQuery('#pass_user_2').val();
-        check_password(password_1, password_2);
+        check_password(password_1, password_2, 'n');
+
+    });
+
+    jQuery('#pass_user_1_wizard').keyup(function(){
+        var password_2 = jQuery('#pass_user_2_wizard').val();
+        var password_1 = jQuery(this).val();
+        check_password(password_1, password_2, 'w');
+    });
+
+    jQuery('#pass_user_2_wizard').keyup(function(){
+        var password_2 = jQuery(this).val();
+        var password_1 = jQuery('#pass_user_1_wizard').val();
+        check_password(password_1, password_2, 'w');
 
     });
 });
@@ -55,17 +70,30 @@ function check_error(object){
     }
 }
 
-function check_password(pass1, pass2){
-    if (pass1 != pass2){
-        jQuery(".form-submit").prop('disabled', true);
-        jQuery(".match-password").css("display", "block");
-        jQuery(".text-match-password").text("Las contraseñas no coinciden");
-        check_error('u')
+function check_password(pass1, pass2, type){
+    if (type == 'n'){
+        if (pass1 != pass2){
+            jQuery(".form-submit").prop('disabled', true);
+            jQuery(".match-password").css("display", "block");
+            jQuery(".text-match-password").text("Las contraseñas no coinciden");
+            check_error('u')
+        }
+        else{
+            jQuery(".form-submit").prop('disabled', false);
+            jQuery(".match-password").css("display", "none");
+            check_error('u')
+        }
     }
-    else{
-        jQuery(".form-submit").prop('disabled', false);
-        jQuery(".match-password").css("display", "none");
-        check_error('u')
+    else if (type == 'w'){
+        if (pass1 != pass2){
+            jQuery(".form-submit-wizard").prop('disabled', true);
+            jQuery(".match-password-wizard").css("display", "block");
+            jQuery(".text-match-password-wizard").text("Las contraseñas no coinciden");
+        }
+        else{
+            jQuery(".form-submit-wizard").prop('disabled', false);
+            jQuery(".match-password-wizard").css("display", "none");
+        }
     }
 }
 
@@ -181,4 +209,39 @@ function close_cookies(){
 function clicked(e)
 {
     if(!confirm('¿Estás seguro de eliminar el registro?'))e.preventDefault();
+}
+
+function sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("myTable");
+    switching = true;
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+    }
 }

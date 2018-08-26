@@ -27,7 +27,7 @@
                 <br/>
                 <strong> Palabras Clave: </strong>
                 {% for keyword in conference.keyword_ids.all %}
-                    <a href="https://biblioteca.sistedes.es/tag/ecological-debt/?post_type=articulo"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                    <a href="/tag/{{keyword.name}}/"> {{keyword.name}} </a>&nbsp;-&nbsp;
                 {% endfor %}
             </p>
         </div>

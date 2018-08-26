@@ -1289,3 +1289,30 @@ class UserCreate(CreateView):
             return self.render_to_response(
                 self.get_context_data(form=form)
                 )
+
+
+def change_password(request):
+    username = request.session.get('username')
+    rol = request.session.get('rol')
+    if username and rol == 1:
+        if request.method == 'POST':
+            password = request.POST.get('pass1')
+            userid = request.POST.get('userId')
+            user = User.objects.get(id=userid)
+            user.password = password
+            user.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect('/')
+
+
+def UserDelete(request, pk=None):
+    username = request.session.get('username')
+    rol = request.session.get('rol')
+    if username and rol == 1:
+        user = get_object_or_404(User, pk=pk)
+        if user:
+            user.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

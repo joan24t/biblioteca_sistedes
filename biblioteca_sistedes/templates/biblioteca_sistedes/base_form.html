@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/style.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/js/treeview/jquery.treeview.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/multi.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'biblioteca_sistedes/css/res_pass_form.css' %}"/>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/treeview/jquery.cookie.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/treeview/jquery.treeview.js' %}"></script>
@@ -28,6 +29,7 @@
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/table_pagination.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/multiselect-field.js' %}"></script>
     <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/tree.collapse.js' %}"></script>
+    <script type="text/javascript" src="{% static 'biblioteca_sistedes/js/res-pass-form.js' %}"></script>
     {% endblock %}
 
 
@@ -107,7 +109,6 @@
 </header>
 
 <body class=" login" data-admin-utc-offset="0" style="width: 100%;">
-
 <!-- Container -->
 <div id="container" style="width:90%; margin-top: 100px;">
     <div class="general-div">
@@ -121,6 +122,44 @@
         </form>
     </div>
     {% endblock %}
+    <!-- The Modal -->
+    <div id="myModal" class="modal" style="display: none:">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Restablecer contraseña</h2>
+        </div>
+        <div class="general-div" style="width:90%;">
+            <form method="post" action="/change_password/" enctype="multipart/form-data">{% csrf_token %}
+                <input type="hidden" id="userId" name="userId">
+                    <div >
+                        <div>
+                            <label for="pass_user_1_wizard"><h4>Constraseña:</h4></label> <input name="pass1" id="pass_user_1_wizard" type="password">
+                        </div>
+                        <div>
+                            <div>
+                                <label for="pass_user_2_wizard"><h4>Repetir constraseña:</h4></label> <input name="pass2" id="pass_user_2_wizard" type="password">
+                            </div>
+                            <div class="match-password-wizard">
+                                <i class="fa fa-times"></i>
+                                 <span class="text-match-password-wizard"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div>
+                        <input style="background-color: #006699;" class="form-submit-wizard" type="submit" value="Cambiar contraseña">
+                        <button type="button" id="close-form" class="cancel-button-wizard">Cancelar</button>
+                    </div>
+            </form>
+        </div>
+      </div>
+
+    </div>
 </div>
     <!-- END Content -->
 
