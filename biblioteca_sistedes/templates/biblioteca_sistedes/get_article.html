@@ -22,9 +22,11 @@
 
     <div id="entry-keywords" class="entry-content">
         <h3>Palabras Clave:</h3>
+        <p>
         {% for key in article.keyword_ids.all %}
-        <p><a href="/tag/{{key.name}}/">{{key.name}}</a> - </p>
+        <a href="/tag/{{key.name}}/">{{key.name}}</a> {% if not forloop.last %}-{% endif %}
         {% endfor %}
+        </p>
     </div>
 
     <!-- autores -->

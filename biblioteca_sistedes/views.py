@@ -244,19 +244,38 @@ def GetEditions(request, name=None, year=None, id=None):
 
 
 def GetListOfTracks(request, name=None):
-    keywords = Track.objects.all()
+    keywords = Keyword.objects.all()
     keyword_name = name.split()
     final_list = []
     for key in keywords:
         array_description = key.description.split()
         array_title = key.title.split()
+        array_name = key.name.split()
         for kn in keyword_name:
             for ad in array_description:
                 if kn == ad:
-                    final_list.append(kn)
+                    if len(final_list) != 0:
+                        for fl in final_list:
+                            if key.title != fl.title:
+                                final_list.append(key)
+                    else:
+                        final_list.append(key)
             for at in array_title:
                 if kn == at:
-                    final_list.append(kn)
+                    if len(final_list) != 0:
+                        for fl in final_list:
+                            if key.title != fl.title:
+                                final_list.append(key)
+                    else:
+                        final_list.append(key)
+            for an in array_name:
+                if kn == an:
+                    if len(final_list) != 0:
+                        for fl in final_list:
+                            if key.title != fl.title:
+                                final_list.append(key)
+                    else:
+                        final_list.append(key)
     context = {
         'keyword_list': list(set(final_list)),
         }

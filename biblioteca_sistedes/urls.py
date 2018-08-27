@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -149,8 +150,8 @@ urlpatterns = [
         views.GetArticle,
         name='Ver artículo'
         ),
-    path(
-        'tag/<slug:name>/',
+    url(
+        "tag/(?P<name>[\w\s]+|[-\w]+|[_\w]+|[+\w]+)/",
         views.GetListOfTracks,
         name='Listado de tracks'
         ),
