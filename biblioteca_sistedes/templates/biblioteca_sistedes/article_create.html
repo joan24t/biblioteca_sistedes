@@ -37,6 +37,7 @@
                 <label for="track_ar"><h4>Tracks:</h4></label> {{ form_article.track_ids }}
             </div>
         </div>
+        {% if not id %}
         <div class="form-row">
             <div class="form-row-component">
                 <label for="ed_ar"><h4>Edición:</h4></label> {{ form_article.edition_id }}
@@ -45,6 +46,13 @@
                 <label for="article_file"><h4>Adjunto:</h4></label> <input type="file" name="article_file">
             </div>
         </div>
+        {% else %}
+        <div class="form-row">
+            <div class="form-row-component">
+                <label for="ed_ar"><h4>Edición:</h4></label> {{ form_article.edition_id }}
+            </div>
+        </div>
+        {% endif %}
 
     </br>
         <div>
