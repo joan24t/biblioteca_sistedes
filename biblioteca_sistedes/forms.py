@@ -13,6 +13,11 @@ ROL_CHOICE = (
 
 class ConferenceForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(ConferenceForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
+        self.fields['domain'].required = True
+
     class Meta:
         model = Conference
         fields = [
@@ -43,6 +48,11 @@ class EditionForm(forms.ModelForm):
             % obj.name
         self.fields['preamble'].required = False
         self.fields['description'].required = False
+        self.fields['conference_id'].required = True
+        self.fields['place'].required = True
+        self.fields['name'].required = True
+        self.fields['year'].required = True
+        self.fields['topic'].required = False
 
     class Meta:
         model = Edition
@@ -101,6 +111,11 @@ class EditionForm(forms.ModelForm):
 
 class AuthorForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(AuthorForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
+        self.fields['email'].required = True
+
     class Meta:
         model = Author
         fields = [
@@ -145,7 +160,9 @@ class TrackForm(forms.ModelForm):
         self.fields['user_ids'].queryset = User.objects.filter(rol=3)
         self.fields['user_ids'].label_from_instance = lambda obj: '%s' % \
             obj.name
+        self.fields['name'].required = True
         self.fields['user_ids'].required = True
+        self.fields['edition_id'].required = True
 
     class Meta:
         model = Track
@@ -198,12 +215,10 @@ class ArticleForm(forms.ModelForm):
         self.fields['author_ids'].queryset = Author.objects.all()
         self.fields['author_ids'].label_from_instance = lambda obj: '%s' % \
             obj.name
-        self.fields['author_ids'].required = False
 
         self.fields['keyword_ids'].queryset = Keyword.objects.all()
         self.fields['keyword_ids'].label_from_instance = lambda obj: '%s' % \
             obj.name
-        self.fields['keyword_ids'].required = False
 
         self.fields['access_right_ids'].queryset = AccessRight.objects.all()
         self.fields['access_right_ids'].label_from_instance = lambda obj: '%s'\
@@ -217,12 +232,16 @@ class ArticleForm(forms.ModelForm):
             ' ' + \
             '(' + str(obj.edition_id.name) + ' - ' + \
             str(obj.edition_id.conference_id.domain.upper()) + ')'
-        self.fields['track_ids'].required = False
-
-        self.fields['file'].required = False
         self.fields['edition_id'].queryset = Edition.objects.all()
         self.fields['edition_id'].label_from_instance = lambda obj: '%s' % \
             obj.name
+
+        self.fields['author_ids'].required = False
+        self.fields['keyword_ids'].required = False
+        self.fields['track_ids'].required = False
+        self.fields['year'].required = False
+        self.fields['file'].required = True
+        self.fields['name'].required = True
 
     class Meta:
         model = Article
@@ -282,6 +301,10 @@ class ArticleForm(forms.ModelForm):
 
 class KeywordForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(KeywordForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
+
     class Meta:
         model = Keyword
         fields = [
@@ -298,6 +321,15 @@ class KeywordForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
+        self.fields['surnames'].required = False
+        self.fields['username'].required = True
+        self.fields['email'].required = True
+        self.fields['password'].required = True
+        self.fields['rol'].required = True
 
     class Meta:
         model = User
@@ -334,6 +366,7 @@ class BulletinForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BulletinForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
         self.fields['date'].required = True
 
     class Meta:
@@ -353,18 +386,3 @@ class BulletinForm(forms.ModelForm):
                 attrs={'id': 'date_bul'},
                 ),
             }
-
-# class FormLogin(forms.Form):
-# 	username = forms.CharField(
-# 		label=("Username"),
-# 		required=True,
-# 		name=('username'),
-# 		# id=('id_username'),
-# 	)
-# 	password = forms.CharField(
-# 		label=("Password"),
-# 		widget=forms.PasswordInput,
-# 		required=True,
-# 		name=('password'),
-# 		# id=('id_password'),
-# 	)

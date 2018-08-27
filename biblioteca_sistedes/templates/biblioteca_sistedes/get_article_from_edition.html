@@ -23,13 +23,13 @@
     </header>
     <section id="interior" class="s">
         <div class="wrapper">
-            {% if edition %}
+            {% if edition.preamble %}
                 <hr>
                 <p>{{ edition.preamble|safe }}</p>
                 <hr>
             {% endif %}
             <p>&nbsp;</p>
-            {% if edition  %}
+            {% if edition.description  %}
             <p>{{ edition.description|safe }}</p>
             {% endif %}
             {% if articles %}
