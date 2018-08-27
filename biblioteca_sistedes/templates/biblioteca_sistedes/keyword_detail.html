@@ -3,12 +3,14 @@
 	<title>Detalle palabra clave | Biblioteca sistedes</title>
 {% endblock %}
 {% block container %}
-<h2><u> Detalle autor </u></h2>
+<h2><u> Detalle palabra clave </u></h2>
 {% csrf_token %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <label><h4>Nombre:</h4></label> {{ keyword.name }}
+            <label><h3>Nombre:</h3></label> {{ keyword.name }}
+            <label><h3>Título:</h3></label> {{ keyword.title }}
+            <label><h3>Descripción:</h3></label> {{ keyword.description|safe }}
         </div>
     </div>
 </div>
@@ -18,12 +20,7 @@
     <table id="myTable">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
-            <th>Autores</th>
-            <th>Palabras clave</th>
-            <th>Derechos de acceso</th>
-            <th>Tracks</th>
             <th>Acciones</th>
         </tr>
 
@@ -32,17 +29,14 @@
 
         {% for article in article_list %}
         <tr>
-            <td>{{ article.id }}</td>
             <td>{{ article.name }}</td>
-            <td>{{ article.author_ids }}</td>
-            <td>{{ article.keyword_ids }}</td>
-            <td>{{ article.access_right_ids }}</td>
-            <td>{{ article.track_ids }}</td>
 
             <td style="width: auto;">
                 <a class="btn btn-primary" href="/article_view/{{ article.id }}/"><i class="fa fa-eye fa-2x"></i></a>
+                {% if logged_user in track.user_ids.all or logged_user.rol == 1 %}
                 <a class="btn btn-primary" href="/article_update/{{ article.id }}/"><i class="fa fa-edit fa-2x"></i></a>
                 <a class="btn btn-danger" href="/article_delete/{{ article.id }}" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

@@ -159,7 +159,7 @@ class TrackForm(forms.ModelForm):
             obj.name
         self.fields['preamble'].required = False
         self.fields['description'].required = False
-        self.fields['user_ids'].queryset = User.objects.filter(rol=3)
+        self.fields['user_ids'].queryset = User.objects.all()
         self.fields['user_ids'].label_from_instance = lambda obj: '%s' % \
             obj.name
         self.fields['name'].required = True
@@ -216,7 +216,7 @@ class ArticleForm(forms.ModelForm):
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['author_ids'].queryset = Author.objects.all()
         self.fields['author_ids'].label_from_instance = lambda obj: '%s' % \
-            obj.name
+            (obj.name + ' ' + obj.middle_name + ' ' + obj.last_name)
 
         self.fields['keyword_ids'].queryset = Keyword.objects.all()
         self.fields['keyword_ids'].label_from_instance = lambda obj: '%s' % \
@@ -227,13 +227,13 @@ class ArticleForm(forms.ModelForm):
             % obj.name
         self.fields['access_right_ids'].required = False
 
-        self.fields['track_ids'].queryset = Track.objects.filter(
-            user_ids__in=users,
-            ) if kwargs.get('username') else Track.objects.all()
-        self.fields['track_ids'].label_from_instance = lambda obj: obj.name + \
-            ' ' + \
-            '(' + str(obj.edition_id.name) + ' - ' + \
+        # self.fields['track_ids'].queryset = Track.objects.filter(
+        #     user_ids__in=users,
+        #     ) if kwargs.get('username') else Track.objects.all()
+        self.fields['track_ids'].label_from_instance = lambda obj: '%s' % (
+            obj.name + ' ' + '(' + str(obj.edition_id.name) + ' - ' +
             str(obj.edition_id.conference_id.domain.upper()) + ')'
+            )
         self.fields['edition_id'].queryset = Edition.objects.all()
         self.fields['edition_id'].label_from_instance = lambda obj: '%s' % \
             obj.name

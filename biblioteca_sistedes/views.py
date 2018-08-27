@@ -413,7 +413,6 @@ def ArticleView(request, pk=None):
         track_list = article.track_ids.all()
         keyword_list = article.keyword_ids.all()
         author_list = article.author_ids.all()
-        logged_user = User.objects.get(username=username)
         context = {
             'article': article,
             'track_list': track_list,
@@ -468,9 +467,11 @@ def BulletinView(request, pk=None):
 def KeywordView(request, pk=None):
     username = request.session.get('username')
     if username:
+        logged_user = User.objects.get(username=username)
         keyword = get_object_or_404(Keyword, pk=pk)
         article_list = Article.objects.filter(keyword_ids=keyword.id)
         context = {
+            'logged_user': logged_user,
             'keyword': keyword,
             'article_list': article_list,
             }

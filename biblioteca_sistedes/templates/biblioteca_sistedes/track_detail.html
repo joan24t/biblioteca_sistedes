@@ -8,10 +8,10 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <label><h4>Nombre:</h4></label> {{ track.name }}
-            <label><h4>Preámbulo:</h4></label> {{ track.preamble|safe  }}
-            <label><h4>Descripción:</h4></label> {{ track.description|safe  }}
-            <label><h4>Responsables del track:</h4>
+            <label><h3>Nombre:</h3></label> {{ track.name }}
+            <label><h3>Preámbulo:</h3></label> {{ track.preamble|safe  }}
+            <label><h3>Descripción:</h3></label> {{ track.description|safe  }}
+            <label><h3>Responsables del track:</h3>
             <ul>
             {% for user in track.user_ids.all %}
                 <li> {{user.name}} {{user.surnames}} </li>
