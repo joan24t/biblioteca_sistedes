@@ -3,11 +3,11 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7,8,9">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://biblioteca.sistedes.es/wp-content/themes/sistedes/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" src="{% static 'biblioteca_sistedes/img/favicon.ico' %}">
     {% block title %}
         <title>Inicio | Biblioteca sistedes</title>
     {% endblock %}
-    {% load static %}
     {% block head %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -198,16 +198,16 @@
                     <h1>Inicio</h1>
                 </header>
                 <section id="interior" class="s">
-                    <div class="wrapper"><p>Bienvenidos a la Biblioteca Digital de <a href="">SISTEDES</a>.
+                    <div class="wrapper"><p>Bienvenidos a la Biblioteca Digital de <a href="http://www.sistedes.es">SISTEDES</a>.
                         Este es&nbsp;el instrumento mediante el cual SISTEDES pone a disposición de sus socios y del
                         público en general los fondos documentales asociados a sus actividades. En particular, y como
                         principal valor, esta biblioteca contiene, en la actualidad parcialmente, el <a
-                                href="#">archivo de actas</a> de las Jornadas SISTEDES,
+                                href="/conferencias/">archivo de actas</a> de las Jornadas SISTEDES,
                         celebradas desde 2006. El archivo incluirá, además, las actas de las diferentes jornadas
                         precedentes, que se remontan hasta 1996. Adicionalmente, la biblioteca contiene los <a
-                                href="#">documentos </a>de producción propia como
+                                href="/documentos-sistedes/">documentos </a>de producción propia como
                         informes, anuarios, etc. Puede consultarse igualmente el <a
-                                href=""
+                                href="/boletines/boletines-prensa/"
                                 target="_blank" rel="noopener" title="este enlace se abrirá en una ventana emergente">Boletín
                             de Noticias</a> que SISTEDES publica desde febrero de 2018.</p>
                     </div>
@@ -224,10 +224,10 @@
     <div class="wrapper">
         <div class="c c-1-2 c-first">
             <ul id="menu-pie" class="menu">
-                <li><a href="">Acerca de la Biblioteca</a></li>
-                <li><a href="">Noticias</a></li>
-                <li href="">Búsqueda Avanzada</a></li>
-                <li href="">Contacto</a></li>
+                <li><a href="/biblioteca/">Acerca de la Biblioteca</a></li>
+                <li><a href="/noticias/">Noticias</a></li>
+                <li><a onkeyup=""href="/busqueda/">Búsqueda Avanzada</a></li>
+                <li><a href="/contacto/">Contacto</a></li>
             </ul>
         </div>
         <div class="c c-1-2 c-last c-right redes">
