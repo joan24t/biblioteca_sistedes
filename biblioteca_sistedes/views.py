@@ -15,7 +15,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.http import Http404
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
 
 
 # PUBLIC PART
@@ -1278,12 +1278,20 @@ class UserCreate(CreateView):
             self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
-            # send_mail(
-            #     'Hola',
-            #     'Provando.',
-            #     'from@example.com',
-            #     ['jchorda22@gmail.com', 'joan_24t@hotmail.com'],
-            #     )
+            if user.email:
+                texto = \
+                    """
+                    Se ha registrado en la Biblioteca Sistedes.
+
+                    Nombre de usuario: {0}
+                    Contraseña: {1}
+                    """.format(user.username, user.password)
+                send_mail(
+                    'Nueva registro',
+                    texto,
+                    'pruebas.sistedes@gmail.com',
+                    [user.email],
+                    )
             return HttpResponseRedirect('/user_list/')
         else:
             return self.render_to_response(
@@ -1302,6 +1310,18 @@ def change_password(request):
                 user = User.objects.get(id=userid)
                 user.password = password
                 user.save()
+                if user.email:
+                    texto = \
+                        """
+                        Se ha restablecido la contraseña.
+                        Nueva contraseña: {0}
+                        """.format(user.password)
+                    send_mail(
+                        'Nueva registro',
+                        texto,
+                        'pruebas.sistedes@gmail.com',
+                        [user.email],
+                        )
                 return HttpResponse(
                     """
                     <script>
