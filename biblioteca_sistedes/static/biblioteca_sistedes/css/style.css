@@ -1408,6 +1408,8 @@ a.deletelink:focus, a.deletelink:hover {
     height:30px;
     margin-top: 5px;"
     background: #006696;
+    overflow:hidden;
+    text-align: center;
 }
 .fa-eye,
 .fa-edit,

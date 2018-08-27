@@ -1,5 +1,13 @@
 jQuery(document).ready(function() {
 
+    var current_url = window.location.href;
+    var str_url = new URL(current_url);
+    var key = str_url.searchParams.get("s");
+
+    if (key){
+        jQuery("#search").val(key);
+    }
+
     var table = document.getElementById("myTable");
     if (table) {
         sortTable();

@@ -67,11 +67,7 @@
                             class="caret"></span></a>
                     <ul id="arrow-menu" >
                             <div class="user-section">
-                                {% if request.session.username|length >= 7 %}
-                                    <span class="username">{{ request.session.username|slice:"0:7" }}...</span>
-                                {% else %}
-                                    <span class="username">{{ request.session.username }}</span>
-                                {% endif %}
+                                    <span>{{ request.session.username }}</span>
                             </div>
                             <br/>
                             <div>
@@ -174,7 +170,7 @@
               <input type="hidden" id="objectType" name="objectType">
                   <div >
                       <div>
-                          <label for="articleFile"><h4>Adjunto:</h4></label> <input name="articleFile" id="articleFile" type="file">
+                          <label for="articleFile"><h4>Adjunto:</h4></label> <input name="articleFile" id="articleFile" type="file" accept="application/pdf">
                       </div>
 
                   </div>

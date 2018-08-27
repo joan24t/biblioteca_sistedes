@@ -22,12 +22,13 @@
                 <div class="form-row">
                     <label class="required" for="id_username">Username:</label> <input type="text" name="username"
                                                                                        id="id_username" autofocus=""
-                                                                                       required="" maxlength="254">
+                                                                                       required="1" maxlength="254"
+                                                                                       {% if user_setted %} value="{{user_setted}}" {% endif %}>
                 </div>
                 <div class="form-row">
 
                     <label class="required" for="id_password">Password:</label> <input type="password" name="password"
-                                                                                       id="id_password" required="">
+                                                                                       id="id_password" required="1">
                     <input type="hidden" name="next" value="/admin/">
                 </div>
                 <!--{{ form_login.as_p }}-->

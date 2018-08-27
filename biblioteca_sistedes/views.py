@@ -74,22 +74,26 @@ def Contactus(request):
 
 
 def download(request, pk=None):
-    type = request.GET.get('type')
-    object = None
-    file_path = ''
-    if type == 'a':
-        object = Article.objects.get(id=pk)
-        file_path = os.path.join(settings.MEDIA_ROOT, object.url_file)
-    elif type == 'b':
-        object = Bulletin.objects.get(id=pk)
-        file_path = os.path.join(settings.BULLETIN_ROOT, object.url_file)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/pdf")
-            response['Content-Disposition'] = 'inline; filename=' + \
-                os.path.basename(file_path)
-            return response
-    raise Http404
+    username = request.session.get('username')
+    if username:
+        type = request.GET.get('type')
+        object = None
+        file_path = ''
+        if type == 'a':
+            object = Article.objects.get(id=pk)
+            file_path = os.path.join(settings.MEDIA_ROOT, object.url_file)
+        elif type == 'b':
+            object = Bulletin.objects.get(id=pk)
+            file_path = os.path.join(settings.BULLETIN_ROOT, object.url_file)
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as fh:
+                response = HttpResponse(fh.read(), content_type="application/pdf")
+                response['Content-Disposition'] = 'inline; filename=' + \
+                    os.path.basename(file_path)
+                return response
+        raise Http404
+    else:
+        return HttpResponseRedirect('/')
 
 
 def GetListObjects(username, rol, model):
@@ -303,7 +307,7 @@ def Login(request):
         request.session['user'] = user_loged
         return HttpResponseRedirect('/')
     else:
-        context = {'errorLogin': True}
+        context = {'errorLogin': True, 'user_setted': username}
         return render(request, 'biblioteca_sistedes/login.html', context)
 
 
