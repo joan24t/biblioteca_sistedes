@@ -171,6 +171,7 @@
       <div class="general-div" style="width:90%;">
           <form method="post" action="/upload_file/" enctype="multipart/form-data">{% csrf_token %}
               <input type="hidden" id="articleId" name="articleId">
+              <input type="hidden" id="objectType" name="objectType">
                   <div >
                       <div>
                           <label for="articleFile"><h4>Adjunto:</h4></label> <input name="articleFile" id="articleFile" type="file">

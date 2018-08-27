@@ -35,7 +35,7 @@
 						<a class="btn btn-primary" href="/article_view/{{ article.id }}/"><i class="fa fa-eye fa-2x"></i></a>
 						<a class="btn btn-primary" href="/article_update/{{ article.id }}/"><i class="fa fa-edit fa-2x"></i></a>
 						<a class="btn btn-danger" href="/article_delete/{{ article.id }}" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
-                        <a href="#" onclick="showWizardArticleFile({{article.id}})" ><i class="fa fa-upload fa-2x"></i></a>
+                        <a href="#" onclick="showWizardArticleFile({{article.id}}, 'a')" ><i class="fa fa-upload fa-2x"></i></a>
                     </td>
 				</tr>
                 {% endif %}

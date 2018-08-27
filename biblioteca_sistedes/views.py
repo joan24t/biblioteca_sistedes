@@ -1328,11 +1328,16 @@ def upload_file(request):
     username = request.session.get('username')
     if username:
         try:
+            object_type = request.POST.get('objectType')
             articleid = request.POST.get('articleId')
             myfile = request.FILES.get('articleFile')
             uploaded_file_url = ''
-            article = get_object_or_404(Article, pk=articleid) or False
-            fs = FileSystemStorage()
+            article = get_object_or_404(Article, pk=articleid) \
+                if object_type == 'a' else get_object_or_404(
+                    Bulletin, pk=articleid
+                    )
+            fs = FileSystemStorage() if object_type == 'a' else \
+                FileSystemStorage(location=settings.BULLETIN_ROOT)
             if article.url_file and article.url_file != '':
                 fs.delete(article.url_file)
             if myfile:
@@ -1344,14 +1349,24 @@ def upload_file(request):
                 uploaded_file_url = fs.url(filename)
                 article.url_file = uploaded_file_url
                 article.save()
-            return HttpResponse(
-                """
-                <script>
-                    window.location.href = "/article_list/";
-                    alert('Archivo reemplazado');
-                </script>
-                """
-                )
+            if object_type == 'a':
+                return HttpResponse(
+                    """
+                    <script>
+                        window.location.href = "/article_list/";
+                        alert('Archivo reemplazado');
+                    </script>
+                    """
+                    )
+            else:
+                return HttpResponse(
+                    """
+                    <script>
+                        window.location.href = "/bulletin_list/";
+                        alert('Archivo reemplazado');
+                    </script>
+                    """
+                    )
         except:
             return HttpResponse(
                 """

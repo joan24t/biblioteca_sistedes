@@ -55,8 +55,9 @@ function showWizardPassword(user_id) {
     modal.style.display = "block";
 }
 
-function showWizardArticleFile(articleid) {
+function showWizardArticleFile(articleid, objectType) {
     var modal_file = document.getElementById('myModal-file');
     document.getElementById('articleId').value = articleid;
+    document.getElementById('objectType').value = objectType;
     modal_file.style.display = "block";
 }

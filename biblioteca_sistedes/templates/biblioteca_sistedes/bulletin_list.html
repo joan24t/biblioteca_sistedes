@@ -34,7 +34,8 @@
 						<a class="btn btn-primary" href="/bulletin_view/{{ bulletin.id }}/"><i class="fa fa-eye fa-2x"></i></a>
 						<a class="btn btn-primary" href="/bulletin_update/{{ bulletin.id }}/"><i class="fa fa-edit fa-2x"></i></a>
 						<a class="btn btn-danger" href="/bulletin_delete/{{ bulletin.id }}" onclick="clicked(event)"><i class="fa fa-trash fa-2x"></i></a>
-					</td>
+                        <a href="#" onclick="showWizardArticleFile({{bulletin.id}}, 'b')" ><i class="fa fa-upload fa-2x"></i></a>
+                    </td>
 				</tr>
 				{% endfor %}
 			</tbody>
