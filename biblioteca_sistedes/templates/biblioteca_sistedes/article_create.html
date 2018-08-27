@@ -4,6 +4,7 @@
 {% endblock %}
 {% block form %}
 <h2><u> Crear artículo </u></h2>
+{% csrf_token %}
         <div class="form-row">
             <div class="form-row-component">
                 <label for="name_ar"><h4>Nombre:</h4></label> {{ form_article.name }}

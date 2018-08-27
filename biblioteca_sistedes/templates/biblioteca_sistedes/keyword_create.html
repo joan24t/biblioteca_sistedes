@@ -6,9 +6,17 @@
 <h2><u>Crear palabra clave </u></h2>
 {% csrf_token %}
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
+        <div class="form-row">
+            <div class="form-row-component">
                 <label for="name_key"><h4>Nombre:</h4></label> {{ form_keyword.name }}
+            </div>
+            <div class="form-row-component">
+                <label for="title_key"><h4>Título:</h4></label> {{ form_keyword.title }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-component-alone">
+                <label for="desc_key"><h4>Descripción:</h4></label> {{ form_keyword.description }}
             </div>
         </div>
     </div>

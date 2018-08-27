@@ -244,24 +244,28 @@ def GetEditions(request, name=None, year=None, id=None):
 
 
 def GetListOfTracks(request, name=None):
-    tracks = Track.objects.all()
-    track_name = name.split()
+    keywords = Track.objects.all()
+    keyword_name = name.split()
     final_list = []
-    for tr in tracks:
-        array_description = tr.description.split()
-        array_title = tr.name.split()
-        for tn in track_name:
+    for key in keywords:
+        array_description = key.description.split()
+        array_title = key.title.split()
+        for kn in keyword_name:
             for ad in array_description:
-                if tn == ad:
-                    final_list.append(tr)
+                if kn == ad:
+                    final_list.append(kn)
             for at in array_title:
-                if tn == at:
-                    final_list.append(tr)
+                if kn == at:
+                    final_list.append(kn)
     context = {
-        'track_list': list(set(final_list)),
+        'keyword_list': list(set(final_list)),
         }
     context.update(global_context())
-    return render(request, 'biblioteca_sistedes/list_of_tracks.html', context)
+    return render(
+        request,
+        'biblioteca_sistedes/list_of_keywords.html',
+        context
+        )
 
 
 def GetListOfArticles(request):
@@ -1094,7 +1098,6 @@ class ArticleCreate(CreateView):
             Sequence(number=next_number).save()
             filename = fs.save(file_name, myfile)
             uploaded_file_url = fs.url(filename)
-
         if form.is_valid():
             article = form.save()
             logged_user = request.session.get('user')

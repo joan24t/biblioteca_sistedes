@@ -16,7 +16,6 @@ class Article(models.Model):
     access_right_ids = models.ManyToManyField('AccessRight')
     track_ids = models.ManyToManyField('Track')
     edition_id = models.ForeignKey('Edition', on_delete=models.CASCADE)
-    file = models.FileField(upload_to="media/", null=True, blank=True)
     url_file = models.CharField(max_length=1000)
     description = models.TextField(max_length=1000)
     user_ids = models.ManyToManyField('User')
@@ -84,6 +83,8 @@ class Keyword(models.Model):
 
     # Attributes
     name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=10000)
     article_ids = models.ManyToManyField('Article')
 
 

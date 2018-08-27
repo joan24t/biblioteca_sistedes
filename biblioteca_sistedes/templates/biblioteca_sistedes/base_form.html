@@ -108,8 +108,11 @@
 <!-- Container -->
 <div id="container" style="width:90%; margin-top: 100px;">
     <div class="general-div">
+        {% block article %}
+
+        {% endblock %}
         {% block container %}
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
             <div class="form-style-10" style="width:75%;">
                 {% block form %}
 

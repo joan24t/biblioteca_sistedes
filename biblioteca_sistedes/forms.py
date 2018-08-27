@@ -115,6 +115,8 @@ class AuthorForm(forms.ModelForm):
         super(AuthorForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
         self.fields['email'].required = True
+        self.fields['middle_name'].required = False
+        self.fields['last_name'].required = False
 
     class Meta:
         model = Author
@@ -235,12 +237,8 @@ class ArticleForm(forms.ModelForm):
         self.fields['edition_id'].queryset = Edition.objects.all()
         self.fields['edition_id'].label_from_instance = lambda obj: '%s' % \
             obj.name
-
-        self.fields['author_ids'].required = False
-        self.fields['keyword_ids'].required = False
-        self.fields['track_ids'].required = False
         self.fields['year'].required = False
-        self.fields['file'].required = True
+        self.fields['description'].required = False
         self.fields['name'].required = True
 
     class Meta:
@@ -254,7 +252,6 @@ class ArticleForm(forms.ModelForm):
             'keyword_ids',
             'access_right_ids',
             'track_ids',
-            'file',
             ]
         labels = {
             'name': 'Nombre',
@@ -265,7 +262,6 @@ class ArticleForm(forms.ModelForm):
             'keyword_ids': 'Palabras clave',
             'access_right_ids': 'Derechos de acceso',
             'track_ids': 'Tracks',
-            'file': 'Fichero',
             }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -304,18 +300,30 @@ class KeywordForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(KeywordForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
+        self.fields['title'].required = False
+        self.fields['description'].required = False
 
     class Meta:
         model = Keyword
         fields = [
             'name',
+            'title',
+            'description',
             ]
         labels = {
             'name': 'Nombre',
+            'title': 'Título',
+            'description': 'Descripción',
             }
         widgets = {
             'name': forms.TextInput(attrs={
                 'id': 'name_key'
+                }),
+            'title': forms.TextInput(attrs={
+                'id': 'title_key'
+                }),
+            'description': forms.Textarea(attrs={
+                'id': 'desc_key'
                 }),
             }
 

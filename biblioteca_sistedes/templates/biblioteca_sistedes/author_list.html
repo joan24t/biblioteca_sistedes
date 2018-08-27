@@ -19,6 +19,7 @@
 			<thead>
 				<tr>
 					<th>Nombre</th>
+                    <th>Email</th>
 					<th>Primer apellido</th>
 					<th>Segundo apellido</th>
 					<th>Acciones</th>
@@ -29,6 +30,7 @@
 				{% for author in object_list %}
 				<tr>
 					<td>{{ author.name }}</td>
+                    <td>{{ author.email }}</td>
 					<td>{{ author.middle_name }}</td>
 					<td>{{ author.last_name }}</td>
 

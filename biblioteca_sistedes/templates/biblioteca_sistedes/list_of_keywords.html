@@ -5,13 +5,13 @@
 {% block content %}
 {% csrf_token %}
 
-{% for tr in track_list %}
+{% for key in keyword_list %}
 <article>
     <header class="wrapper">
-        <h1>{{ tr.name }}</h1>
+        <h1>{{ key.title }}</h1>
     </header>
     <section id="interior" class="s">
-        <div class="wrapper"><p>{{ tr.description|safe  }}</p></div>
+        <div class="wrapper"><p>{{ key.description|safe  }}</p></div>
     </section>
 </article>
 {% endfor %}
