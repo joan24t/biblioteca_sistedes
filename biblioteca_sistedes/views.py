@@ -288,12 +288,12 @@ def GetListOfTracks(request, name=None):
 
 
 def GetListOfArticles(request):
-    txtAutor = request.GET.get('txtAutor') or False
+    txtAutor = request.GET.get('autor') or False
     articles = Article.objects.all()
     final_list = []
     for ar in articles:
         for au in ar.author_ids.all():
-            if txtAutor == au.name + ' ' + au.middle_name + ' ' + au.last_name:
+            if txtAutor.replace(" ", "") == (au.name + ' ' + au.middle_name + ' ' + au.last_name).replace(" ", ""):
                 final_list.append(ar)
     context = {
         'article_list': list(set(final_list)),

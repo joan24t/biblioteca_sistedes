@@ -27,7 +27,11 @@
             {% endif %}
             <p>&nbsp;</p>
             <p>{{ track.description|safe  }}</p>
+            <br/>
             {% if articles %}
+            Listado de artículos correspondientes al track {{ track.name }}:
+            <br/>
+            <br/>
             <ol id="articulo_a_conferencia_list">
                 {% for ar in articles %}
                 <li>

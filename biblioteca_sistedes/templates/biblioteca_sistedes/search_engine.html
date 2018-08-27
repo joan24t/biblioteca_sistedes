@@ -22,7 +22,7 @@
             <p style="font-size: 0.8em;" id="text-hightlight">
                 <strong>Autores: </strong>
                 {% for author in conference.author_ids.all %}
-                 <a href="/autor/?txtAutor={{author.name}} {{author.middle_name}} {{author.last_name}}">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
+                 <a href="/autor/?autor={{author.name}} {{author.middle_name}} {{author.last_name}}">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                 {% endfor %}
                 <br/>
                 <strong> Palabras Clave: </strong>
