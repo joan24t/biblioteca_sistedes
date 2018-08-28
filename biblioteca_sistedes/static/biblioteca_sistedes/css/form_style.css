@@ -13,25 +13,19 @@
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -5px;
-  margin-left: -5px;
-
-  > .col,
-  > [class*="col-"] {
-    padding-right: 5px;
-    padding-left: 5px;
-  }
 }
-
 .form-row-component{
-    margin-right: 15px;
-    margin-left: 15px;
+    margin: auto;
     width: 47%;
 }
 .form-row-component-alone{
-    margin-right: 15px;
     margin-left: 15px;
+    margin-right: 15px;
     width: 100%;
+}
+.form-row-component-alone-oc{
+    margin-left: 15px;
+    width: 47%;
 }
 .form-style-10 .inner-wrap{
     padding: 30px;
