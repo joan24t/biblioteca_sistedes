@@ -80,8 +80,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 }
 
-/* The Modal (background) */
-.modal-file {
+/* The Modal (background) keyword*/
+.modal-file,
+.modal-keyword{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -96,7 +97,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 /* Modal Content */
-.modal-content-file {
+.modal-content-file,
+.modal-content-keyword{
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -111,7 +113,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 /* The Close Button */
-.close-file {
+.close-file,
+.close-keyword{
     color: black;
     float: right;
     font-size: 28px;
@@ -119,24 +122,46 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 .close-file:hover,
-.close-file:focus {
+.close-file:focus,
+.close-keyword:hover,
+.close-keyword:focus,{
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header-file {
+#cursor-key:hover{
+    cursor: pointer;
+}
+
+.modal-header-file,
+.modal-header-keyword {
     padding: 2px 16px;
     background-color: white;
     color: white;
 }
 
-.modal-content-type input[type="file"] {
+#keywordWizard{
     display: block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     width: 100%;
     padding: 8px;
     height: 40px;
     max-width: 100%;
     min-width: 100%;
 
+}
+
+.modal-content input[type="file"]{
+    display: block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    height: 40px;
+    max-width: 100%;
+    min-width: 100%;
 }

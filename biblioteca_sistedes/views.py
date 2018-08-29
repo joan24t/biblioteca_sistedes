@@ -713,6 +713,17 @@ def ArticleDelete(request, pk=None):
         return HttpResponseRedirect('/')
 
 
+def KeywordDelete(request, pk=None):
+    username = request.session.get('username')
+    key = get_object_or_404(Keyword, pk=pk)
+    if username:
+        if key:
+            key.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect('/')
+
+
 class ConferenceList(ListView):
 
     def get(self, request, **kwargs):
@@ -1206,43 +1217,19 @@ class BulletinCreate(CreateView):
         return ' ' + month + ' de ' + str(date.year)
 
 
-class KeywordCreate(CreateView):
-    form_class = KeywordForm
-
-    def get(self, request, **kwargs):
-        username = request.session.get('username')
-        if username:
-            context = {}
-            pk = self.kwargs.get('pk', 0)
-            keyword = Keyword.objects.get(id=pk) if pk != 0 else False
-            if 'form_keyword' not in context:
-                if keyword:
-                    context['form_keyword'] = self.form_class(instance=keyword)
-                    context['id'] = pk
-                else:
-                    context['form_keyword'] = self.form_class(self.request.GET)
-            context.update(global_context())
-            return render(
-                request,
-                'biblioteca_sistedes/keyword_create.html',
-                context
-                )
+def KeywordCreate(request):
+    username = request.session.get('username')
+    rol = request.session.get('rol')
+    if username and rol == 1:
+        keyword_name = request.POST.get('keywordName')
+        keyword_id = request.POST.get('keywordId')
+        if keyword_id != 'undefined':
+            Keyword.objects.filter(id=keyword_id).update(name=keyword_name)
         else:
-            return HttpResponseRedirect('/')
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        pk = self.kwargs.get('pk', 0)
-        keyword = Keyword.objects.get(id=pk) if pk != 0 else False
-        if keyword:
-            form = self.form_class(request.POST, instance=keyword)
-        else:
-            form = self.form_class(request.POST)
-        if form.is_valid():
-            keyword = form.save()
-            return HttpResponseRedirect('/keyword_list/')
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+            Keyword.objects.create(name=keyword_name)
+        return HttpResponseRedirect('/keyword_list/')
+    else:
+        return HttpResponseRedirect('/')
 
 
 class UserCreate(CreateView):

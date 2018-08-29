@@ -122,7 +122,7 @@
     </div>
     {% endblock %}
     <!-- The Modal -->
-    <div id="myModal" class="modal" style="display: none:">
+    <div id="myModal" class="modal" style="display: none;">
 
       <!-- Modal content -->
       <div class="modal-content">
@@ -161,7 +161,7 @@
     </div>
 
     <!-- Modal content article file-->
-    <div id="myModal-file" class="modal-file" style="display: none:">
+    <div id="myModal-file" class="modal-file" style="display: none;">
     <div class="modal-content-file">
       <div class="modal-header-file">
         <span class="close-file">&times;</span>
@@ -187,6 +187,34 @@
     </div>
 
   </div>
+
+  <!-- Modal content keyword-->
+  <div id="myModal-keyword" class="modal-keyword" style="display: none;">
+  <div class="modal-content-keyword">
+    <div class="modal-header-keyword">
+      <span class="close-keyword">&times;</span>
+      <h2>Crear palabra clave</h2>
+    </div>
+    <div class="general-div" style="width:90%;">
+        <form method="post" action="/keyword_create/" enctype="multipart/form-data">{% csrf_token %}
+                <input type="hidden" id="keywordId" name="keywordId">
+                <div >
+                    <div>
+                        <label><h4>Nombre:</h4></label> <input id="keywordWizard" name="keywordName"required="true" type="text">
+                    </div>
+
+                </div>
+                <br/>
+                <div>
+                    <input style="background-color: #006699;" class="form-submit-wizard-keyword" type="submit" value="Guardar">
+                    <button type="button" id="close-form-keyword" class="cancel-button-wizard">Cancelar</button>
+                </div>
+        </form>
+    </div>
+  </div>
+
+</div>
+
 </div>
     <!-- END Content -->
 

@@ -113,13 +113,18 @@ urlpatterns = [
         ),
     path(
         'keyword_create/',
-        views.KeywordCreate.as_view(),
+        views.KeywordCreate,
         name='Crear palabra clave'
         ),
     path(
         'keyword_update/<int:pk>/',
-        views.KeywordCreate.as_view(),
+        views.KeywordCreate,
         name='Modificar palabra clave'
+        ),
+    path(
+        'keyword_delete/<int:pk>/',
+        views.KeywordDelete,
+        name='Eliminar palabra clave'
         ),
     path('user_list/', views.UserList.as_view(), name='Lista de usuarios'),
     path('user_create/', views.UserCreate.as_view(), name='Crear Usuario'),
