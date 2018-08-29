@@ -37,6 +37,9 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100, default='')
     email = models.CharField(max_length=100, default='')
     article_ids = models.ManyToManyField('Article')
+    country = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    university = models.CharField(max_length=100)
 
 
 class Conference(models.Model):

@@ -47,26 +47,26 @@
         {% if conference_list %}
             <!-- resultados de la busqueda //-->
             <h1>Resultados de la Búsqueda: [ {{ conference_list|length }} artículo(s) ]</h1>
-            {% for conference in conference_list %}
+            {% for article in conference_list %}
                 <article class="page page_319">
                     <header class="wrapper" id="text-hightlight">
-                        <h3>{{forloop.counter}} - <a href="">{{ conference.name }}</a></h3>
+                        <h3>{{forloop.counter}} - <a href="">{{ article.name }}</a></h3>
                     </header>
                     <p id="text-hightlight">
-                        {{  conference.description|safe  }}
+                        {{  article.description|safe  }}
                     </p>
                     <p style="font-size: 0.8em;" id="text-hightlight">
                         <strong>Autores: </strong>
-                            {% for author in conference.author_ids.all %}
+                            {% for author in article.author_ids.all %}
                                 <a href="/autor/?autor={{author.name}} {{author.middle_name}} {{author.last_name}}/">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                             {% endfor %}
                         <br/>
                         <strong> Palabras Clave: </strong>
-                            {% for keyword in conference.keyword_ids.all %}
+                            {% for keyword in article.keyword_ids.all %}
                                 <a href=""> {{keyword.name}} </a>{% if not forloop.last %}&nbsp;-&nbsp;{% endif %}
                             {% endfor %}
                     </p>
-                        <a href="/articulo/{{ conference.id }}/">...leer artículo</a>
+                        <a href="/articulo/{{ article.id }}/">...leer artículo</a>
                     </p>
                 </article>
             {% endfor %}

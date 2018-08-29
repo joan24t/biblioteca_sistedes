@@ -117,6 +117,9 @@ class AuthorForm(forms.ModelForm):
         self.fields['email'].required = True
         self.fields['middle_name'].required = False
         self.fields['last_name'].required = False
+        self.fields['country'].required = False
+        self.fields['department'].required = False
+        self.fields['university'].required = False
 
     class Meta:
         model = Author
@@ -125,12 +128,18 @@ class AuthorForm(forms.ModelForm):
             'middle_name',
             'last_name',
             'email',
+            'country',
+            'department',
+            'university',
             ]
         labels = {
             'name': 'Nombre',
             'middle_name': 'Primer apellido',
             'last_name': 'Segundo apellido',
             'email': 'E-mail',
+            'country': 'País',
+            'department': 'Departamento',
+            'university': 'Universidad',
             }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -147,6 +156,15 @@ class AuthorForm(forms.ModelForm):
 
             'email': forms.EmailInput(attrs={
                 'id': 'em_au',
+                }),
+            'country': forms.TextInput(attrs={
+                'id': 'co_au',
+                }),
+            'department': forms.TextInput(attrs={
+                'id': 'de_au',
+                }),
+            'university': forms.TextInput(attrs={
+                'id': 'uni_au',
                 }),
                 }
 

@@ -20,8 +20,8 @@
 				<tr>
 					<th>Nombre</th>
                     <th>Email</th>
-					<th>Primer apellido</th>
-					<th>Segundo apellido</th>
+					<th>País</th>
+					<th>Universidad</th>
 					<th>Acciones</th>
 				</tr>
 
@@ -29,10 +29,10 @@
 			<tbody>
 				{% for author in object_list %}
 				<tr>
-					<td>{{ author.name }}</td>
+					<td>{{ author.name }} {{ author.middle_name }} {{ author.last_name }}</td>
                     <td>{{ author.email }}</td>
-					<td>{{ author.middle_name }}</td>
-					<td>{{ author.last_name }}</td>
+					<td>{{ author.country }}</td>
+					<td>{{ author.university }}</td>
 
 					<td style="width: auto;">
 						<a class="btn btn-primary" href="/author_update/{{ author.id }}/"><i class="fa fa-edit fa-2x"></i></a>

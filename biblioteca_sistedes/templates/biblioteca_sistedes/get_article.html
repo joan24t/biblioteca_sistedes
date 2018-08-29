@@ -34,7 +34,8 @@
         <h3>Autor(es):</h3>
         <ul style="font-size: 0.80em;">
             {% for au in article.author_ids.all %}
-            <li><strong><a href="/autor/?autor={{au.name}} {{au.middle_name}} {{au.last_name}}">{{au.name}} {{au.middle_name}} {{au.last_name}}</a></strong> {<a href="mailto:{{au.email}}" target="_blank" title="este enlace se abrirá en una ventana emergente">{{au.email}}</a>}<br><span style="font-style: italic; ">Grupo UCASE de Ingeniería del Software, Departamento de Ingeniería Informática, Universidad de Cádiz, Cádiz, España</span><br></li>
+            <li><strong><a href="/autor/?autor={{au.name}} {{au.middle_name}} {{au.last_name}}">{{au.name}} {{au.middle_name}} {{au.last_name}}</a></strong> {<a href="mailto:{{au.email}}" target="_blank" title="este enlace se abrirá en una ventana emergente">{{au.email}}</a>}<br>
+                <span style="font-style: italic; ">{% if au.department %}{{au.department}}, {% endif %}{% if au.university %} {{au.university}}, {% endif %} {% if au.country %}{{au.country}}. {% endif %}</span><br></li>
             {% endfor %}
         </ul>
     </div>
