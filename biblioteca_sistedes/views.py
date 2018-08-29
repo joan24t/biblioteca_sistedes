@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 from .models import Conference, Edition, Author
 from .models import Track, Article, Sequence, Keyword, User, Bulletin
 from .forms import ConferenceForm, EditionForm, AuthorForm
-from .forms import TrackForm, ArticleForm, KeywordForm, UserForm, BulletinForm
+from .forms import TrackForm, ArticleForm, UserForm, BulletinForm
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.conf import settings
@@ -16,6 +16,7 @@ import os
 from django.http import HttpResponse
 from django.http import Http404
 from django.core.mail import send_mail
+from unidecode import unidecode
 
 
 # PUBLIC PART
@@ -551,10 +552,9 @@ def search_article(
 
                 for n in final_list:
                     for k in key.split():
-                        if k.lower() in n.lower():
+                        if unidecode(k.lower()) == unidecode(n.lower()):
                             conference_list.append(a)
                             break
-                print(final_list)
 
         elif stype == 'a':
             conference_list = list([])
@@ -565,7 +565,7 @@ def search_article(
                 if txtTitulo:
                     for n in article_name.split():
                         for tt in txtTitulo.split():
-                            if tt.lower() == n.lower():
+                            if unidecode(tt.lower()) == unidecode(n.lower()):
                                 conference_list = list(conference_list)
                                 conference_list.append(a)
                                 break
@@ -573,7 +573,8 @@ def search_article(
                     for autor in articles_autor:
                         for txtau in txtAutor.split():
                             for n in autor.name.split():
-                                if txtau.lower() == n.lower():
+                                if unidecode(txtau.lower()) == \
+                                        unidecode(n.lower()):
                                     list_by_author.append(a)
                                     break
                     if selCondAutor == 'o':
@@ -587,7 +588,8 @@ def search_article(
                     for keyword in article_keyword:
                         for key in txtKeyword.split():
                             for n in keyword.name.split():
-                                if key.lower() == n.lower():
+                                if unidecode(key.lower()) == \
+                                        unidecode(n.lower()):
                                     list_by_keyword.append(a)
                                     break
                     if selCondKeyword == 'o':
