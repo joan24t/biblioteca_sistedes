@@ -58,12 +58,12 @@
                     <p style="font-size: 0.8em;" id="text-hightlight">
                         <strong>Autores: </strong>
                             {% for author in conference.author_ids.all %}
-                                <a href="/autor/?autor={{author.name}} {{author.middle_name}} {{author.last_name}}/">{{author.name}}</a>&nbsp;/&nbsp;
+                                <a href="/autor/?autor={{author.name}} {{author.middle_name}} {{author.last_name}}/">{{author.name}} {{author.middle_name}} {{author.last_name}}</a>&nbsp;/&nbsp;
                             {% endfor %}
                         <br/>
                         <strong> Palabras Clave: </strong>
                             {% for keyword in conference.keyword_ids.all %}
-                                <a href=""> {{keyword.name}} </a>&nbsp;-&nbsp;
+                                <a href=""> {{keyword.name}} </a>{% if not forloop.last %}&nbsp;-&nbsp;{% endif %}
                             {% endfor %}
                     </p>
                         <a href="/articulo/{{ conference.id }}/">...leer artículo</a>

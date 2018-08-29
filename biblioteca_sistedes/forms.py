@@ -300,30 +300,18 @@ class KeywordForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(KeywordForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
-        self.fields['title'].required = False
-        self.fields['description'].required = False
 
     class Meta:
         model = Keyword
         fields = [
             'name',
-            'title',
-            'description',
             ]
         labels = {
             'name': 'Nombre',
-            'title': 'Título',
-            'description': 'Descripción',
             }
         widgets = {
             'name': forms.TextInput(attrs={
                 'id': 'name_key'
-                }),
-            'title': forms.TextInput(attrs={
-                'id': 'title_key'
-                }),
-            'description': forms.Textarea(attrs={
-                'id': 'desc_key'
                 }),
             }
 

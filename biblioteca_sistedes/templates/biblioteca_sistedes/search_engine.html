@@ -27,7 +27,7 @@
                 <br/>
                 <strong> Palabras Clave: </strong>
                 {% for keyword in conference.keyword_ids.all %}
-                    <a href="/tag/{{keyword.name}}/"> {{keyword.name}} </a>&nbsp;-&nbsp;
+                    <a href="/tag/{{keyword.name}}/"> {{keyword.name}} </a>{% if not forloop.last %}&nbsp;-&nbsp;{% endif %}
                 {% endfor %}
             </p>
         </div>

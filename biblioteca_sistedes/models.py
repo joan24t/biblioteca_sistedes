@@ -83,8 +83,6 @@ class Keyword(models.Model):
 
     # Attributes
     name = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=10000)
     article_ids = models.ManyToManyField('Article')
 
 

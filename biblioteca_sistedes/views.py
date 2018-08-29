@@ -243,41 +243,12 @@ def GetEditions(request, name=None, year=None, id=None):
             )
 
 
-def GetListOfTracks(request, name=None):
-    keywords = Keyword.objects.all()
-    keyword_name = name.split()
-    final_list = []
-    for key in keywords:
-        array_description = key.description.split()
-        array_title = key.title.split()
-        array_name = key.name.split()
-        for kn in keyword_name:
-            for ad in array_description:
-                if kn == ad:
-                    if len(final_list) != 0:
-                        for fl in final_list:
-                            if key.title != fl.title:
-                                final_list.append(key)
-                    else:
-                        final_list.append(key)
-            for at in array_title:
-                if kn == at:
-                    if len(final_list) != 0:
-                        for fl in final_list:
-                            if key.title != fl.title:
-                                final_list.append(key)
-                    else:
-                        final_list.append(key)
-            for an in array_name:
-                if kn == an:
-                    if len(final_list) != 0:
-                        for fl in final_list:
-                            if key.title != fl.title:
-                                final_list.append(key)
-                    else:
-                        final_list.append(key)
+def GetListOfArticlesFromKeyword(request, name=None):
+    articles = Article.objects.all()
+    keyword = Keyword.objects.filter(name=name)[0]
+    final_list = [a for a in articles if keyword in a.keyword_ids.all()]
     context = {
-        'keyword_list': list(set(final_list)),
+        'article_list': list(set(final_list)),
         }
     context.update(global_context())
     return render(
@@ -594,16 +565,17 @@ def search_article(
                 if txtTitulo:
                     for n in article_name.split():
                         for tt in txtTitulo.split():
-                            if tt.lower() in n.lower():
+                            if tt.lower() == n.lower():
                                 conference_list = list(conference_list)
                                 conference_list.append(a)
                                 break
                 if txtAutor:
                     for autor in articles_autor:
-                        for n in autor.name.split():
-                            if txtAutor.lower() in n.lower():
-                                list_by_author.append(a)
-                                break
+                        for txtau in txtAutor.split():
+                            for n in autor.name.split():
+                                if txtau.lower() == n.lower():
+                                    list_by_author.append(a)
+                                    break
                     if selCondAutor == 'o':
                         conference_list = list(conference_list) + \
                             list_by_author
@@ -613,10 +585,11 @@ def search_article(
                             )
                 if txtKeyword:
                     for keyword in article_keyword:
-                        for n in keyword.name.split():
-                            if txtKeyword.lower() in n.lower():
-                                list_by_keyword.append(a)
-                                break
+                        for key in txtKeyword.split():
+                            for n in keyword.name.split():
+                                if key.lower() == n.lower():
+                                    list_by_keyword.append(a)
+                                    break
                     if selCondKeyword == 'o':
                         conference_list = list(conference_list) + \
                             list_by_keyword

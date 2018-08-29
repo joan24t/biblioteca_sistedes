@@ -156,7 +156,7 @@ urlpatterns = [
         ),
     url(
         "tag/(?P<name>[\w\s]+|[-\w]+|[_\w]+|[+\w]+)/",
-        views.GetListOfTracks,
+        views.GetListOfArticlesFromKeyword,
         name='Listado de tracks'
         ),
     path(

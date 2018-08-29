@@ -1,17 +1,17 @@
 {% extends 'biblioteca_sistedes/base.html' %}
 {% block title %}
-	<title>Listado de tracks | Biblioteca sistedes</title>
+	<title>Listado de artículos | Biblioteca sistedes</title>
 {% endblock %}
 {% block content %}
 {% csrf_token %}
 
-{% for key in keyword_list %}
+{% for ar in article_list %}
 <article>
     <header class="wrapper">
-        <h1>{{ key.title }}</h1>
+        <h1>{{ ar.name }}</h1>
     </header>
     <section id="interior" class="s">
-        <div class="wrapper"><p>{{ key.description|safe  }}</p></div>
+        <div class="wrapper"><p>{{ ar.description|safe  }}</p></div>
     </section>
 </article>
 {% endfor %}
