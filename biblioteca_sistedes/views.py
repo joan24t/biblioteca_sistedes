@@ -1225,7 +1225,7 @@ def KeywordCreate(request):
     if username and rol == 1:
         keyword_name = request.POST.get('keywordName')
         keyword_id = request.POST.get('keywordId')
-        if keyword_id != 'undefined':
+        if keyword_id:
             Keyword.objects.filter(id=keyword_id).update(name=keyword_name)
         else:
             Keyword.objects.create(name=keyword_name)
