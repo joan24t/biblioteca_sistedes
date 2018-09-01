@@ -17,16 +17,19 @@ class ConferenceForm(forms.ModelForm):
         super(ConferenceForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = True
         self.fields['domain'].required = True
+        self.fields['description'].required = False
 
     class Meta:
         model = Conference
         fields = [
             'name',
             'domain',
+            'description',
             ]
         labels = {
             'name': 'Nombre',
             'domain': 'Domain',
+            'description': 'Descripción',
             }
         widgets = {
             'name': forms.TextInput(
@@ -36,6 +39,10 @@ class ConferenceForm(forms.ModelForm):
             'domain': forms.TextInput(
                 attrs={
                     'id': 'dom_con'
+                    }),
+            'description': forms.Textarea(
+                attrs={
+                    'id': 'desc_con'
                     }),
             }
 

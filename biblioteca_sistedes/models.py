@@ -43,20 +43,13 @@ class Author(models.Model):
 
 
 class Conference(models.Model):
-
     # Attributes
     name = models.CharField(max_length=100)
     domain = models.CharField(max_length=100)
-
-# class File(models.Model):
-#
-#     #Attributes
-#     name = models.CharField(max_length=100)
-#     domain = models.CharField(max_length=100)
+    description = models.TextField(max_length=10000)
 
 
 class User(models.Model):
-
     # Attributes
     name = models.CharField(max_length=100)
     surnames = models.CharField(max_length=100)

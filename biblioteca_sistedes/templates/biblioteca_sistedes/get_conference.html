@@ -21,15 +21,8 @@
         {% endfor %}
     </header>
     <section id="interior" class="s">
-        <div class="wrapper"><p>Las Jornadas de Ingeniería del Software y Bases de Datos (JISBD) constituyen un foro de
-            encuentro de referencia donde investigadores y profesionales de España, Portugal e Iberoamérica en los
-            campos de la Ingeniería del Software y de las Bases de Datos pueden debatir e intercambiar ideas, crear
-            sinergias y, sobre todo, conocer la investigación que se está llevando a cabo en nuestra comunidad.</p>
-            <p>El impacto de las JISBD no ha parado de crecer desde que se organizaron por primera vez en Cáceres en
-                1999 y donde se unificaron dos eventos nacionales ya consolidados: de una parte, las Jornadas de
-                Ingeniería de Software, que tuvieron lugar en Sevilla, San Sebastián y Murcia en los años 1996, 1997 y
-                1998, respectivamente; de otra, las Jornadas de Investigación y Docencia en Bases de Datos, celebradas
-                con anterioridad en A Coruña, Madrid y Valencia en los mismos años.</p>
+        <div class="wrapper">
+            {% for conf in conference %}<p>{{ conf.description|safe }}</p>{% endfor %}
             <p>&nbsp;</p>
             <ul>
                 {% for edition in new_editions %}
