@@ -9,15 +9,16 @@ from django.db import models
 class Article(models.Model):
 
     # Attributes
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=1000)
     year = models.IntegerField()
     author_ids = models.ManyToManyField('Author')
     keyword_ids = models.ManyToManyField('Keyword')
     access_right_ids = models.ManyToManyField('AccessRight')
     track_ids = models.ManyToManyField('Track')
     edition_id = models.ForeignKey('Edition', on_delete=models.CASCADE)
-    url_file = models.CharField(max_length=1000)
-    description = models.TextField(max_length=1000)
+    url_file = models.CharField(max_length=5000)
+    handle = models.CharField(max_length=100)
+    description = models.TextField(max_length=5000)
     user_ids = models.ManyToManyField('User')
 
 
@@ -44,7 +45,7 @@ class Author(models.Model):
 
 class Conference(models.Model):
     # Attributes
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=1000)
     domain = models.CharField(max_length=100)
     description = models.TextField(max_length=10000)
 

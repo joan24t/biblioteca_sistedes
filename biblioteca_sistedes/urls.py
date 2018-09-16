@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.views.generic import RedirectView
 from . import views
+from . import migrations
 
 urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(
@@ -13,6 +14,7 @@ urlpatterns = [
     path('logout/', views.Logout, name='Logout'),
     path('busqueda/', views.search, name='Busqueda avanzada'),
     path('download/<int:pk>/', views.download, name='Descargar fichero'),
+    path('migrate/', views.migrate, name='Descargar fichero'),
     path(
         'conference_list/',
         views.ConferenceList.as_view(),

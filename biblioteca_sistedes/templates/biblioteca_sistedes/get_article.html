@@ -43,11 +43,14 @@
     <!-- texto para citas //-->
     <div id="entry-pdf" class="entry-content">
         <h3>Handle:</h3>
-        <a href="http://hdl.handle.net/11705/JISBD/2015/012" target="blank">11705/JISBD/2015/012</a>	</div>
-
+        {% if article %}
+        <a href="http://hdl.handle.net/{{ar.handle}}" target="blank">{{article.handle}}</a>	</div>
+        {% endif %}
         <div id="entry-pdf" class="entry-content">
             <h3>Descargas:</h3>
-            <p>Este artículo tiene una licencia de uso <a href="http://es.creativecommons.org/blog/licencias/" target="_blank" title="este enlace se abrirá en una ventana emergente">CreativeCommons - Reconocimiento (by)</a></p>
+            {% for ar in article.access_right_ids.all %}
+            <p>Este artículo tiene una licencia de uso <a href="{{ar.description}}" target="_blank" title="este enlace se abrirá en una ventana emergente">{{ar.name}}</a></p>
+            {% endfor %}
             <p>Descarga el artículo haciendo <a href="/download/{{article.id }}?type=a" target="_blank" title="este enlace se abrirá en una ventana emergente">click aquí.</a></p>
         </div>
     </article>
