@@ -116,7 +116,7 @@
                             {% for conference in conferences %}
                             <li class="expandable hit-{{ conference.domain }}-li">
                                 <div class="hitarea hit-{{ conference.domain }}-area"></div>
-                                <a href="/conferencias/{{ conference.domain }}/" class="{{ conference.domain }}">{{ conference.name }}</a>
+                                <a href="/conferencias/{{ conference.domain }}/" class="{{ conference.domain }}">{{ conference.name }} ({{ conference.domain }})</a>
                                 <ul class="children child-{{ conference.domain }}">
                                     {% for edition in editions %}
                                     {% if edition.conference_id.id == conference.id%}
