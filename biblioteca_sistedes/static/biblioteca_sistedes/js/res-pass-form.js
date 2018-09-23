@@ -63,6 +63,7 @@ window.onclick = function(event) {
         document.getElementById('keywordWizard').value = '';
     }
 }
+    jQuery(".loader").fadeOut("slow");
 }
 
 // When the user clicks the button, open the modal

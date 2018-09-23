@@ -14,7 +14,7 @@ urlpatterns = [
     path('logout/', views.Logout, name='Logout'),
     path('busqueda/', views.search, name='Busqueda avanzada'),
     path('download/<int:pk>/', views.download, name='Descargar fichero'),
-    path('migrate/', views.migrate, name='Descargar fichero'),
+    path('migrate/', views.migrate, name='Migrar datos'),
     path(
         'conference_list/',
         views.ConferenceList.as_view(),

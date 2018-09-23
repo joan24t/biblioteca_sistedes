@@ -20,7 +20,7 @@ $table = document.getElementById("myTable");
 
 if ($table){
 // number of rows per page
-$n = 10,
+$n = 30,
 // number of rows of the table
 $rowCount = $table.rows.length,
 // get the first cell's tag name (in the first row)

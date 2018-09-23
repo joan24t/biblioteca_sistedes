@@ -4,6 +4,7 @@
 {% endblock %}
 {% block container %}
 {% load static %}
+        <div class="loader"></div>
 		<h2><u> Artículos </u></h2>
         </br>
         </br>
@@ -19,7 +20,6 @@
 			<thead>
 				<tr>
 					<th>Nombre</th>
-					<th>Año</th>
                     <th>Acciones</th>
 				</tr>
 
@@ -30,7 +30,6 @@
                 {% if logged_user in article.user_ids.all or logged_user.rol == 1 %}
 				<tr>
 					<td>{{ article.name }}</td>
-                    <td>{{ article.year }}</td>
 					<td style="width: auto;">
 						<a class="btn btn-primary" href="/article_view/{{ article.id }}/"><i class="fa fa-eye fa-2x"></i></a>
 						<a class="btn btn-primary" href="/article_update/{{ article.id }}/"><i class="fa fa-edit fa-2x"></i></a>

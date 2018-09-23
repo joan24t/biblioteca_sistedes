@@ -10,12 +10,12 @@ class Article(models.Model):
 
     # Attributes
     name = models.CharField(max_length=1000)
-    year = models.IntegerField()
+    year = models.IntegerField(null=True)
     author_ids = models.ManyToManyField('Author')
     keyword_ids = models.ManyToManyField('Keyword')
     access_right_ids = models.ManyToManyField('AccessRight')
     track_ids = models.ManyToManyField('Track')
-    edition_id = models.ForeignKey('Edition', on_delete=models.CASCADE)
+    edition_id = models.ForeignKey('Edition', on_delete=models.CASCADE, null=True)
     url_file = models.CharField(max_length=5000)
     handle = models.CharField(max_length=100)
     description = models.TextField(max_length=5000)
@@ -33,14 +33,14 @@ class AccessRight(models.Model):
 class Author(models.Model):
 
     # Attributes
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=500)
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, default='')
-    email = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=500, default='')
     article_ids = models.ManyToManyField('Article')
     country = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
-    university = models.CharField(max_length=100)
+    university = models.CharField(max_length=500)
 
 
 class Conference(models.Model):
@@ -71,7 +71,6 @@ class Edition(models.Model):
     description = models.TextField(max_length=10000)
     year = models.IntegerField()
     place = models.CharField(max_length=100)
-    topic = models.CharField(max_length=100)
     user_ids = models.ManyToManyField('User')
     conference_id = models.ForeignKey('Conference', on_delete=models.CASCADE)
 
@@ -79,7 +78,7 @@ class Edition(models.Model):
 class Keyword(models.Model):
 
     # Attributes
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=500)
     article_ids = models.ManyToManyField('Article')
 
 

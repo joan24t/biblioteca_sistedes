@@ -101,154 +101,61 @@ def download(request, pk=None):
 def migrate(request):
     tree = ET.parse('biblioteca_sistedes/migrations_library/datos_sistedes.xml')
     root = tree.getroot()
-    user = create_user('Administrador', 'admin', 'admin@admin.es', 'admin', 1)
     for item in root.findall('item'):
-        edition = None
         title = unidecode(item.find('title').text)
         content = unidecode(item.find('content').text) if item.find('content').text else ''
-        article = create_article(title, content, False, user)
-        if article:
-            name = ''
-            email = ''
-            univ = ''
-            keywords_list = []
-            author_list = []
-            track_list = []
-            track_name = False
-            for pm in item.findall('postmeta'):
-                for key in pm.findall('meta_key'):
-                    if 'track' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            track_name = mv.text
-                    if 'handle' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            article.handle = str(mv.text)
-                            handle = str(mv.text).split('/')
-                            if handle[1] == 'JCIS':
-                                conf_name = 'Jornadas de Ciencia e Ingeniería de Servicios'
-                                conf_edition = 'JCIS ' + handle[2]
-                                conference = create_conference(name=conf_name, domain=handle[1])
-                                edition = create_edition(name=conf_edition, year=int(handle[2]), conference=conference, user=user)
-                            elif handle[1] == 'JISBD':
-                                conf_name = 'Jornadas de Ingeniería del Software y Bases de Datos'
-                                conf_edition = 'JISBD ' + handle[2]
-                                conference = create_conference(name=conf_name, domain=handle[1])
-                                edition = create_edition(name=conf_edition, year=int(handle[2]), conference=conference, user=user)
+        for pm in item.findall('postmeta'):
+            for key in pm.findall('meta_key'):
+                if 'author_name' in key.text:
+                    for mv in pm.findall('meta_value'):
+                        if mv.text:
+                            print(unidecode('     Author ' + mv.text))
+                        else:
+                            print(unidecode('     Author ' + 'Unknown'))
+                if 'author_email' in key.text:
+                    for mv in pm.findall('meta_value'):
+                        if mv.text:
+                            print(unidecode('     Email ' + mv.text))
+                        else:
+                            print(unidecode('     Email ' + 'Unknown'))
+                if 'author_univ' in key.text:
+                    for mv in pm.findall('meta_value'):
+                        if mv.text:
+                            print(unidecode('     Universidad: ' + mv.text))
+                        else:
+                            print(unidecode('     Universidad: ' + 'Unknown'))
+                if 'track' in key.text:
+                    for mv in pm.findall('meta_value'):
+                        if mv.text:
+                            print(unidecode('     Track: ' + mv.text))
+                        else:
+                            print(unidecode('     Track: ' + 'Unknown'))
+                if 'handle' in key.text:
+                    for mv in pm.findall('meta_value'):
+                        if mv.text:
+                            if 'JCIS' in mv.text:
+                                conference = mv.text.split('/')[1]
+                                edition = mv.text.split('/')[2]
+                                Conference.objects.create(name=title, domain=conference, description=content)
+                                print(unidecode('      edicion: ' + edition))
+                                print(unidecode('      handle: ' + mv.text))
+                            elif 'JISBD' in mv.text:
+                                conference = mv.text.split('/')[1]
+                                edition = mv.text.split('/')[2]
+                                print(unidecode('      conferencia: ' + conference))
+                                print(unidecode('      edicion: ' + edition))
+                                print(unidecode('      handle: ' + mv.text))
+                            elif 'PROLE' in mv.text:
+                                conference = mv.text.split('/')[1]
+                                edition = mv.text.split('/')[2]
+                                print(unidecode('      conferencia: ' + conference))
+                                print(unidecode('      edicion: ' + edition))
+                                print(unidecode('      handle: ' + mv.text))
                             else:
-                                conf_name = 'Jornadas sobre Programación y Lenguajes'
-                                conf_edition = 'PROLE ' + handle[2]
-                                conference = create_conference(name=conf_name, domain=handle[1])
-                                edition = create_edition(name=conf_edition, year=int(handle[2]), conference=conference, user=user)
-                            track_list.append(create_track(name=track_name, edition=edition))
-                    if 'author_name' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            name = mv.text
-                    if 'author_email' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            email = mv.text
-                    if 'author_univ' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            univ = mv.text
-                    if 'keywords' in key.text:
-                        for mv in pm.findall('meta_value'):
-                            keywords = str(mv.text).split(',')
-                            for k in keywords:
-                                key = create_keyword(str(k).lstrip())
-                                keywords_list.append(key)
-                    if email != '':
-                        author = create_author(str(name), str(email), str(univ))
-                        author_list.append(author)
-            for au in author_list:
-                article.author_ids.add(au)
-            for key in keywords_list:
-                article.keyword_ids.add(key)
-            for key in track_list:
-                article.track_ids .add(key)
+                                print(unidecode('      conferencia: ' + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))
+                        else:
+                            print(unidecode('     conferencia: ' + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))
     return HttpResponseRedirect('/')
-
-
-def create_track(name, edition):
-    track = Track.objects.filter(name=name)
-    if not track:
-        track = Track.objects.create(name=name, edition_id=edition)
-    else:
-        track = track.first()
-    return track
-
-
-def create_conference(name, domain):
-    conference = Conference.objects.filter(domain=domain)
-    if not conference:
-        conference = Conference.objects.create(name=name, domain=domain)
-    else:
-        conference = conference.first()
-    return conference
-
-
-def create_edition(name, year, conference, user):
-    edition = Edition.objects.filter(year=year, conference_id=conference)
-    if not edition:
-        edition = Edition.objects.create(name=name, year=year, conference_id=conference)
-        edition.user_ids.add(user)
-    else:
-        edition = edition.first()
-    return edition
-
-
-def create_keyword(name):
-    keyword = Keyword.objects.filter(name=name)
-    if not keyword:
-        keyword = Keyword.objects.create(name=name)
-    else:
-        keyword = keyword.first()
-    return keyword
-
-
-def create_author(name, email, university):
-    author = Author.objects.filter(email=email)
-    if not author:
-        author = Author.objects.create(name=name, email=email, university=university)
-    else:
-        author = author.first()
-    return author
-
-
-def create_user(name, username, email, password, rol):
-    user = User.objects.filter(username=username)
-    if not user:
-        user = User.objects.create(
-            name=name,
-            username=username,
-            email=email,
-            password=password,
-            rol=rol
-            )
-    else:
-        user = user.first()
-    return user
-
-
-def create_article(name, description, edition_id, user):
-    article = Article.objects.filter(name=name)
-    if not article:
-        if edition_id is False:
-            article = Article.objects.create(
-                name=name,
-                description=description,
-                )
-        else:
-            article = Article.objects.create(
-                name=name,
-                description=description,
-                edition_id=edition_id
-                )
-        print('Articulo: ' + str(article.id))
-        if user not in article.user_ids.all():
-            article.user_ids.add(user)
-            return article
-    else:
-        article = False
-
 
 def GetListObjects(username, rol, model):
     if username:
@@ -413,7 +320,7 @@ def GetListOfArticlesFromKeyword(request, name=None):
 
 
 def GetListOfArticles(request):
-    txtAutor = request.GET.get('autor').replace("<span class='highlight'>", "").replace("</span>", "") or False
+    txtAutor = request.GET.get('autor') or False
     articles = Article.objects.all()
     final_list = []
     for ar in articles:

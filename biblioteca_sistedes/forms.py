@@ -59,7 +59,6 @@ class EditionForm(forms.ModelForm):
         self.fields['place'].required = True
         self.fields['name'].required = True
         self.fields['year'].required = True
-        self.fields['topic'].required = False
 
     class Meta:
         model = Edition
@@ -71,7 +70,6 @@ class EditionForm(forms.ModelForm):
             'name',
             'year',
             'place',
-            'topic',
             'conference_id',
             'preamble',
             'description',
@@ -80,7 +78,6 @@ class EditionForm(forms.ModelForm):
             'name': 'Nombre',
             'year': 'Year',
             'place': 'Place',
-            'topic': 'Topic',
             'conference_id': 'Conference',
             'preamble': 'Preamble',
             'description': 'Description',
@@ -98,10 +95,6 @@ class EditionForm(forms.ModelForm):
 
             'place': forms.TextInput(attrs={
                 'id': 'place_ed'
-                }),
-
-            'topic': forms.TextInput(attrs={
-                'id': 'top_ed',
                 }),
 
             'conference_id': forms.Select(attrs={
