@@ -258,7 +258,8 @@ class ArticleForm(forms.ModelForm):
         self.fields['year'].required = False
         self.fields['description'].required = False
         self.fields['name'].required = True
-
+        self.fields['handle'].required = False
+        self.fields['edition_id'].required = False
     class Meta:
         model = Article
         fields = [
@@ -270,6 +271,7 @@ class ArticleForm(forms.ModelForm):
             'keyword_ids',
             'access_right_ids',
             'track_ids',
+            'handle',
             ]
         labels = {
             'name': 'Nombre',
@@ -280,10 +282,14 @@ class ArticleForm(forms.ModelForm):
             'keyword_ids': 'Palabras clave',
             'access_right_ids': 'Derechos de acceso',
             'track_ids': 'Tracks',
+            'handle': 'Handle',
             }
         widgets = {
             'name': forms.TextInput(attrs={
                 'id': 'name_ar',
+                }),
+            'handle': forms.TextInput(attrs={
+                'id': 'handle_ar',
                 }),
             'description': forms.Textarea(attrs={
                 'id': 'desc_ar',

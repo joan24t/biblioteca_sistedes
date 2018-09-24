@@ -10,7 +10,7 @@
                 <label for="name_ar"><h4>Nombre:</h4></label> {{ form_article.name }}
             </div>
             <div class="form-row-component">
-                <label for="year_ar"><h4>Año:</h4></label> {{ form_article.year }}
+                <label for="handle_ar"><h4>Handle:</h4></label> {{ form_article.handle }}
             </div>
         </div>
         <div class="form-row">
@@ -38,23 +38,11 @@
                 <label for="track_ar"><h4>Tracks:</h4></label> {{ form_article.track_ids }}
             </div>
         </div>
-        {% if not id %}
         <div class="form-row">
-            <div class="form-row-component">
-                <label for="ed_ar"><h4>Edición:</h4></label> {{ form_article.edition_id }}
-            </div>
-            <div class="form-row-component">
+            <div class="form-row-component-alone">
                 <label for="article_file" ><h4>Adjunto:</h4></label> <input required="true" accept="application/pdf" type="file" name="article_file">
             </div>
         </div>
-        {% else %}
-        <div class="form-row">
-            <div class="form-row-component-alone-oc">
-                <label for="ed_ar"><h4>Edición:</h4></label> {{ form_article.edition_id }}
-            </div>
-        </div>
-        {% endif %}
-
     </br>
         <div>
             <input style="background-color: #006699;" class="form-submit" type="submit" value="Guardar artículo">
